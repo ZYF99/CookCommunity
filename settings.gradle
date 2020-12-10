@@ -1,0 +1,3 @@
+include ':mvvm_generator'
+include ':app'
+rootProject.name = "CookCommunity"

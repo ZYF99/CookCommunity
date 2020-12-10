@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/single_activity"
+    app:startDestination="@id/bridgeFragment">
+
+    <fragment
+        android:id="@+id/bridgeFragment"
+        android:name="com.lxh.cookcommunity.ui.base.BridgeFragment"
+        android:label="fragment_bridge">
+
+        <action
+            android:id="@+id/action_bridgeFragment_to_splasheFragment"
+            app:destination="@id/splash_fragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/splash_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.splash.SplashFragment"
+        android:label="fragment_splash">
+
+    </fragment>
+
+    <!--<include app:graph="@navigation/top_article" />-->
+
+</navigation>

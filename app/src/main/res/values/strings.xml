@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">美食社</string>
+    <string name="exit_info">再按一次退出</string>
+
+    <!--登录-->
+    <string name="hint_login_account">请输入您的账号</string>
+    <string name="hint_bind_ip">请输入服务器IP地址</string>
+    <string name="hint_login_password">请输入您的密码</string>
+
+    <!--动态-->
+    <string name="current_city">当前城市</string>
+    <string name="small_button_camera">拍照查询</string>
+    <string name="small_button_mac">语音查询</string>
+    <string name="unit_comment">条回复</string>
+    <string name="no_comment">此条无评论</string>
+    <string name="like">赞</string>
+    <string name="alreadyLike">已赞</string>
+    <string name="age">岁</string>
+
+    <!--Dialog-->
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_cancel">CANCEL</string>
+    <string name="dialog_title"></string>
+    <string name="dialog_msg"></string>
+    <string name="dialog_button_cancel">取消</string>
+    <string name="dialog_button_delete">删除</string>
+    <string name="dialog_button_save">保存</string>
+    <string name="dialog_button_login">登录</string>
+    <string name="dialog_button_clear">清除</string>
+    <string name="error_api_error">API业务异常</string>
+    <string name="tip_input_ip_address">请输入服务器地址</string>
+    <string name="error_dialog_msg_http_error">服务器异常</string>
+    <string name="api_error_network_error_title">网络异常</string>
+    <string name="api_error_network_error_msg">网络中断，请检查网络配置</string>
+    <string name="api_error_network_on_main_thread">在主线程开启了请求</string>
+    <string name="error_dialog_msg_error">未知异常</string>
+    <string name="unit_person">人</string>
+
+</resources>

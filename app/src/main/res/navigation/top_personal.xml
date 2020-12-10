@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_personal"
+    app:startDestination="@id/personal_fragment">
+
+    <fragment
+        android:id="@+id/personal_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.personal.PersonalFragment"
+        android:label="fragment_personal"
+        tools:layout="@layout/fragment_personal">
+
+    </fragment>
+
+</navigation>

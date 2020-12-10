@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+                name="moment"
+                type="com.lxh.cookcommunity.model.api.moments.MomentContent" />
+
+        <variable
+                name="likeString"
+                type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+        <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
+                android:background="@color/colorWhite"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="1dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cell_author_portrait"
+                        imageUrl="@{moment.publisher.avatar}"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/nav_selector_find"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+
+
+                <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:orientation="vertical"
+                        app:layout_constraintBottom_toBottomOf="@+id/cell_author_portrait"
+                        app:layout_constraintStart_toEndOf="@+id/cell_author_portrait"
+                        app:layout_constraintTop_toTopOf="@+id/cell_author_portrait">
+
+                    <TextView
+                            android:id="@+id/tv_dynamic_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@{moment.publisher.name}"
+                            android:textColor="@color/colorBlack"
+                            tools:text="秋风"/>
+                    <TextView
+                            recentTime="@{moment.publishedDate}"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#888888"
+                            android:textSize="12sp"
+                            tools:text="昨天" />
+
+
+                </LinearLayout>
+
+                <TextView
+                        android:id="@+id/tv_dynamic_content"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:lineSpacingExtra="4dp"
+                        android:text="@{moment.content}"
+                        tools:text="正文"
+                        android:textColor="@color/colorBlack"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rec_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:visibility="@{moment.pictures.size()>0?View.VISIBLE:View.GONE}"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="32dp"
+                        android:nestedScrollingEnabled="false"
+                        android:scrollbars="none"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_dynamic_content" />
+
+                <TextView
+                        android:id="@+id/tv_topic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{moment.topic}"
+                        android:layout_marginTop="8dp"
+                        android:paddingStart="8dp"
+                        android:paddingEnd="8dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:textColor="@color/text_third"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="@+id/rec_img"
+                        app:layout_constraintTop_toBottomOf="@id/rec_img"
+                        tools:text="#古风经典" />
+
+                <LinearLayout
+                        android:id="@+id/frame_like"
+                        android:layout_width="match_parent"
+                        android:layout_height="24dp"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:gravity="center_vertical"
+                        android:visibility="@{moment.likeList.size()>0?View.VISIBLE:View.GONE}"
+                        app:layout_constraintBottom_toTopOf="@id/lin_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_topic">
+
+                    <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="4dp"
+                            android:textSize="12sp"
+                            android:gravity="center"
+                            android:textAlignment="center"
+                            android:text="@{likeString}"
+                            tools:text="10人觉得很赞"/>
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                        android:id="@+id/lin_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        app:layout_constraintTop_toBottomOf="@id/frame_like"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+
+                    <TextView
+                            android:id="@+id/btn_like"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:text="@{moment.likedByMe?@string/alreadyLike:@string/like}"
+                            android:textColor="@color/colorBlack"
+                            tools:targetApi="lollipop"
+                            tools:text="赞"/>
+
+                    <View
+                            android:id="@+id/view4"
+                            android:layout_width="1dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0"
+                            android:background="#7CE2E2E2" />
+
+                    <TextView
+                            android:id="@+id/btn_trans"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:background="?android:attr/selectableItemBackground"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:gravity="center"
+                            android:paddingTop="12dp"
+                            android:paddingBottom="12dp"
+                            android:text="转发"
+                            android:textColor="@color/colorBlack"
+                            tools:ignore="NewApi" />
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/navigation_moment"
+    app:startDestination="@id/moment_fragment">
+
+    <fragment
+        android:id="@+id/moment_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.moment.MomentFragment"
+        android:label="fragment_moment">
+
+    </fragment>
+
+</navigation>
