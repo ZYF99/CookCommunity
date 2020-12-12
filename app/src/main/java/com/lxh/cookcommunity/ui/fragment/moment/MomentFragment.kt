@@ -1,5 +1,6 @@
 package com.lxh.cookcommunity.ui.fragment.moment
 
+import androidx.activity.ComponentActivity
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.ItemMomentBinding
 import com.lxh.cookcommunity.model.api.moments.MomentContent
@@ -17,6 +18,7 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
 
     override fun getCustomRecyclerAdapter(): CommonListRecyclerAdapter<MomentContent, ItemMomentBinding>? {
         return MomentRecyclerAdapter(
+            activity as ComponentActivity,
             this,
             onCellClick = {
 

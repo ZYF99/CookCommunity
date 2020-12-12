@@ -3,6 +3,7 @@ package com.lxh.cookcommunity.ui.fragment.home
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentHomeBinding
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.ui.fragment.camerasearch.jumpToCameraSearch
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     HomeViewModel::class.java, layoutRes = R.layout.fragment_home
@@ -24,6 +25,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }
         }
 
+        //扫描
+        binding.tvScan.setOnClickListener {
+            context?.jumpToCameraSearch()
+        }
 
 
     }

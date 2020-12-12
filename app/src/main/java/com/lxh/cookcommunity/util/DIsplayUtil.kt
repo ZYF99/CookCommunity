@@ -1,18 +1,23 @@
 package com.lxh.cookcommunity.util
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
+import android.content.res.ColorStateList
 import android.text.InputFilter
 import android.text.Spanned
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
+import com.lxh.cookcommunity.MainApplication
+import com.lxh.cookcommunity.R
 import java.text.SimpleDateFormat
 import java.util.*
-
-
 
 /**
  * 显示 时：分，如 08：30
@@ -76,6 +81,61 @@ fun banEditSpace(editText: EditText, banSpace: Boolean) {
                 return null
             }
         })
+    }
+}
+
+@BindingAdapter("imageUrl")
+fun loadImage(imageView: ImageView, url: String?) {
+    Glide.with(imageView.context).load(url)
+        .placeholder(R.color.colorWhite)
+        .skipMemoryCache(false)
+        .centerCrop()
+        .into(imageView)
+}
+
+@BindingAdapter("imageUrlWithAddIcon")
+fun loadImageWithAddIcon(imageView: ImageView, url: String?) {
+    Glide.with(imageView.context).load(url)
+        .placeholder(R.drawable.icon_add_pic)
+        .centerCrop()
+        .into(imageView)
+}
+
+
+@SuppressLint("NewApi")
+@BindingAdapter("gender")
+fun getGenderDrawable(imageView: ImageView, gender: String?) {
+    when (gender) {
+        "女" -> {
+            Glide.with(imageView.context).load(R.drawable.icon_gender_female)
+                .placeholder(R.mipmap.ic_launcher)
+                .dontAnimate()
+                .into(imageView)
+
+            imageView.imageTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        MainApplication.instance!!,
+                        R.color.colorFemale
+                    )
+                )
+
+        }
+        else -> {
+            Glide.with(imageView.context).load(R.drawable.icon_gender_male)
+                .placeholder(R.mipmap.ic_launcher)
+                .dontAnimate()
+                .into(imageView)
+
+            imageView.imageTintList =
+                ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        MainApplication.instance!!,
+                        R.color.colorMale
+                    )
+                )
+
+        }
     }
 }
 

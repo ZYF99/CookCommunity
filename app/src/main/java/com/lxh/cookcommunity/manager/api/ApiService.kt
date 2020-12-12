@@ -22,17 +22,17 @@ interface ApiService {
     /*刷新通用列表*/
     @GET("get")
     fun refreshCommonList(
-        @Query("name")name:String?,
-        @Query("id")id:Int?,
-        @Query("size")size:Int?
+        @Query("name") name: String?,
+        @Query("id") id: Int?,
+        @Query("size") size: Int?
     ): Single<ResultModel<CommonListPageModel<MomentContent>>>
 
     /*刷新通用列表*/
     @GET("get")
     fun searchCommonList(
-        @Query("name")name:String?,
-        @Query("id")id:Int?,
-        @Query("size")size:Int?
+        @Query("name") name: String?,
+        @Query("id") id: Int?,
+        @Query("size") size: Int?
     ): Single<ResultModel<CommonListPageModel<MomentContent>>>
 
 }

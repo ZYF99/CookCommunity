@@ -13,12 +13,24 @@
         <action
             android:id="@+id/action_bridgeFragment_to_splasheFragment"
             app:destination="@id/splash_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_camera_search_fragment"
+            app:destination="@id/camera_search_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/splash_fragment"
         android:name="com.lxh.cookcommunity.ui.fragment.splash.SplashFragment"
+        tools:layout="@layout/fragment_splash"
         android:label="fragment_splash">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/camera_search_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.camerasearch.CameraSearchFragment"
+        android:label="fragment_camera_search"
+        tools:layout="@layout/fragment_camera_search">
 
     </fragment>
 

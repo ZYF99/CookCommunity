@@ -35,4 +35,7 @@
     <color name="desk_color_none">#FF999999</color>
     <color name="desk_color_not_arrive">#FFA37A</color>
 
+    <color name="colorMale">#00BCD4</color>
+    <color name="colorFemale">#E91E63</color>
+
 </resources>
