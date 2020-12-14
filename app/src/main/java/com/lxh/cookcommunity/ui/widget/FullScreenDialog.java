@@ -1,6 +1,5 @@
 package com.lxh.cookcommunity.ui.widget;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -20,7 +19,7 @@ public class FullScreenDialog extends Dialog {
 
     public FullScreenDialog(@NonNull Context context, ViewDataBinding binding) {
         super(context, R.style.MyDialog);
-        setOwnerActivity((Activity)context);
+        //setOwnerActivity((Activity)context);
         this.binding = binding;
     }
 

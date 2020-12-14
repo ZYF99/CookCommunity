@@ -8,8 +8,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="foodBannerModel"
-            type="com.lxh.cookcommunity.model.api.home.FoodBannerModel" />
+            name="url"
+            type="String" />
 
     </data>
 
@@ -30,7 +30,7 @@
 
                 <ImageView
                     android:id="@+id/gird_img"
-                    imageUrl="@{foodBannerModel.imgUrl}"
+                    imageUrl="@{url}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -39,20 +39,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:src="@drawable/ic_launcher_background" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="#23000000"
-                    android:padding="16dp"
-                    android:text="@{foodBannerModel.title}"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:text="@string/app_name" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

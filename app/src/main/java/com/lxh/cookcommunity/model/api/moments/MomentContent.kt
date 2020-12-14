@@ -25,12 +25,12 @@ data class MomentContent(
 
     val likeList: List<MomentComment>?
         get() {
-            return momentCommentList?.filter { it.commentType == COMMENT_LIKE }
+            return momentCommentList?.filter { it.commentType == COMMENT_FAVOR }
         }
 
     val isLikedByMe: Boolean
         get() {
-            return momentCommentList?.find { it.commentator.openId == SharedPrefModel.getUserModel().uid && it.commentType == COMMENT_LIKE } != null
+            return momentCommentList?.find { it.commentator.openId == SharedPrefModel.getUserModel().uid && it.commentType == COMMENT_FAVOR } != null
         }
 
     override fun equals(other: Any?): Boolean {

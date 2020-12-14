@@ -35,4 +35,14 @@ interface ApiService {
         @Query("size") size: Int?
     ): Single<ResultModel<CommonListPageModel<MomentContent>>>
 
+    /***********************************************动态********************************************/
+
+    /*评论*/
+     @GET("commentReply")
+    fun pushCommentOrLike(
+        @Query("id") id: Long?,
+        @Query("type") type: String?,
+        @Query("content") content: String?
+    ): Single<ResponseBody>
+
 }

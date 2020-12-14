@@ -10,7 +10,6 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
     PersonalViewModel::class.java, layoutRes = R.layout.fragment_personal
 ) {
 
-
     override fun initView() {
 
         binding.rvMyMoment.adapter = MomentRecyclerAdapter(

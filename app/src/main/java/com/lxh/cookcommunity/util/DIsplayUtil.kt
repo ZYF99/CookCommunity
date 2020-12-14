@@ -22,11 +22,11 @@ import java.util.*
 /**
  * 显示 时：分，如 08：30
  * */
-@BindingAdapter("timehm")
+/*@BindingAdapter("timehm")
 fun getTimeHourAndMinutes(textView: TextView, timeStamp: Long) {
     if (timeStamp == 0.toLong()) return
     textView.text = dateToTimeShort(Date(timeStamp))
-}
+}*/
 
 /**
  * 显示以"-" 连接的 年-月-日
@@ -39,18 +39,20 @@ fun getTimeDate(textView: TextView, birthLong: Long) {
 /**
  * 显示以中文 连接的 年月日
  * */
-@BindingAdapter("dateInChinese")
+/*@BindingAdapter("dateInChinese")
 fun getTimeChineseDate(textView: TextView, birthLong: Long) {
     textView.text = long2DateChineseString(birthLong)
-}
+}*/
 
 /**
  * 显示周几
  * */
+/*
 @BindingAdapter("week")
 fun getTimeWeek(textView: TextView, birthLong: Long) {
     textView.text = dateToWeek(Date(birthLong))
 }
+*/
 
 /**
  * 获取最近的时间

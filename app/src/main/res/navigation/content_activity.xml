@@ -16,13 +16,19 @@
         <action
             android:id="@+id/action_bridgeFragment_to_camera_search_fragment"
             app:destination="@id/camera_search_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_food_detail_fragment"
+            app:destination="@id/food_detail_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_moment_detail_fragment"
+            app:destination="@id/moment_detail_fragment" />
     </fragment>
 
     <fragment
         android:id="@+id/splash_fragment"
         android:name="com.lxh.cookcommunity.ui.fragment.splash.SplashFragment"
-        tools:layout="@layout/fragment_splash"
-        android:label="fragment_splash">
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash">
 
     </fragment>
 
@@ -30,7 +36,21 @@
         android:id="@+id/camera_search_fragment"
         android:name="com.lxh.cookcommunity.ui.fragment.camerasearch.CameraSearchFragment"
         android:label="fragment_camera_search"
-        tools:layout="@layout/fragment_camera_search">
+        tools:layout="@layout/fragment_camera_search"/>
+
+    <fragment
+        android:id="@+id/food_detail_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.fooddetail.FoodDetailFragment"
+        android:label="fragment_food_detail"
+        tools:layout="@layout/fragment_food_detail">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/moment_detail_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.momentdetail.MomentDetailFragment"
+        android:label="fragment_moment_detail"
+        tools:layout="@layout/fragment_moment_detail">
 
     </fragment>
 

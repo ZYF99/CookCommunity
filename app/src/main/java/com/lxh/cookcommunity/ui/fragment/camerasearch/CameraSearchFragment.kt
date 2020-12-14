@@ -3,6 +3,7 @@ package com.lxh.cookcommunity.ui.fragment.camerasearch
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Matrix
+import android.util.Size
 import android.view.Surface
 import android.view.ViewGroup
 import androidx.camera.core.*
@@ -43,10 +44,6 @@ class CameraSearchFragment : BaseFragment<FragmentCameraSearchBinding, CameraSea
         }
     }
 
-
-
-
-
     @SuppressLint("RestrictedApi")
     private fun startCamera() {
 
@@ -67,7 +64,7 @@ class CameraSearchFragment : BaseFragment<FragmentCameraSearchBinding, CameraSea
         val imageCapture = ImageCapture(imageCaptureConfig)
         // Setup image analysis pipeline that computes average pixel luminance
         val analyzerConfig = ImageAnalysisConfig.Builder().apply {
-            /*			setTargetResolution(Size(1280, 720))*/
+            			//setTargetResolution(Size(1280, 720))
             // 旋转
             setImageReaderMode(
                 ImageAnalysis.ImageReaderMode.ACQUIRE_LATEST_IMAGE

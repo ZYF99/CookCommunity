@@ -1,6 +1,9 @@
 package com.lxh.cookcommunity.model.api
 
+import com.squareup.moshi.Json
+
 data class SimpleProfileResp(
+	@Json(name = "uid")
 	val openId: String? = null,
 	val name: String? = null,
 	val avatar: String? = null,

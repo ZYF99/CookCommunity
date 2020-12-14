@@ -76,7 +76,9 @@ class ContentActivity : BaseActivity() {
 
     enum class Destination(@IdRes val id: Int) {
         Splash(R.id.splash_fragment),
-        CameraSearch(R.id.camera_search_fragment)
+        CameraSearch(R.id.camera_search_fragment),
+        FoodDetail(R.id.food_detail_fragment),
+        MomentDetail(R.id.moment_detail_fragment)
     }
 
 }

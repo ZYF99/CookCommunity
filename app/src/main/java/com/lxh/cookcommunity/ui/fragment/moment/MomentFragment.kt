@@ -7,6 +7,7 @@ import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.model.api.moments.MomentRecyclerAdapter
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListFragment
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListRecyclerAdapter
+import com.lxh.cookcommunity.ui.fragment.momentdetail.jumpToMomentDetail
 
 class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMomentBinding>(
     classify = "moment",
@@ -21,7 +22,7 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
             activity as ComponentActivity,
             this,
             onCellClick = {
-
+                context?.jumpToMomentDetail(it)
             },
             onHeaderClick = {
 
@@ -39,7 +40,6 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
         super.initView()
 
     }
-
 
     override fun initData() {
         super.initData()

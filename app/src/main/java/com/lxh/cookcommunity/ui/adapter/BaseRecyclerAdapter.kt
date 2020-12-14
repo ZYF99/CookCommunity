@@ -45,8 +45,8 @@ constructor(
 
     abstract fun bindData(binding: Binding, position: Int)
 
-    fun replaceData(newList: List<Bean>) {
-        baseList = newList
+    fun replaceData(newList: List<Bean>?) {
+        baseList = newList?: emptyList()
         notifyDataSetChanged()
     }
 

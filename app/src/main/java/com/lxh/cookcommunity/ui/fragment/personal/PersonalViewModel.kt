@@ -10,6 +10,7 @@ import com.lxh.cookcommunity.ui.fragment.moment.pic1
 import com.lxh.cookcommunity.ui.fragment.moment.pic2
 import com.lxh.cookcommunity.ui.fragment.moment.pic3
 import com.lxh.cookcommunity.ui.fragment.moment.pic4
+import com.zgxwxy.tuputech.util.switchThread
 import org.kodein.di.generic.instance
 
 class PersonalViewModel(application: Application) : BaseViewModel(application) {
@@ -51,9 +52,11 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
                     )
                 )
             }
-            .doOnApiSuccess {
+            .switchThread()
+            .catchApiError()
+            .doOnSuccess {
                 myRecentMomentMutableLiveDataList.postValue(it.data?.dataList)
-            }
+            }.bindLife()
     }
 
 }

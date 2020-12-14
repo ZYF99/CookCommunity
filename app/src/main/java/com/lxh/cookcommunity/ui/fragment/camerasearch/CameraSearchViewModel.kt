@@ -4,8 +4,8 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lxh.cookcommunity.manager.api.BaiDuIdentifyService
 import com.lxh.cookcommunity.ui.base.BaseViewModel
+import com.zgxwxy.tuputech.util.switchThread
 import org.kodein.di.generic.instance
-
 
 class CameraSearchViewModel(application: Application) : BaseViewModel(application) {
     val thingString = MutableLiveData<String>()
@@ -20,12 +20,14 @@ class CameraSearchViewModel(application: Application) : BaseViewModel(applicatio
                     it.accessToken,
                     imgArrayStr
                 )
-            }.doOnApiSuccess {
+            }.switchThread()
+            .catchApiError()
+            .doOnSuccess {
                 it.result.sortByDescending { thing ->
                     thing.probability
                 }
                 thingString.postValue(it.result[0].name)
-            }
+            }.bindLife()
     }
 
 

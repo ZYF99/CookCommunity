@@ -7,7 +7,7 @@
 
     <data>
             <variable
-                    name="viewModel"
+                    name="vm"
                     type="${basePackage}.${fragmentPackage}.${classFolderName}.${viewModelName}" />
     </data>
 

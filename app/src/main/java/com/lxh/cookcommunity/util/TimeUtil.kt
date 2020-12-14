@@ -1,136 +1,158 @@
 package com.lxh.cookcommunity.util
 
+import android.annotation.SuppressLint
+import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.*
 
-//个位时间补0
-fun fixTimeWith0(time: Int): String {
-    return if (time < 10) "0$time"
-    else "$time"
+fun long2DateString(timeStamp: Long): String {
+	val format = SimpleDateFormat("yyyy年MM月dd日")
+	val date = Date(timeStamp)
+	return format.format(date)
 }
 
-///判断是否是同一天
-fun isTheSameDay(oneTimeStamp: Long, secondTimeStamp: Long): Boolean {
-    val c1 = Calendar.getInstance()
-    val c2 = Calendar.getInstance()
-    c1.time = Date(oneTimeStamp)
-    c2.time = Date(secondTimeStamp)
-    return c1[Calendar.YEAR] == c2[Calendar.YEAR]
-            && c1[Calendar.MONTH] == c2[Calendar.MONTH]
-            && c1[Calendar.DAY_OF_MONTH] == c2[Calendar.DAY_OF_MONTH]
+@BindingAdapter("time")
+fun long2Date(textView: TextView, birthLong: Long) {
+	textView.text = long2DateString(birthLong)
 }
 
-//获取年月日
-fun long2DateStringChineseSplit(timeStamp: Long): String {
-    val format = SimpleDateFormat("yyyy年MM月dd日")
-    val date = Date(timeStamp)
-    return format.format(date)
+
+fun string2Date(string: String): Date {
+	val format = SimpleDateFormat("yyyy年MM月dd日")
+	var date = Date()
+	try {
+		date = format.parse(string)!!
+	} catch (e: ParseException) {
+		showToast("转换日期失败：${e.message}")
+	}
+	return date
 }
 
-//判断是否在时分(String：HH:mm)范围内
-fun judgeTimeInRange(
-    startTimeShortString: String?,
-    endTimeShortString: String?
-): Boolean {
-    val format = "HH:mm"
-    val nowTime: Date = SimpleDateFormat(format).parse(dateToTimeShort(Date()))
-    val startTime: Date = SimpleDateFormat(format).parse(startTimeShortString)
-    val endTime: Date = SimpleDateFormat(format).parse(endTimeShortString)
-    return isEffectiveDate(nowTime, startTime, endTime)
+fun getNowString(): String {
+	val formatter = SimpleDateFormat("yyyy年MM月dd日   HH:mm:ss")
+	val curDate = Date(System.currentTimeMillis())
+	//获取当前时间
+	return formatter.format(curDate)
 }
 
-//判断是否在时分范围内
-fun isEffectiveDate(nowTime: Date, startTime: Date, endTime: Date): Boolean {
-    if (nowTime.time === startTime.time
-        || nowTime.time === endTime.time
-    ) {
-        return true
-    }
-    val date = Calendar.getInstance()
-    date.time = nowTime
-    val begin = Calendar.getInstance()
-    begin.time = startTime
-    val end = Calendar.getInstance()
-    end.time = endTime
-    return date.after(begin) && date.before(end)
+fun getAgeByBirth(birthDay: Date): Int {
+	var age: Int
+	val cal = Calendar.getInstance()
+	if (cal.before(birthDay)) { //出生日期晚于当前时间，无法计算
+		throw  IllegalArgumentException(
+			"The birthDay is before Now.It's unbelievable!"
+		)
+	}
+	val yearNow = cal.get(Calendar.YEAR)  //当前年份
+	val monthNow = cal.get(Calendar.MONTH)  //当前月份
+	val dayOfMonthNow = cal.get(Calendar.DAY_OF_MONTH) //当前日期
+	cal.time = birthDay
+	val yearBirth = cal.get(Calendar.YEAR)
+	val monthBirth = cal.get(Calendar.MONTH)
+	val dayOfMonthBirth = cal.get(Calendar.DAY_OF_MONTH)
+	age = yearNow - yearBirth   //计算整岁数
+	if (monthNow <= monthBirth) {
+		if (monthNow == monthBirth) {
+			if (dayOfMonthNow < dayOfMonthBirth) age--//当前日期在生日之前，年龄减一
+		} else {
+			age-- //当前月份在生日之前，年龄减一
+		}
+	}
+	return age
 }
+
+/**
+ * 获取时间 小时:分 HH:mm
+ *
+ * @return
+ */
+fun getTimeShort(date: Date): String {
+	val formatter = SimpleDateFormat("HH:mm")
+	return formatter.format(date)
+}
+
+/**
+ * 获取时间 小时:分 mm:ss 以Float返回
+ *
+ * @return
+ */
+fun getTimeShortFloat(date: Date): Float {
+	
+	val formatter = SimpleDateFormat("mm:ss")
+	val str = formatter.format(date)
+	val resStr = str.replace(":",".")
+	return resStr.toFloat()
+}
+
+/*@BindingAdapter("recentTime")
+fun getRecentTime(textView: TextView, timeStamp: Long) {
+	val time = Date(timeStamp)
+	val now = Date()
+	textView.text = when (judgeRecentRime(time, now)) {
+		YESTERDAY -> "昨天 ${time.hours}:${time.minutes}"
+		TODAY -> getTimeShort(time)
+		IN_SEVEN_DAY -> getWeekOfDate(Date(timeStamp))
+		OUT_SEVEN_DAY -> {
+			if (now.year == time.year) {
+				//同年
+				"${time.month}月${time.day}日 ${getTimeShort(time)}"
+			} else {
+				//非同年
+				"${time.year}年${time.month}月${time.day}日 ${getTimeShort(time)}"
+			}
+		}
+		else -> {
+			//其他（防止错误）
+			"${time.year}年${time.month}月${time.day}日 ${getTimeShort(time)}"
+		}
+	}
+}*/
+
+const val TODAY = -1 //今天
+const val YESTERDAY = 0 //昨天
+const val IN_SEVEN_DAY = 1 //七天以内
+const val OUT_SEVEN_DAY = 2 //七天外
 
 
 /**
- * 针对str格式的时间做转换 格式为"xx:xx"
- * @param time  传入的时间
- * @param hour  true：返回小时；false：返回分钟
- * @return  当前小时或分钟
+ * @author Zhangyf.
+ * @param oldTime 较小的时间
+ * @param newTime 较大的时间 (如果为空   默认当前时间 ,表示和当前时间相比)
+ * @return -1 ：同一天.    0：昨天 .   1 ：至少是前天.
  */
-private fun getHourOrMinute(time: String, hour: Boolean): Int {
-    return if (hour) {
-        Integer.parseInt(time.substring(0, time.indexOf(":")))
-    } else {
-        Integer.parseInt(time.substring(time.indexOf(":") + 1))
-    }
+@SuppressLint("SimpleDateFormat")
+private fun judgeRecentRime(oldTime: Date, newTime: Date): Int {
+	//将下面的 理解成  yyyy-MM-dd 00：00：00 更好理解点
+	val format = SimpleDateFormat("yyyy-MM-dd")
+	val todayStr = format.format(newTime)
+	val today = format.parse(todayStr)
+	//昨天 86400000=24*60*60*1000 一天
+	return if (today!!.time - oldTime.time > 0 && today.time - oldTime.time <= 86400000) {
+		//昨天
+		YESTERDAY
+	} else if (today.time - oldTime.time <= 0) { //至少是今天
+		//今天
+		TODAY
+	} else { //至少是前天
+		if ((today.time - oldTime.time) < 604800000) {
+			//七天以内
+			IN_SEVEN_DAY
+		} else {
+			//至少七天前
+			OUT_SEVEN_DAY
+		}
+	}
+	
 }
 
-
-//获取 年-月-日
-fun long2DateString(timeStamp: Long?): String {
-    if (timeStamp == 0.toLong() || timeStamp == null) return ""
-    val format = SimpleDateFormat("yyyy-MM-dd")
-    if (timeStamp != null) {
-        val date = Date(timeStamp)
-        return format.format(date)
-    } else {
-        return ""
-    }
-}
-
-//获取中文间隙的年月日
-fun long2DateChineseString(timeStamp: Long): String {
-    val format = SimpleDateFormat("yyyy年MM月dd日")
-    val date = Date(timeStamp)
-    return format.format(date)
-}
-
-//获取时间 小时:分 HH:mm
-fun dateToTimeShort(date: Date): String {
-    val formatter = SimpleDateFormat("HH:mm")
-    return formatter.format(date)
-}
-
-//获取周
-fun getWeek(date: Date): String {
-    val weekMap = hashMapOf(
-        Pair("星期日", "周天"),
-        Pair("星期一", "周一"),
-        Pair("星期二", "周二"),
-        Pair("星期三", "周三"),
-        Pair("星期四", "周四"),
-        Pair("星期五", "周五"),
-        Pair("星期六", "周六")
-    )
-    return weekMap[dateToWeek(date)] ?: "周天"
-}
-
-//获取星期
-fun dateToWeek(dateTime: Date): String {
-    val weekDays =
-        arrayOf("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")
-    val cal = Calendar.getInstance()
-    try {
-        cal.time = dateTime
-    } catch (e: ParseException) {
-        e.printStackTrace()
-    }
-    //一周的第几天
-    var w = cal[Calendar.DAY_OF_WEEK] - 1
-    if (w < 0) w = 0
-    return weekDays[w]
-}
-
-//获取今天是一周的第几天
-fun getTodayNumOfWeek(): Int {
-    val cal = Calendar.getInstance()
-    var w = cal[Calendar.DAY_OF_WEEK] - 1
-    if (w < 0) w = 0
-    return w
+fun getWeekOfDate(dt: Date): String {
+	val weekDays = arrayOf("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六")
+	val cal = Calendar.getInstance()
+	cal.time = dt
+	var w = cal.get(Calendar.DAY_OF_WEEK) - 1
+	if (w < 0)
+		w = 0
+	return weekDays[w]
 }
