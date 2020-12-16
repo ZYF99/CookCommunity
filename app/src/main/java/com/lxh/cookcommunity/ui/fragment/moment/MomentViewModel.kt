@@ -26,7 +26,7 @@ class MomentViewModel(application: Application) : CommonListViewModel<MomentCont
     //刷新动态列表
     override val refreshFunction: (String?, Int?, Int?) -> Single<ResultModel<CommonListPageModel<MomentContent>>> =
         { ds, wes, we ->
-            apiService.refreshCommonList("1", 1, 1)
+            apiService.refreshMomentList("1", 1, 1)
                 .doOnSubscribe {
                     commonListLiveData.postValue(
                         listOf(
@@ -62,7 +62,7 @@ class MomentViewModel(application: Application) : CommonListViewModel<MomentCont
     //搜索动态列表
     override val searchFunction: (String?, Int, Int) -> Single<ResultModel<CommonListPageModel<MomentContent>>> =
         { ds, wes, we ->
-            apiService.searchCommonList("1", 1, 1)
+            apiService.searchMomentList("1", 1, 1)
                 .doOnSubscribe {
 
                 }

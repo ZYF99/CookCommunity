@@ -5,6 +5,7 @@ import com.lxh.cookcommunity.databinding.FragmentHomeBinding
 import com.lxh.cookcommunity.ui.base.BaseFragment
 import com.lxh.cookcommunity.ui.fragment.camerasearch.jumpToCameraSearch
 import com.lxh.cookcommunity.ui.fragment.fooddetail.jumpToFoodDetail
+import com.lxh.cookcommunity.ui.fragment.searchfood.jumpToSearchFood
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
     HomeViewModel::class.java, layoutRes = R.layout.fragment_home
@@ -14,7 +15,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
         //菜单列表
         binding.rvFood.apply {
-            adapter = FoodRecyclerAdapter {
+            adapter = FoodRecyclerAdapter(this@HomeFragment) {
                 context.jumpToFoodDetail(it)
             }
         }
@@ -24,6 +25,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             if (viewModel.bannerListMutableLiveData.value?.isNotEmpty() == true) {
 
             }
+        }
+
+        //搜索
+        binding.tvSearch.setOnClickListener {
+            context?.jumpToSearchFood()
         }
 
         //扫描

@@ -21,7 +21,7 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
 
     //拉取我最近的动态
     fun fetchMyMoments() {
-        apiService.refreshCommonList("", 0, 10)
+        apiService.refreshMomentList("", 0, 10)
             .doOnSubscribe {
                 myRecentMomentMutableLiveDataList.postValue(
                     listOf(

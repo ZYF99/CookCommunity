@@ -41,13 +41,6 @@ class ContentActivity : BaseActivity() {
             }
         }
 
-        binding.flFinish.setOnClickListener {
-            hideClickCount++
-            if (hideClickCount == 5) {
-                finish()
-                hideClickCount = 0
-            }
-        }
     }
 
     companion object {
@@ -78,6 +71,7 @@ class ContentActivity : BaseActivity() {
         Splash(R.id.splash_fragment),
         CameraSearch(R.id.camera_search_fragment),
         FoodDetail(R.id.food_detail_fragment),
+        SearchFood(R.id.search_food_fragment),
         MomentDetail(R.id.moment_detail_fragment)
     }
 

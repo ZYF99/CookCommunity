@@ -22,6 +22,9 @@
         <action
             android:id="@+id/action_bridgeFragment_to_moment_detail_fragment"
             app:destination="@id/moment_detail_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_search_food_fragment"
+            app:destination="@id/search_food_fragment" />
     </fragment>
 
     <fragment
@@ -36,7 +39,7 @@
         android:id="@+id/camera_search_fragment"
         android:name="com.lxh.cookcommunity.ui.fragment.camerasearch.CameraSearchFragment"
         android:label="fragment_camera_search"
-        tools:layout="@layout/fragment_camera_search"/>
+        tools:layout="@layout/fragment_camera_search" />
 
     <fragment
         android:id="@+id/food_detail_fragment"
@@ -53,6 +56,15 @@
         tools:layout="@layout/fragment_moment_detail">
 
     </fragment>
+
+    <fragment
+        android:id="@+id/search_food_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.searchfood.SearchFoodFragment"
+        android:label="fragment_search_food"
+        tools:layout="@layout/fragment_search_food">
+
+    </fragment>
+
 
     <!--<include app:graph="@navigation/top_article" />-->
 
