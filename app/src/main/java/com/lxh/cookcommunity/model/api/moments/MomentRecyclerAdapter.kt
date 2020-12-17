@@ -16,7 +16,7 @@ class MomentRecyclerAdapter(
     val onCellClick: (MomentContent) -> Unit,
     val onHeaderClick: (SimpleProfileResp?) -> Unit,
     val onLikeClick: (MomentContent?, Int) -> Unit,
-    val onTransClick: (MomentContent?) -> Unit
+    val onCommitClick: (MomentContent) -> Unit
 ) : CommonListRecyclerAdapter<MomentContent, ItemMomentBinding>(
     lifecycleOwner = lifecycleOwner,
     layoutRes = R.layout.item_moment,
@@ -51,7 +51,7 @@ class MomentRecyclerAdapter(
         binding.root.setOnClickListener { onCellClick(moment) }
         binding.cellAuthorPortrait.setOnClickListener { onHeaderClick(moment.publisher) }
         binding.btnLike.setOnClickListener { onLikeClick(moment, position) }
-        binding.btnTrans.setOnClickListener { onTransClick(moment) }
+        binding.btnCommit.setOnClickListener { onCommitClick(moment) }
     }
 
     /*//点赞或取消点赞

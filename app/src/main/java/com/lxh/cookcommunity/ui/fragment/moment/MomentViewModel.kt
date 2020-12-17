@@ -5,6 +5,8 @@ import com.lxh.cookcommunity.manager.api.ApiService
 import com.lxh.cookcommunity.manager.api.base.ResultModel
 import com.lxh.cookcommunity.model.api.SimpleProfileResp
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
+import com.lxh.cookcommunity.model.api.moments.COMMENT_COMMENT
+import com.lxh.cookcommunity.model.api.moments.MomentComment
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListViewModel
 import io.reactivex.Single
@@ -34,7 +36,12 @@ class MomentViewModel(application: Application) : CommonListViewModel<MomentCont
                                 content = "asfokwhdfiu",
                                 publisher = SimpleProfileResp.getDefault(),
                                 publishedDate = System.currentTimeMillis(),
-                                pictures = listOf(pic1, pic2, pic3, pic4)
+                                pictures = listOf(pic1, pic2, pic3, pic4),
+                                momentCommentList = listOf(
+                                    MomentComment(commentType = COMMENT_COMMENT,content = "帅的"),
+                                    MomentComment(commentType = COMMENT_COMMENT,content = "帅的"),
+                                    MomentComment(commentType = COMMENT_COMMENT,content = "帅的")
+                                )
                             ),
                             MomentContent(
                                 content = "ertgregertgh",

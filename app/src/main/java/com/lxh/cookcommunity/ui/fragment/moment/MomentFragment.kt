@@ -30,8 +30,8 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
             onLikeClick = { momentContent, i ->
 
             },
-            onTransClick = {
-
+            onCommitClick = {
+                context?.jumpToMomentDetail(it)
             }
         )
     }

@@ -8,9 +8,9 @@ const val COMMENT_COMMENT = "comment" //评论
 const val COMMENT_FAVOR = "favor" // 点赞
 
 data class MomentComment(
-    val commentId: Long,
-    val commentType: String,
+    val commentId: Long? = null,
+    val commentType: String? = null,
     val content: String = "favor",
-    val commentator: SimpleProfileResp,
-    val commentDate: Long
+    val commentator: SimpleProfileResp? = null,
+    val commentDate: Long? = null
 )

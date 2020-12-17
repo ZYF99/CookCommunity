@@ -5,6 +5,7 @@ import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentPersonalBinding
 import com.lxh.cookcommunity.model.api.moments.MomentRecyclerAdapter
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.ui.fragment.momentdetail.jumpToMomentDetail
 
 class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel>(
     PersonalViewModel::class.java, layoutRes = R.layout.fragment_personal
@@ -16,7 +17,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
             activity as ComponentActivity,
             this,
             onCellClick = {
-
+                context?.jumpToMomentDetail(it)
             },
             onHeaderClick = {
 
@@ -24,8 +25,8 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
             onLikeClick = { momentContent, i ->
 
             },
-            onTransClick = {
-
+            onCommitClick = {
+                context?.jumpToMomentDetail(it)
             }
         )
 
