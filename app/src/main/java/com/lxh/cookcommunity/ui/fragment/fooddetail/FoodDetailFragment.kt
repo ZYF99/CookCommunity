@@ -7,6 +7,7 @@ import com.lxh.cookcommunity.databinding.FragmentFoodDetailBinding
 import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.ui.activity.ContentActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.ui.fragment.studyvideo.jumpToStudyVideo
 import com.lxh.cookcommunity.util.toJson
 
 const val KEY_FOOD_DETAIL = "key_food_detail"
@@ -16,7 +17,9 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
 ) {
 
     override fun initView() {
-
+        binding.tvStartCook.setOnClickListener {
+            context?.jumpToStudyVideo()
+        }
     }
 
     override fun initData() {

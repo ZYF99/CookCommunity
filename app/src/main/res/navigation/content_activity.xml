@@ -65,6 +65,13 @@
 
     </fragment>
 
+    <fragment
+        android:id="@+id/study_video_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.studyvideo.StudyVideoFragment"
+        android:label="fragment_study_video"
+        tools:layout="@layout/fragment_study_video">
+
+    </fragment>
 
     <!--<include app:graph="@navigation/top_article" />-->
 
