@@ -7,7 +7,7 @@
     <data>
 
         <variable
-            name="viewModel"
+            name="vm"
             type="com.lxh.cookcommunity.ui.fragment.fooddetail.FoodDetailViewModel" />
     </data>
 
@@ -22,7 +22,8 @@
             android:layout_marginStart="24dp"
             android:text="炒鸡蛋"
             android:textColor="@color/colorBlack"
-            android:textSize="24dp"
+            android:textSize="28dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/tv_collection"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/tv_collection" />
@@ -35,50 +36,50 @@
             android:layout_marginEnd="24dp"
             android:background="@drawable/bg_card_corner_4dp"
             android:backgroundTint="@color/colorAccent"
-            android:padding="12dp"
+            android:padding="4dp"
             android:text="收藏"
             android:textColor="@color/colorWhite"
-            android:textSize="16dp"
+            android:textSize="12dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.zhouwei.mzbanner.MZBannerView
             android:id="@+id/banner_food_pic"
             android:layout_width="match_parent"
-            tools:background="#434EA680"
-            android:layout_height="154dp"
+            android:layout_height="240dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
-            app:layout_constraintTop_toBottomOf="@id/tv_collection"
             app:canLoop="true"
             app:indicatorAlign="center"
             app:layout_collapseParallaxMultiplier="0.6"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_collection"
             app:middle_page_cover="false"
-            app:open_mz_mode="true" />
+            app:open_mz_mode="false"
+            tools:background="#434EA680" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_avatar"
+            android:id="@+id/iv_cook_avatar"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/icon_gender_male"
+            android:src="@drawable/logo"
             app:layout_constraintStart_toStartOf="@+id/banner_food_pic"
             app:layout_constraintTop_toBottomOf="@+id/banner_food_pic" />
 
         <TextView
-            android:id="@+id/tv_original_name"
+            android:id="@+id/tv_cook_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:text="厨师：张三丰"
             android:textColor="@color/colorBlack"
             android:textSize="18dp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
-            app:layout_constraintStart_toEndOf="@+id/iv_avatar"
-            app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cook_avatar"
+            app:layout_constraintStart_toEndOf="@+id/iv_cook_avatar"
+            app:layout_constraintTop_toTopOf="@+id/iv_cook_avatar" />
 
         <TextView
             android:id="@+id/tv_personal"
@@ -87,9 +88,9 @@
             android:text="进入主页"
             android:textColor="@color/colorGrey_656565"
             android:textSize="12dp"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_avatar"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_cook_avatar"
             app:layout_constraintEnd_toEndOf="@+id/banner_food_pic"
-            app:layout_constraintTop_toTopOf="@+id/iv_avatar" />
+            app:layout_constraintTop_toTopOf="@+id/iv_cook_avatar" />
 
         <TextView
             android:id="@+id/tv_tip_tool"
@@ -99,24 +100,30 @@
             android:text="食材/工具："
             android:textColor="@color/colorBlack"
             android:textSize="16dp"
-            app:layout_constraintStart_toStartOf="@+id/iv_avatar"
-            app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+            app:layout_constraintStart_toStartOf="@+id/iv_cook_avatar"
+            app:layout_constraintTop_toBottomOf="@+id/iv_cook_avatar" />
 
-        <TextView
-            android:id="@+id/tv_tool"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:padding="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:lineSpacingExtra="6dp"
-            android:text="狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,"
-            android:textColor="@color/colorGrey_656565"
-            android:textSize="16dp"
+            android:padding="8dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_start_cook"
             app:layout_constraintEnd_toEndOf="@+id/banner_food_pic"
             app:layout_constraintStart_toEndOf="@+id/tv_tip_tool"
-            app:layout_constraintTop_toBottomOf="@+id/iv_avatar" />
+            app:layout_constraintTop_toBottomOf="@+id/iv_cook_avatar">
+
+            <TextView
+                android:id="@+id/tv_tool"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:lineSpacingExtra="6dp"
+                android:text="狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,"
+                android:textColor="@color/colorGrey_656565"
+                android:textSize="16dp" />
+
+        </androidx.core.widget.NestedScrollView>
 
         <TextView
             android:id="@+id/tv_start_cook"
@@ -127,7 +134,7 @@
             android:background="@drawable/bg_card_corner_4dp"
             android:backgroundTint="#9903A9F4"
             android:padding="12dp"
-            android:text="开始制作 >>"
+            android:text="开始制作 >"
             android:textColor="@color/colorWhite"
             android:textSize="16dp"
             app:layout_constraintBottom_toBottomOf="parent"

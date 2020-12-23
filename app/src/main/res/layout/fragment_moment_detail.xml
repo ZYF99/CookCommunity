@@ -105,6 +105,7 @@
                     android:id="@+id/release_content"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:minHeight="100dp"
                     android:layout_marginTop="16dp"
                     android:background="@null"
                     android:gravity="start"

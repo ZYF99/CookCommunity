@@ -36,8 +36,11 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
 
     //隐藏键盘及输入框
     private fun hideInputDialog() {
+        //显示输入框，隐藏下方按钮
+        binding.cardBtn.visibility = View.VISIBLE
+        binding.linComment.root.visibility = View.GONE
         //隐藏键盘
-        requireActivity().hideSoftKeyBoard()
+        requireActivity().hideSoftKeyBoard(binding.linComment.editComment)
     }
 
     override fun initView() {
@@ -87,6 +90,12 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
         //返回按钮
         binding.btnBack.setOnClickListener {
             activity?.finish()
+        }
+
+        //收起评论按钮
+        binding.linComment.tvClose.setOnClickListener {
+
+            hideInputDialog()
         }
 
         //评论按钮

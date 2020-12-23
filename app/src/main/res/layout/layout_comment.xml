@@ -28,10 +28,18 @@
             android:paddingRight="16dp"
             android:paddingBottom="8dp">
 
+            <TextView
+                android:id="@+id/tv_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="收起"/>
+
             <EditText
                 android:id="@+id/edit_comment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginBottom="4dp"
@@ -50,6 +58,7 @@
                 android:id="@+id/btn_send"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_weight="0"
                 android:background="@drawable/bg_card_corner_4dp"
                 android:backgroundTint="@color/colorAccent"

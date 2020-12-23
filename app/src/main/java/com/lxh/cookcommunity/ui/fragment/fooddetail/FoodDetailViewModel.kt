@@ -11,7 +11,8 @@ import org.kodein.di.generic.instance
 class FoodDetailViewModel(application: Application) : BaseViewModel(application) {
 
     val apiService by instance<ApiService>()
-    val bannerListMutableLiveData = MutableLiveData<List<String  >>()
+    val bannerListMutableLiveData = MutableLiveData<List<String>>()
+    val foodMutableLiveData = MutableLiveData<Food>()
 
     //拉取Banner
     fun fetchBannerList() {

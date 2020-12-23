@@ -4,6 +4,7 @@ import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentHomeBinding
 import com.lxh.cookcommunity.ui.base.BaseFragment
 import com.lxh.cookcommunity.ui.fragment.camerasearch.jumpToCameraSearch
+import com.lxh.cookcommunity.ui.fragment.classify.jumpToClassify
 import com.lxh.cookcommunity.ui.fragment.fooddetail.jumpToFoodDetail
 import com.lxh.cookcommunity.ui.fragment.searchfood.jumpToSearchFood
 
@@ -30,6 +31,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
         //搜索
         binding.tvSearch.setOnClickListener {
             context?.jumpToSearchFood()
+        }
+
+        //分类
+        binding.tvClassify.setOnClickListener {
+            context?.jumpToClassify()
         }
 
         //扫描

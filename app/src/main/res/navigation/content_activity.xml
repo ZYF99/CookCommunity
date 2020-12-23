@@ -25,6 +25,15 @@
         <action
             android:id="@+id/action_bridgeFragment_to_search_food_fragment"
             app:destination="@id/search_food_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_study_video_fragment"
+            app:destination="@id/study_video_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_cook_personal_fragment"
+            app:destination="@id/cook_personal_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_classify_fragment"
+            app:destination="@id/classify_fragment" />
     </fragment>
 
     <fragment
@@ -70,6 +79,22 @@
         android:name="com.lxh.cookcommunity.ui.fragment.studyvideo.StudyVideoFragment"
         android:label="fragment_study_video"
         tools:layout="@layout/fragment_study_video">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/cook_personal_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.cookpersonal.CookPersonalFragment"
+        android:label="fragment_cook_personal"
+        tools:layout="@layout/fragment_cook_personal">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/classify_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.classify.ClassifyFragment"
+        android:label="fragment_classify"
+        tools:layout="@layout/fragment_classify">
 
     </fragment>
 
