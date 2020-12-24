@@ -13,6 +13,7 @@ import com.lxh.cookcommunity.model.api.moments.MomentsListGridImageAdapter
 import com.lxh.cookcommunity.model.api.moments.getMomentsPictureLayoutManager
 import com.lxh.cookcommunity.ui.activity.ContentActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.ui.fragment.personpersonal.jumpToPersonPersonal
 import com.lxh.cookcommunity.util.*
 
 const val KEY_MOMENT_DETAIL = "key_moment_detail"
@@ -64,6 +65,10 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
             (binding.commentRec.adapter as CommentListAdapter).replaceData(
                 it.realCommentList ?: emptyList()
             )
+
+            binding.ivAvatar.setOnClickListener {
+                context?.jumpToPersonPersonal()
+            }
 
         }
 

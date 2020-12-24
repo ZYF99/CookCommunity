@@ -40,6 +40,9 @@
         <action
             android:id="@+id/action_bridgeFragment_to_goods_detail_fragment"
             app:destination="@id/goods_detail_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_person_personal_fragment"
+            app:destination="@id/person_personal_fragment" />
     </fragment>
 
     <fragment
@@ -116,6 +119,11 @@
         android:id="@+id/goods_detail_fragment"
         android:name="com.lxh.cookcommunity.ui.fragment.goodsdetail.GoodsDetailFragment"
         tools:layout="@layout/fragment_goods_detail" />
+
+    <fragment
+        android:id="@+id/person_personal_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.personpersonal.PersonPersonalFragment"
+        tools:layout="@layout/fragment_person_personal" />
 
     <!--<include app:graph="@navigation/top_article" />-->
 

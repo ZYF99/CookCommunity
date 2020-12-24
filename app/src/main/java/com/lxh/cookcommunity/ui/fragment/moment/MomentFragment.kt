@@ -8,6 +8,7 @@ import com.lxh.cookcommunity.model.api.moments.MomentRecyclerAdapter
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListFragment
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListRecyclerAdapter
 import com.lxh.cookcommunity.ui.fragment.momentdetail.jumpToMomentDetail
+import com.lxh.cookcommunity.ui.fragment.personpersonal.jumpToPersonPersonal
 
 class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMomentBinding>(
     classify = "moment",
@@ -25,7 +26,7 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
                 context?.jumpToMomentDetail(it)
             },
             onHeaderClick = {
-
+                context?.jumpToPersonPersonal()
             },
             onLikeClick = { momentContent, i ->
 
