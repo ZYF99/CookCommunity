@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="登陆您的账号"
+                android:text="登录您的账号"
                 android:textColor="@color/colorWhite"
                 android:textSize="16sp" />
 
@@ -217,7 +217,7 @@
             android:background="@drawable/bg_card_corner_4dp"
             android:paddingLeft="30dp"
             android:paddingRight="30dp"
-            android:text="登陆"
+            android:text="登录"
             android:textColor="@color/colorWhite"
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
