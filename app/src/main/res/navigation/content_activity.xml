@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_bridgeFragment_to_classify_fragment"
             app:destination="@id/classify_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_mark_fragment"
+            app:destination="@id/mark_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_goods_detail_fragment"
+            app:destination="@id/goods_detail_fragment" />
     </fragment>
 
     <fragment
@@ -97,6 +103,19 @@
         tools:layout="@layout/fragment_classify">
 
     </fragment>
+
+    <fragment
+        android:id="@+id/mark_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.mark.MarkFragment"
+        android:label="fragment_mark"
+        tools:layout="@layout/fragment_mark">
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/goods_detail_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.goodsdetail.GoodsDetailFragment"
+        tools:layout="@layout/fragment_goods_detail" />
 
     <!--<include app:graph="@navigation/top_article" />-->
 

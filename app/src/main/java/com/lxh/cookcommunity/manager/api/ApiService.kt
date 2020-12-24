@@ -2,6 +2,7 @@ package com.lxh.cookcommunity.manager.api
 
 import com.lxh.cookcommunity.manager.api.base.ResultModel
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
+import com.lxh.cookcommunity.model.api.goods.Goods
 import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
@@ -61,5 +62,23 @@ interface ApiService {
         @Query("type") type: String?,
         @Query("content") content: String?
     ): Single<ResponseBody>
+
+    /**********************************************商品********************************************/
+
+    /*刷新食物列表*/
+    @GET("get")
+    fun refreshGoodsList(
+        @Query("name") name: String?,
+        @Query("id") id: Int?,
+        @Query("size") size: Int?
+    ): Single<ResultModel<CommonListPageModel<Goods>>>
+
+    /*搜索食物列表*/
+    @GET("get")
+    fun searchGoodsList(
+        @Query("name") name: String?,
+        @Query("id") id: Int?,
+        @Query("size") size: Int?
+    ): Single<ResultModel<CommonListPageModel<Goods>>>
 
 }

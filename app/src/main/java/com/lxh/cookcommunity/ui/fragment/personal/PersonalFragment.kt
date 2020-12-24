@@ -5,6 +5,7 @@ import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentPersonalBinding
 import com.lxh.cookcommunity.model.api.moments.MomentRecyclerAdapter
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.ui.fragment.mark.jumpToMark
 import com.lxh.cookcommunity.ui.fragment.momentdetail.jumpToMomentDetail
 
 class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel>(
@@ -29,6 +30,10 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
                 context?.jumpToMomentDetail(it)
             }
         )
+
+        binding.tvShop.setOnClickListener {
+            context?.jumpToMark()
+        }
 
     }
 

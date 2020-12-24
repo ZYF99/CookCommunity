@@ -30,6 +30,7 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
         binding.tvPersonal.setOnClickListener {
             context?.jumpToCookPersonal(viewModel.foodMutableLiveData.value?.cook)
         }
+
     }
 
     override fun initData() {

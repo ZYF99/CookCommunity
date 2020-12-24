@@ -36,6 +36,9 @@ class SearchFoodFragment : CommonListFragment<Food, SearchFoodViewModel, ItemFoo
         }
     }
 
+    override val onCellClick: ((Food) -> Unit)?
+        get() = null
+
 }
 
 fun Context.jumpToSearchFood() {

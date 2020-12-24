@@ -45,4 +45,7 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
         super.initData()
 
     }
+
+    override val onCellClick: ((MomentContent) -> Unit)?
+        get() = null
 }

@@ -68,6 +68,23 @@ object DialogUtil {
     }
 
     /**
+     * 购买弹窗
+     * */
+    fun showPurchaseDialog(context: Context, price: Float) {
+        AlertDialog.Builder(context)
+            .setTitle("消费确认")
+            .setMessage("本次消费将消费${price}元，确认支付吗？")
+            .setPositiveButton("确认") { _, _ ->
+                showToast("支付成功")
+            }
+            .setNegativeButton("取消") { _, _ ->
+
+            }.create()
+            .show()
+    }
+
+
+    /**
      *  showProgressDialog
      */
 

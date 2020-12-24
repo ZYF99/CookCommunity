@@ -6,7 +6,8 @@ import com.lxh.cookcommunity.model.api.cook.Course
 import com.lxh.cookcommunity.ui.adapter.BaseRecyclerAdapter
 
 class CourseListAdapter(
-	list: List<Course>?
+	list: List<Course>?,
+	val onPurchaseClick:((Course)->Unit)? = null
 ) : BaseRecyclerAdapter<Course,ItemCourseBinding>(
 	R.layout.item_course,
 	null
@@ -19,7 +20,9 @@ class CourseListAdapter(
 	override fun bindData(binding: ItemCourseBinding, position: Int) {
 		val course = baseList[position]
 		binding.course = course
-
+		binding.tvBuy.setOnClickListener {
+			onPurchaseClick?.invoke(course)
+		}
 	}
 
 }

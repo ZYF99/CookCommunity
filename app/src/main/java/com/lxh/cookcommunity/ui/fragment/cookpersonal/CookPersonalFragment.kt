@@ -8,6 +8,7 @@ import com.lxh.cookcommunity.manager.api.base.globalMoshi
 import com.lxh.cookcommunity.model.api.cook.Cook
 import com.lxh.cookcommunity.ui.activity.ContentActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.util.DialogUtil
 import com.lxh.cookcommunity.util.fromJson
 import com.lxh.cookcommunity.util.toJson
 
@@ -37,7 +38,9 @@ class CookPersonalFragment : BaseFragment<FragmentCookPersonalBinding, CookPerso
 
     override fun initDataObServer() {
         viewModel.cookMutableLiveData.observeNonNull {
-            binding.rvCourse.adapter = CourseListAdapter(it.courseList)
+            binding.rvCourse.adapter = CourseListAdapter(it.courseList) {course->
+                DialogUtil.showPurchaseDialog(requireContext(), course.price ?: 0f)
+            }
         }
     }
 

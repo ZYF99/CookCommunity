@@ -25,6 +25,8 @@ abstract class CommonListFragment<Bean, VM : CommonListViewModel<Bean>, ItemBind
     private var isFirstInit = true
     private var recyclerAdapter: CommonListRecyclerAdapter<Bean, ItemBinding>? = null
 
+    abstract val onCellClick: ((Bean) -> Unit)?
+
     //列表布局
     open fun getLayoutManager(): RecyclerView.LayoutManager {
         return LinearLayoutManager(context)
@@ -45,7 +47,8 @@ abstract class CommonListFragment<Bean, VM : CommonListViewModel<Bean>, ItemBind
             this,
             itemLayoutRes,
             true,
-            ArrayList<Bean>()
+            ArrayList<Bean>(),
+            onCellClick = onCellClick
         )
         return recyclerAdapter
     }

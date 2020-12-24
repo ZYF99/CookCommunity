@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.fragment.goodsdetail.GoodsDetailFragment">
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.lxh.cookcommunity.ui.fragment.goodsdetail.GoodsDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="@{vm.goodsMutableLiveData.name}"
+            android:textColor="@color/colorBlack"
+            android:textSize="28dp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/banner_goods_pic"
+            app:layout_constraintStart_toStartOf="@+id/banner_goods_pic"
+            app:layout_constraintTop_toBottomOf="@+id/banner_goods_pic"
+            tools:text="辣条" />
+
+        <com.zhouwei.mzbanner.MZBannerView
+            android:id="@+id/banner_goods_pic"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:canLoop="true"
+            app:indicatorAlign="center"
+            app:layout_collapseParallaxMultiplier="0.6"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:middle_page_cover="false"
+            app:open_mz_mode="false"
+            tools:background="#434EA680" />
+
+
+        <TextView
+            android:id="@+id/tv_personal"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:gravity="center"
+            android:text="@{vm.goodsMutableLiveData.price.toString()}"
+            android:textColor="@color/colorAccent"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_tip_tool"
+            app:layout_constraintEnd_toEndOf="@+id/banner_food_pic"
+            app:layout_constraintStart_toEndOf="@+id/tv_tip_tool"
+            app:layout_constraintTop_toTopOf="@+id/tv_tip_tool"
+            tools:text="88.8" />
+
+        <TextView
+            android:id="@+id/tv_tip_tool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="￥："
+            android:textColor="@color/colorBlack"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="@+id/tv_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_name" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:padding="8dp"
+            app:layout_constraintBottom_toTopOf="@id/tv_buy"
+            app:layout_constraintEnd_toEndOf="@+id/banner_goods_pic"
+            app:layout_constraintStart_toStartOf="@+id/tv_tip_tool"
+            app:layout_constraintTop_toBottomOf="@+id/tv_tip_tool">
+
+            <TextView
+                android:id="@+id/tv_tool"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:lineSpacingExtra="6dp"
+                android:text="@{vm.goodsMutableLiveData.brief}"
+                android:textColor="@color/colorGrey_656565"
+                android:textSize="16dp"
+                tools:text="狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml," />
+
+        </androidx.core.widget.NestedScrollView>
+
+        <TextView
+            android:id="@+id/tv_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_card_corner_8dp"
+            android:layout_margin="16dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="8dp"
+            android:text="立即购买"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

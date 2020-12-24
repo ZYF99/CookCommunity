@@ -75,7 +75,9 @@ class ContentActivity : BaseActivity() {
         MomentDetail(R.id.moment_detail_fragment),
         StudyVideo(R.id.study_video_fragment),
         CookPersonal(R.id.cook_personal_fragment),
-        Classify(R.id.classify_fragment)
+        Classify(R.id.classify_fragment),
+        Mark(R.id.mark_fragment),
+        GoodsDetail(R.id.goods_detail_fragment)
     }
 
 }
