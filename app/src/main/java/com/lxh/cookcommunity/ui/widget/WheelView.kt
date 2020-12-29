@@ -9,12 +9,13 @@ import android.annotation.SuppressLint
 import android.os.Handler
 import android.os.Message
 import android.graphics.Canvas
-import android.graphics.Color
 import android.view.MotionEvent
 import android.graphics.Paint.Align
-import kotlin.math.abs
-import kotlin.math.pow
 
+
+/**
+ * from website https://blog.csdn.net/weixin_41454168/article/details/79541354
+ * */
 class WheelView(context: Context, attributeSet: AttributeSet) : View(context, attributeSet) {
     /**
      * text之间间距和minTextSize之比
@@ -33,13 +34,13 @@ class WheelView(context: Context, attributeSet: AttributeSet) : View(context, at
 
     private var mPaint: Paint? = null
 
-    private var mMaxTextSize = 30f
-    private var mMinTextSize = 30f
+    private var mMaxTextSize = 80f
+    private var mMinTextSize = 40f
 
     private val mMaxTextAlpha = 255f
     private val mMinTextAlpha = 120f
 
-    private val mColorText = Color.parseColor("#666666")
+    private val mColorText = 0x333333
 
     private var mViewHeight: Int = 0
     private var mViewWidth: Int = 0
@@ -54,6 +55,7 @@ class WheelView(context: Context, attributeSet: AttributeSet) : View(context, at
     private var timer: Timer? = null
     private var mTask: MyTimerTask? = null
 
+
     private var updateHandler: Handler = @SuppressLint("HandlerLeak")
     object : Handler() {
         override fun handleMessage(msg: Message) {
@@ -66,7 +68,7 @@ class WheelView(context: Context, attributeSet: AttributeSet) : View(context, at
                 }
             } else
             // 这里mMoveLen / Math.abs(mMoveLen)是为了保有mMoveLen的正负号，以实现上滚或下滚
-                mMoveLen -= mMoveLen / abs(mMoveLen) * SPEED
+                mMoveLen -= mMoveLen / Math.abs(mMoveLen) * SPEED
             invalidate()
         }
     }
@@ -77,7 +79,7 @@ class WheelView(context: Context, attributeSet: AttributeSet) : View(context, at
 
 
     fun setOnSelectListener(onSelected: (String)->Unit) {
-         mOnSelected = onSelected
+        mOnSelected = onSelected
     }
 
     private fun performSelect() {
@@ -142,9 +144,7 @@ class WheelView(context: Context, attributeSet: AttributeSet) : View(context, at
         // 先绘制选中的text再往上往下绘制其余的text
         val scale = parabola(mViewHeight / 4.0f, mMoveLen)
         val size = (mMaxTextSize - mMinTextSize) * scale + mMinTextSize
-        mPaint?.color = Color.WHITE
-        //mPaint?.textSize = size
-        mPaint?.textSize = 28f
+        mPaint?.textSize = size
         mPaint?.alpha = ((mMaxTextAlpha - mMinTextAlpha) * scale + mMinTextAlpha).toInt()
         // text居中绘制，注意baseline的计算才能达到居中，y值是text中心坐标
         val x = (mViewWidth / 2.0).toFloat()
@@ -153,7 +153,6 @@ class WheelView(context: Context, attributeSet: AttributeSet) : View(context, at
         val baseline = (y - (fmi!!.bottom / 2.0 + fmi.top / 2.0)).run { toFloat() }
 
         mPaint?.let { canvas.drawText(mDataList!![mCurrentSelected], x, baseline, it) }
-        mPaint?.color = Color.parseColor("#666666")
         // 绘制上方data
         run {
             var i = 1
@@ -182,9 +181,8 @@ class WheelView(context: Context, attributeSet: AttributeSet) : View(context, at
         val d = MARGIN_ALPHA * mMinTextSize * position + type * mMoveLen
         val scale = parabola(mViewHeight / 4.0f, d)
         val size = (mMaxTextSize - mMinTextSize) * scale + mMinTextSize
-        mPaint?.textSize = 28f
-        //mPaint?.textSize = size
-        //mPaint?.alpha = ((mMaxTextAlpha - mMinTextAlpha) * scale + mMinTextAlpha).toInt()
+        mPaint?.textSize = size
+        mPaint?.alpha = ((mMaxTextAlpha - mMinTextAlpha) * scale + mMinTextAlpha).toInt()
         val y = (mViewHeight / 2.0 + type * d).toFloat()
         val fmi = mPaint!!.fontMetricsInt
         val baseline = (y - (fmi.bottom / 2.0 + fmi.top / 2.0)).toFloat()
@@ -204,7 +202,7 @@ class WheelView(context: Context, attributeSet: AttributeSet) : View(context, at
      * @return scale
      */
     private fun parabola(zero: Float, x: Float): Float {
-        val f = (1 - (x / zero).toDouble().pow(2.0)).toFloat()
+        val f = (1 - Math.pow((x / zero).toDouble(), 2.0)).toFloat()
         return if (f < 0) 0f else f
     }
 

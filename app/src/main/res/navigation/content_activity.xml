@@ -43,6 +43,9 @@
         <action
             android:id="@+id/action_bridgeFragment_to_person_personal_fragment"
             app:destination="@id/person_personal_fragment" />
+        <action
+            android:id="@+id/action_bridgeFragment_to_edit_info_fragment"
+            app:destination="@id/edit_info_fragment" />
     </fragment>
 
     <fragment
@@ -124,6 +127,11 @@
         android:id="@+id/person_personal_fragment"
         android:name="com.lxh.cookcommunity.ui.fragment.personpersonal.PersonPersonalFragment"
         tools:layout="@layout/fragment_person_personal" />
+
+    <fragment
+        android:id="@+id/edit_info_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.editinfo.EditInfoFragment"
+        tools:layout="@layout/fragment_edit_info" />
 
     <!--<include app:graph="@navigation/top_article" />-->
 

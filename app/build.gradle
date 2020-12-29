@@ -137,6 +137,9 @@ dependencies {
     implementation "androidx.camera:camera-core:${camerax_version}"
     implementation "androidx.camera:camera-camera2:${camerax_version}"
 
+    //PictureSelector
+    implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.2.7'
+
     //CircleImageView
     api "de.hdodenhof:circleimageview:$circleimageviewVersion"
 
