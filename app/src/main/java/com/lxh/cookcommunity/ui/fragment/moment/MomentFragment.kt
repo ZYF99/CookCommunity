@@ -39,7 +39,6 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
 
     override fun initView() {
         super.initView()
-
     }
 
     override fun initData() {

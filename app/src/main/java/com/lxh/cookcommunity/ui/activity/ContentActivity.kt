@@ -79,7 +79,8 @@ class ContentActivity : BaseActivity() {
         Mark(R.id.mark_fragment),
         GoodsDetail(R.id.goods_detail_fragment),
         PersonPersonal(R.id.person_personal_fragment),
-        EditInfo(R.id.edit_info_fragment)
+        EditInfo(R.id.edit_info_fragment),
+        ReleaseMoment(R.id.release_moment_fragment),
     }
 
 }

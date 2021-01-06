@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toolbar
 import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -18,12 +19,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.AppBarLayout
 import com.lxh.cookcommunity.BR
 import com.lxh.cookcommunity.MainApplication
+import com.lxh.cookcommunity.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import com.lxh.cookcommunity.util.DialogUtil
 import io.reactivex.Completable
+import kotlinx.android.synthetic.main.fragment_release_moment.view.*
 import org.kodein.di.KodeinAware
 import org.kodein.di.android.x.kodein
 import java.util.concurrent.TimeUnit
@@ -73,6 +77,10 @@ constructor(
         initDataObServer()
         if (!isNavigationViewInit) {
             initView()
+            view.findViewById<androidx.appcompat.widget.Toolbar>(R.id.toolbar)
+                ?.setNavigationOnClickListener {
+                    activity?.finish()
+                }
             initDataAlways()
             if (!viewModel.vmInit) {
                 initData()

@@ -11,141 +11,154 @@
             type="com.lxh.cookcommunity.ui.fragment.classify.ClassifyViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_choose"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:background="@drawable/bg_card_corner_8dp"
-            android:backgroundTint="@color/colorWhite"
-            android:paddingStart="8dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="8dp"
-            android:paddingBottom="16dp"
+            android:layout_height="274dp"
+            android:background="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:text="时间："
-                android:textColor="@color/colorBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_choose_time"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rv_choose_time" />
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar_layout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed"
+                android:minHeight="56dp">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_choose_time"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/textView2"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_choose_classify" />
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    app:layout_collapseMode="pin"
+                    android:background="@color/white"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navigationIcon="@drawable/ic_arrow_back_black_24dp" />
 
-            <View
-                android:id="@+id/view_time"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/colorGrey_999999"
-                app:layout_constraintEnd_toEndOf="@+id/rv_choose_time"
-                app:layout_constraintStart_toStartOf="@+id/textView2"
-                app:layout_constraintTop_toBottomOf="@id/rv_choose_time" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/cl_choose"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_collapseMode="pin"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="56dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/tv_cuisine"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:text="菜系："
-                android:textColor="@color/colorBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_choose_cuisine"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rv_choose_cuisine" />
+                    <TextView
+                        android:id="@+id/textView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:text="时间："
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/rv_choose_time"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/rv_choose_time" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_choose_cuisine"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_cuisine"
-                app:layout_constraintTop_toBottomOf="@+id/view_time"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_choose_classify" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_choose_time"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/textView2"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_choose_classify" />
 
-            <View
-                android:id="@+id/view_cuisine"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/colorGrey_999999"
-                app:layout_constraintEnd_toEndOf="@+id/rv_choose_time"
-                app:layout_constraintStart_toStartOf="@+id/tv_cuisine"
-                app:layout_constraintTop_toBottomOf="@id/rv_choose_cuisine" />
+                    <View
+                        android:id="@+id/view_time"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#E6E6E6"
+                        app:layout_constraintEnd_toEndOf="@+id/rv_choose_time"
+                        app:layout_constraintStart_toStartOf="@+id/textView2"
+                        app:layout_constraintTop_toBottomOf="@id/rv_choose_time" />
 
-            <TextView
-                android:id="@+id/tv_type"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:gravity="center_vertical"
-                android:text="菜系："
-                android:textColor="@color/colorBlack"
-                android:textSize="16dp"
-                app:layout_constraintBottom_toBottomOf="@+id/rv_choose_type"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/rv_choose_type" />
+                    <TextView
+                        android:id="@+id/tv_cuisine"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:text="菜系："
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/rv_choose_cuisine"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/rv_choose_cuisine" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_choose_type"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tv_type"
-                app:layout_constraintTop_toBottomOf="@id/view_cuisine"
-                tools:itemCount="1"
-                tools:listitem="@layout/item_choose_classify" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_choose_cuisine"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_cuisine"
+                        app:layout_constraintTop_toBottomOf="@+id/view_time"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_choose_classify" />
 
-            <View
-                android:id="@+id/view_type"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="4dp"
-                android:background="@color/colorGrey_999999"
-                app:layout_constraintEnd_toEndOf="@+id/rv_choose_time"
-                app:layout_constraintStart_toStartOf="@+id/tv_type"
-                app:layout_constraintTop_toBottomOf="@id/rv_choose_type" />
+                    <View
+                        android:id="@+id/view_cuisine"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="4dp"
+                        android:background="#E6E6E6"
+                        app:layout_constraintEnd_toEndOf="@+id/rv_choose_time"
+                        app:layout_constraintStart_toStartOf="@+id/tv_cuisine"
+                        app:layout_constraintTop_toBottomOf="@id/rv_choose_cuisine" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/tv_type"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:gravity="center_vertical"
+                        android:text="菜系："
+                        android:textColor="@color/colorBlack"
+                        android:textSize="16dp"
+                        app:layout_constraintBottom_toBottomOf="@+id/rv_choose_type"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/rv_choose_type" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_choose_type"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="16dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/tv_type"
+                        app:layout_constraintTop_toBottomOf="@id/view_cuisine"
+                        tools:itemCount="1"
+                        tools:listitem="@layout/item_choose_classify" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_food"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="match_parent"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cl_choose" />
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

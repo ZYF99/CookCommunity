@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.ui.base.BaseActivity
 import com.lxh.cookcommunity.ui.base.setupNavController
+import com.lxh.cookcommunity.ui.fragment.releasemoment.jumpToReleaseMoment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity() {
@@ -16,6 +17,10 @@ class MainActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setUpBottomNavigation()
+        //添加动态按钮
+        fb_add_moment.setOnClickListener {
+            jumpToReleaseMoment()
+        }
     }
 
     //设置底部导航栏

@@ -25,10 +25,6 @@ class CookPersonalFragment : BaseFragment<FragmentCookPersonalBinding, CookPerso
     override fun initView() {
         viewModel.cookMutableLiveData.value =
             globalMoshi.fromJson(arguments?.getString(KEY_COOK_PERSONAL))
-
-        binding.ivBack.setOnClickListener {
-            activity?.finish()
-        }
     }
 
 

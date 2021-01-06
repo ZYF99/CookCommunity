@@ -7,11 +7,9 @@ import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import io.reactivex.Single
+import okhttp3.MultipartBody
 import okhttp3.ResponseBody
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ApiService {
 
@@ -81,4 +79,12 @@ interface ApiService {
         @Query("size") size: Int?
     ): Single<ResultModel<CommonListPageModel<Goods>>>
 
+    /**********************************************工具********************************************/
+
+    /*上传图片*/
+    @Multipart
+    @POST("picture/upload")
+    fun uploadFile(
+        @Part file: MultipartBody.Part?
+    ): Single<ResultModel<String>>
 }

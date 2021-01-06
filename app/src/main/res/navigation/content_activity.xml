@@ -133,6 +133,11 @@
         android:name="com.lxh.cookcommunity.ui.fragment.editinfo.EditInfoFragment"
         tools:layout="@layout/fragment_edit_info" />
 
+    <fragment
+        android:id="@+id/release_moment_fragment"
+        android:name="com.lxh.cookcommunity.ui.fragment.releasemoment.ReleaseMomentFragment"
+        tools:layout="@layout/fragment_release_moment" />
+
     <!--<include app:graph="@navigation/top_article" />-->
 
 </navigation>

@@ -32,7 +32,7 @@
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"
             app:cardCornerRadius="8dp"
-            app:cardElevation="4dp"
+            app:cardElevation="2dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/tv_course_name"
             app:layout_constraintStart_toStartOf="@+id/tv_course_name"

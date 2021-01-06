@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#00BCD4</color>
+    <color name="colorPrimary">#BA2FACA8</color>
     <color name="colorPrimaryDark">#ffffff</color>
-    <color name="colorAccent">#00BCD4</color>
-    <color name="colorFFC300">#FFC300</color>
+    <color name="colorAccent">#BA2FACA8</color>
+    <color name="colorFFC300">#BA2FACA8</color>
 
     <color name="colorHomeText">#5E4200</color>
-
-    <color name="colorCourseActive">#FF6600</color>
 
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>

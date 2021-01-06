@@ -15,16 +15,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/tv_step"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="第一步"
-            android:textColor="@color/colorBlack"
-            android:textSize="24dp"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:navigationIcon="@drawable/ic_arrow_back_black_24dp" />
+
+                <TextView
+                    android:id="@+id/tv_step"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:text="第一步"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="20dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <fm.jiecao.jcvideoplayer_lib.JCVideoPlayerStandard
             android:id="@+id/video_player"
@@ -33,7 +65,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_step" />
+            app:layout_constraintTop_toBottomOf="@id/appbar" />
 
         <TextView
             android:id="@+id/tv_tip_warning"
@@ -53,13 +85,13 @@
             android:layout_marginBottom="8dp"
             android:lineSpacingExtra="8dp"
             android:text="@{vm.foodVideoMutableLiveData.warning}"
-            tools:text="的水分就会提示独一份被打死尽快发你比谁v会大幅上攻二年竣工率部活动反思与规划"
             android:textColor="@color/colorGrey_666666"
             android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_next_step"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_tip_warning"
-            app:layout_constraintTop_toTopOf="@+id/tv_tip_warning" />
+            app:layout_constraintTop_toTopOf="@+id/tv_tip_warning"
+            tools:text="的水分就会提示独一份被打死尽快发你比谁v会大幅上攻二年竣工率部活动反思与规划" />
 
         <TextView
             android:id="@+id/tv_next_step"

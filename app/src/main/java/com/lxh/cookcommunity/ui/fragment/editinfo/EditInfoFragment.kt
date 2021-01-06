@@ -57,9 +57,6 @@ class EditInfoFragment : BaseFragment<FragmentEditInfoBinding, EditInfoViewModel
             }
         }
 
-        //返回按钮
-        binding.ivBack.setOnClickListener { activity?.finish() }
-
         //注销按钮
         binding.btnLogout.setOnClickListener { logout() }
     }

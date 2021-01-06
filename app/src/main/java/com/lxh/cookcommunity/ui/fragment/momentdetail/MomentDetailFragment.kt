@@ -92,11 +92,6 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
             )
         }
 
-        //返回按钮
-        binding.btnBack.setOnClickListener {
-            activity?.finish()
-        }
-
         //收起评论按钮
         binding.linComment.tvClose.setOnClickListener {
 
