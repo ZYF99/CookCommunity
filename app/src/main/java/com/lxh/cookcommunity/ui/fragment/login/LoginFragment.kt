@@ -1,10 +1,12 @@
 package com.lxh.cookcommunity.ui.fragment.login
 
+import android.content.Context
 import android.content.Intent
 import androidx.navigation.fragment.findNavController
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentLoginBinding
 import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
+import com.lxh.cookcommunity.ui.activity.LoginActivity
 import com.lxh.cookcommunity.ui.activity.MainActivity
 import com.lxh.cookcommunity.util.hideSoftKeyBoard
 import com.lxh.cookcommunity.ui.base.BaseFragment
@@ -55,5 +57,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
 
     }
 
+}
 
+fun Context.jumpToLogin(){
+    val intent = Intent(this, LoginActivity::class.java)
+    startActivity(intent)
 }

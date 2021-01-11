@@ -2,7 +2,9 @@ package com.lxh.cookcommunity.manager.api
 
 import com.lxh.cookcommunity.manager.api.base.ResultModel
 import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
+import com.lxh.cookcommunity.model.api.UploadFileResultModel
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
+import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
 import com.lxh.cookcommunity.model.api.goods.Goods
 import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
@@ -34,6 +36,12 @@ interface ApiService {
     fun fetchUserProfile(
         @Query("uid") uid: Long? = SharedPrefModel.nowUserId
     ): Single<ResultModel<UserProfileModel>>
+
+    /*修改个人信息*/
+    @PUT("api/account")
+    fun editUserProfile(
+        @Body editInfoRequestModel: EditInfoRequestModel
+    ): Single<ResponseBody>
 
     /*************************************************食物******************************************/
 
@@ -101,8 +109,8 @@ interface ApiService {
 
     /*上传图片*/
     @Multipart
-    @POST("picture/upload")
+    @POST("tools/upload")
     fun uploadFile(
         @Part file: MultipartBody.Part?
-    ): Single<ResultModel<String>>
+    ): Single<ResultModel<UploadFileResultModel>>
 }

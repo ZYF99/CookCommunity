@@ -6,6 +6,7 @@ import com.lxh.cookcommunity.databinding.FragmentPersonalBinding
 import com.lxh.cookcommunity.model.api.moments.MomentRecyclerAdapter
 import com.lxh.cookcommunity.ui.base.BaseFragment
 import com.lxh.cookcommunity.ui.fragment.editinfo.jumpToEditInfo
+import com.lxh.cookcommunity.ui.fragment.editinfo.userInfoHasChanged
 import com.lxh.cookcommunity.ui.fragment.mark.jumpToMark
 import com.lxh.cookcommunity.ui.fragment.momentdetail.jumpToMomentDetail
 
@@ -52,4 +53,12 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
         viewModel.fetchUserProfile()
         viewModel.fetchMyMoments()
     }
+
+    override fun onResume() {
+        super.onResume()
+        if(userInfoHasChanged){
+            viewModel.fetchUserProfile()
+        }
+    }
+
 }

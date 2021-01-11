@@ -8,8 +8,10 @@ import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.entity.LocalMedia
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentEditInfoBinding
+import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
 import com.lxh.cookcommunity.ui.activity.ContentActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.ui.fragment.login.jumpToLogin
 import com.lxh.cookcommunity.util.showAvatarAlbum
 
 class EditInfoFragment : BaseFragment<FragmentEditInfoBinding, EditInfoViewModel>(
@@ -18,7 +20,6 @@ class EditInfoFragment : BaseFragment<FragmentEditInfoBinding, EditInfoViewModel
 
 
     override fun initView() {
-
 
         //修改头像按钮
         binding.btnAvatar.setOnClickListener {
@@ -63,7 +64,7 @@ class EditInfoFragment : BaseFragment<FragmentEditInfoBinding, EditInfoViewModel
 
 
     override fun initData() {
-        viewModel.initData()
+        viewModel.fetchUserProfile()
     }
 
     //弹出修改文字按钮
@@ -84,12 +85,9 @@ class EditInfoFragment : BaseFragment<FragmentEditInfoBinding, EditInfoViewModel
     }
 
     private fun logout() {
-        /*viewModel.logout()
-            .doOnSuccess {
-                //注销成功
-                //jumpToLogin(context!!)
-            }
-            .bindLife()*/
+        activity?.finish()
+        SharedPrefModel.hasLogin = false
+        context?.jumpToLogin()
     }
 
     //选图后的回调

@@ -2,11 +2,20 @@ package com.lxh.cookcommunity.ui.fragment.editinfo
 
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
+import com.lxh.cookcommunity.BuildConfig
 import com.lxh.cookcommunity.manager.api.ApiService
+import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
+import com.lxh.cookcommunity.model.api.login.UserProfileModel
+import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.base.BaseViewModel
+import com.zgxwxy.tuputech.util.switchThread
 import io.reactivex.Single
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import org.kodein.di.generic.instance
+import java.io.File
 
 var userInfoHasChanged = false
 
@@ -18,76 +27,69 @@ class EditInfoViewModel(application: Application) : BaseViewModel(application) {
     val name = MutableLiveData("默认昵称")
     val gender = MutableLiveData("男")
     val signature = MutableLiveData("")
-    val isUpdating = MutableLiveData(false)
+
+    //拉取个人信息
+    fun fetchUserProfile() {
+        userInfoHasChanged = false
+        apiService.fetchUserProfile()
+            .switchThread()
+            .catchApiError()
+            .doOnSuccess {
+                avatar.postValue(it.data?.avatar)
+                name.postValue(it.data?.name)
+                gender.postValue(if (it.data?.gender == "F") "女" else "男")
+                signature.postValue(it.data?.aboutMe)
+            }.bindLife()
+    }
 
     //修改头像
     fun editAvatar() {
-        /*imageService.upLoadImage(avatar.value!!) {
-            //onProgress
-            uploadProgress.postValue(it)
-        }.doOnSubscribe { isUpdating.postValue(true) }
-            .doFinally { isUpdating.postValue(false) }
-            .flatMap { key ->
-                val url = getImageUrlFromServer(key)
-                avatar.postValue(url)
-                editUserInfo("avatar", url)?.switchThread()
-            }?.doOnApiSuccess {
+        val file = File(avatar.value ?: "")
+        val photoRequestBody: RequestBody =
+            RequestBody.create("multipart/form-data".toMediaTypeOrNull(), file)
+        val photo: MultipartBody.Part = MultipartBody.Part.createFormData(
+            "imageFile",
+            file.name,
+            photoRequestBody
+        )
 
-            }*/
-
+        apiService.uploadFile(photo)
+            .flatMap {
+                apiService.editUserProfile(
+                    EditInfoRequestModel(avatar = BuildConfig.BASE_URL + "image/" + it.data?.imagePath)
+                )
+            }.switchThread()
+            .catchApiError()
+            .doOnSuccess {
+                userInfoHasChanged = true
+            }.bindLife()
     }
 
     //修改昵称
     fun editName() {
-        /*editUserInfo("name", name.value!!)?.doOnApiSuccess {
-
-        }*/
+        apiService.editUserProfile(
+            EditInfoRequestModel(name = name.value)
+        ).doOnApiSuccess {
+            userInfoHasChanged = true
+        }
     }
 
     //修改性别
     fun editGender() {
-        /*editUserInfo("gender", gender.value!!)
-            ?.doOnApiSuccess {
-
-            }*/
+        apiService.editUserProfile(
+            EditInfoRequestModel(gender = if (gender.value == "女") "F" else "M")
+        ).doOnApiSuccess {
+            userInfoHasChanged = true
+        }
     }
-
 
     //修改个人签名
     fun editSignature() {
-        /*editUserInfo("signature", signature.value!!)?.doOnApiSuccess {
-
-        }*/
+        apiService.editUserProfile(
+            EditInfoRequestModel(aboutMe = signature.value)
+        ).doOnApiSuccess {
+            userInfoHasChanged = true
+        }
     }
-
-    //注销
-    fun logout() {
-        /*return userService.logout()
-            .switchThread()
-            .catchApiError()*/
-    }
-
-    fun initData() {
-        //初始化原始信息
-        /*getLocalUserInfo().run {
-            this@EditInfoViewModel.avatar.postValue(avatar)
-            this@EditInfoViewModel.name.postValue(name)
-            this@EditInfoViewModel.gender.postValue(gender)
-            this@EditInfoViewModel.birthday.postValue(birthday)
-            this@EditInfoViewModel.signature.postValue(signature)
-            this@EditInfoViewModel.profession.postValue(profession)
-            this@EditInfoViewModel.aboutMe.postValue(aboutMe)
-        }*/
-    }
-
-    /*private fun <T> editUserInfo(key: String, value: T): Single<ResultModel<String>>? {
-        return userService.editUserInfo(
-            hashMapOf(Pair(key, value.toString()))
-        ).dealLoading()
-            .doOnSuccess {
-                userInfoHasChanged = true
-            }
-
-    }*/
 
 }
