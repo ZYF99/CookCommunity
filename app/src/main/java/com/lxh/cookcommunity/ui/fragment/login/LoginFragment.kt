@@ -28,8 +28,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
 
         //登录按钮
         binding.btnLogin.setOnClickListener {
-            viewModel.loginEvent.postValue(Event(true))
-            //viewModel.checkAndLogin()
+            viewModel.checkAndLogin()
         }
 
         //去注册按钮

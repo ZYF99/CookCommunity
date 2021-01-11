@@ -27,7 +27,10 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             SharedPrefModel.hasLogin = true
             SharedPrefModel.userAccount = userAccount.value ?: ""
             SharedPrefModel.password = password.value ?: ""
-            //SharedPrefModel.nowUserId = it.data?.id ?: 0
+            SharedPrefModel.nowUserId = it.data?.uid?:0
+            SharedPrefModel.setUserModel {
+                token = it.data?.token
+            }
             loginEvent.postValue(Event(true))
         }.bindLife()
     }

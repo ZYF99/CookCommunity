@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lxh.cookcommunity.manager.api.ApiService
 import com.lxh.cookcommunity.model.api.SimpleProfileResp
+import com.lxh.cookcommunity.model.api.login.UserProfileModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.base.BaseViewModel
 import com.lxh.cookcommunity.ui.fragment.moment.pic1
@@ -16,8 +17,18 @@ import org.kodein.di.generic.instance
 class PersonalViewModel(application: Application) : BaseViewModel(application) {
 
     val apiService by instance<ApiService>()
-
     val myRecentMomentMutableLiveDataList = MutableLiveData<List<MomentContent>>()
+    val userProfileMutableLiveData = MutableLiveData<UserProfileModel>()
+
+    //拉取个人信息
+    fun fetchUserProfile() {
+        apiService.fetchUserProfile()
+            .switchThread()
+            .catchApiError()
+            .doOnSuccess {
+                userProfileMutableLiveData.postValue(it.data)
+            }.bindLife()
+    }
 
     //拉取我最近的动态
     fun fetchMyMoments() {
@@ -58,5 +69,6 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
                 myRecentMomentMutableLiveDataList.postValue(it.data?.dataList)
             }.bindLife()
     }
+
 
 }

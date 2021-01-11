@@ -56,7 +56,7 @@ android {
     productFlavors {
         //产品环境
         production {
-            buildConfigField "String", "BASE_URL", '"http://172.232.240.86:8705/"'
+            buildConfigField "String", "BASE_URL", '"http://49.234.233.143:8080/"'
 
             //百度图像 api
             buildConfigField("String", "BAIDU_IDENTIFY_URL", '"https://aip.baidubce.com/"')

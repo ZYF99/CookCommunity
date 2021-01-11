@@ -75,8 +75,8 @@ abstract class CommonListFragment<Bean, VM : CommonListViewModel<Bean>, ItemBind
     }
 
     override fun initView() {
-        if (canSearch) binding.etSearch.visibility =
-            View.VISIBLE else binding.etSearch.visibility = View.GONE
+        if (canSearch) binding.appbar.visibility =
+            View.VISIBLE else binding.appbar.visibility = View.GONE
         binding.refreshLayout.isEnabled = canRefresh
         binding.etSearch.setOnEditorActionListener { textView, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH) {

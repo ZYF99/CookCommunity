@@ -108,7 +108,7 @@ fun loadImageWithAddIcon(imageView: ImageView, url: String?) {
 @BindingAdapter("gender")
 fun getGenderDrawable(imageView: ImageView, gender: String?) {
     when (gender) {
-        "女" -> {
+        "F" -> {
             Glide.with(imageView.context).load(R.drawable.icon_gender_female)
                 .placeholder(R.mipmap.ic_launcher)
                 .dontAnimate()
@@ -121,7 +121,6 @@ fun getGenderDrawable(imageView: ImageView, gender: String?) {
                         R.color.colorFemale
                     )
                 )
-
         }
         else -> {
             Glide.with(imageView.context).load(R.drawable.icon_gender_male)
@@ -136,7 +135,6 @@ fun getGenderDrawable(imageView: ImageView, gender: String?) {
                         R.color.colorMale
                     )
                 )
-
         }
     }
 }

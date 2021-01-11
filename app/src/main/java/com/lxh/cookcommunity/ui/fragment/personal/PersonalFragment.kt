@@ -49,6 +49,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
     }
 
     override fun initData() {
+        viewModel.fetchUserProfile()
         viewModel.fetchMyMoments()
     }
 }

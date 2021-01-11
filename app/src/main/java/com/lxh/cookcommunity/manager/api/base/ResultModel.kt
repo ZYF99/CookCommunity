@@ -1,10 +1,10 @@
 package com.lxh.cookcommunity.manager.api.base
 
+import com.lxh.cookcommunity.manager.Meta
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
 data class ResultModel<T>(
-    val status: Int,
-    val msg: String,
+    val meta: Meta?,
     val data: T?
 )

@@ -1,8 +1,10 @@
 package com.lxh.cookcommunity.ui.fragment.register
 
+import android.content.Intent
 import androidx.navigation.fragment.findNavController
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentRegisterBinding
+import com.lxh.cookcommunity.ui.activity.MainActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel>(
@@ -11,7 +13,7 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     override fun initView() {
 
-        //登录按钮
+        //注册并登录按钮
         binding.btnNext.setOnClickListener {
             viewModel.register()
         }
@@ -23,7 +25,15 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
     }
 
     override fun initDataObServer() {
-
+        //登陆成功事件
+        viewModel.loginEvent.observeNonNull {
+            it.handleIfNot { content ->
+                if (content) {
+                    startActivity(Intent(context, MainActivity::class.java))
+                    activity?.finish()
+                }
+            }
+        }
     }
 
     override fun initData() {
