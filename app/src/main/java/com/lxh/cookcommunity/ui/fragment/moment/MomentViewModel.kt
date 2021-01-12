@@ -3,15 +3,35 @@ package com.lxh.cookcommunity.ui.fragment.moment
 import android.app.Application
 import com.lxh.cookcommunity.manager.api.ApiService
 import com.lxh.cookcommunity.manager.api.base.ResultModel
-import com.lxh.cookcommunity.model.api.SimpleProfileResp
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
-import com.lxh.cookcommunity.model.api.moments.COMMENT_COMMENT
-import com.lxh.cookcommunity.model.api.moments.MomentComment
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListViewModel
 import io.reactivex.Single
 import org.kodein.di.generic.instance
 
+class MomentViewModel(application: Application) : CommonListViewModel<MomentContent>(application) {
+
+    val apiService by instance<ApiService>()
+
+    //刷新动态列表
+    override val refreshFunction: (Int?, Int?) -> Single<ResultModel<CommonListPageModel<MomentContent>>> =
+        {  pageNo, pageSize ->
+            apiService.refreshMomentList(pageNo,pageSize)
+
+        }
+
+    //搜索动态列表
+    override val searchFunction: (Int, Int) -> Single<ResultModel<CommonListPageModel<MomentContent>>> =
+        { wes, we ->
+            apiService.searchMomentList("1", 1, 1)
+                .doOnSubscribe {
+
+                }
+        }
+
+}
+
+/*
 const val pic1 =
     "https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1564543140,1383105555&fm=26&gp=0.jpg"
 const val pic2 =
@@ -21,15 +41,7 @@ const val pic3 =
 const val pic4 =
     "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=835592908,594992964&fm=26&gp=0.jpg"
 
-class MomentViewModel(application: Application) : CommonListViewModel<MomentContent>(application) {
-
-    val apiService by instance<ApiService>()
-
-    //刷新动态列表
-    override val refreshFunction: (String?, Int?, Int?) -> Single<ResultModel<CommonListPageModel<MomentContent>>> =
-        { ds, wes, we ->
-            apiService.refreshMomentList("1", 1, 1)
-                .doOnSubscribe {
+* .doOnSubscribe {
                     commonListLiveData.postValue(
                         listOf(
                             MomentContent(
@@ -64,15 +76,5 @@ class MomentViewModel(application: Application) : CommonListViewModel<MomentCont
                         )
                     )
                 }
-        }
-
-    //搜索动态列表
-    override val searchFunction: (String?, Int, Int) -> Single<ResultModel<CommonListPageModel<MomentContent>>> =
-        { ds, wes, we ->
-            apiService.searchMomentList("1", 1, 1)
-                .doOnSubscribe {
-
-                }
-        }
-
-}
+*
+* */

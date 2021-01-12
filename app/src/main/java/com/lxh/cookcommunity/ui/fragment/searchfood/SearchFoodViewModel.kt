@@ -13,21 +13,16 @@ class SearchFoodViewModel(application: Application) : CommonListViewModel<Food>(
 
     val apiService by instance<ApiService>()
 
-    override val refreshFunction: (String?, Int?, Int?) -> Single<ResultModel<CommonListPageModel<Food>>> =
-        { ds, wes, we ->
-            apiService.refreshFoodList("1", 1, 1)
-                .doOnSubscribe {
-                    commonListLiveData.postValue(listOf(Food(), Food(), Food()))
-                }
+    override val refreshFunction: (Int?, Int?) -> Single<ResultModel<CommonListPageModel<Food>>> =
+        { pageNo, pageSize ->
+            apiService.refreshFoodList(pageNo, pageSize)
+
         }
 
 
-    override val searchFunction: (String?, Int?, Int?) -> Single<ResultModel<CommonListPageModel<Food>>> =
-        { ds, wes, we ->
+    override val searchFunction: (Int?, Int?) -> Single<ResultModel<CommonListPageModel<Food>>> =
+        { pageNo, pageSize ->
             apiService.searchFoodList("1", 1, 1)
-                .doOnSubscribe {
-                    commonListLiveData.postValue(listOf(Food(), Food(), Food()))
-                }
         }
 
 

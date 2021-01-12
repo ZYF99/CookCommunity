@@ -50,17 +50,17 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
 
             //照片列表
             binding.rvImg.run {
-                layoutManager = getMomentsPictureLayoutManager(context, it.pictures?.size ?: 1)
-                adapter = MomentsListGridImageAdapter(it.pictures ?: emptyList()) { position ->
+                layoutManager = getMomentsPictureLayoutManager(context, it.images?.size ?: 1)
+                adapter = MomentsListGridImageAdapter(it.images ?: emptyList()) { position ->
                     showGallery(
                         context,
-                        it.pictures,
+                        it.images,
                         position
                     )
                 }
             }
 
-            (binding.rvImg.adapter as MomentsListGridImageAdapter).replaceData(it.pictures)
+            (binding.rvImg.adapter as MomentsListGridImageAdapter).replaceData(it.images)
 
             (binding.commentRec.adapter as CommentListAdapter).replaceData(
                 it.realCommentList ?: emptyList()

@@ -44,7 +44,7 @@
 
                 <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/cell_author_portrait"
-                        imageUrl="@{moment.publisher.avatar}"
+                        imageUrl="@{moment.profile.avatar}"
                         android:layout_width="30dp"
                         android:layout_height="30dp"
                         android:layout_marginStart="16dp"
@@ -70,11 +70,11 @@
                             android:id="@+id/tv_dynamic_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@{moment.publisher.name}"
+                            android:text="@{moment.profile.name}"
                             android:textColor="@color/colorBlack"
                             tools:text="秋风"/>
                     <TextView
-                            recentTime="@{moment.publishedDate}"
+                            recentTime="@{moment.createTime}"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textColor="#888888"
@@ -103,7 +103,7 @@
                         android:id="@+id/rec_img"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:visibility="@{moment.pictures.size()>0?View.VISIBLE:View.GONE}"
+                        android:visibility="@{moment.images.size()>0?View.VISIBLE:View.GONE}"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
@@ -114,46 +114,30 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/tv_dynamic_content" />
 
-                <TextView
-                        android:id="@+id/tv_topic"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{moment.topic}"
-                        android:layout_marginTop="8dp"
-                        android:paddingStart="8dp"
-                        android:paddingEnd="8dp"
-                        android:paddingTop="4dp"
-                        android:paddingBottom="4dp"
-                        android:textColor="@color/text_third"
-                        android:textSize="12sp"
-                        app:layout_constraintEnd_toEndOf="@+id/rec_img"
-                        app:layout_constraintTop_toBottomOf="@id/rec_img"
-                        tools:text="#古风经典" />
-
                 <LinearLayout
-                        android:id="@+id/frame_like"
-                        android:layout_width="match_parent"
-                        android:layout_height="24dp"
-                        android:orientation="horizontal"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        android:gravity="center_vertical"
-                        android:visibility="@{moment.likeList.size()>0?View.VISIBLE:View.GONE}"
-                        app:layout_constraintBottom_toTopOf="@id/lin_btn"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/tv_topic">
+                    android:id="@+id/frame_like"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="@{moment.likeList.size()>0?View.VISIBLE:View.GONE}"
+                    app:layout_constraintBottom_toTopOf="@id/lin_btn"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rec_img">
 
                     <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="4dp"
-                            android:textSize="12sp"
-                            android:gravity="center"
-                            android:textAlignment="center"
-                            android:text="@{likeString}"
-                            tools:text="10人觉得很赞"/>
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="4dp"
+                        android:gravity="center"
+                        android:text="@{likeString}"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        tools:text="10人觉得很赞" />
 
                 </LinearLayout>
 

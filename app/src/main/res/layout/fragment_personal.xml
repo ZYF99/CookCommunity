@@ -24,7 +24,7 @@
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
             android:layout_width="match_parent"
-            android:layout_height="540dp">
+            android:layout_height="580dp">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
                 android:layout_width="match_parent"
@@ -162,11 +162,11 @@
                             android:id="@+id/btn_setting"
                             android:layout_width="32dp"
                             android:layout_height="32dp"
+                            android:layout_marginTop="4dp"
                             android:layout_marginStart="16dp"
-                            android:layout_marginBottom="16dp"
                             android:src="@drawable/icon_setting"
-                            app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
                             app:tint="@color/colorWhite" />
 
                         <LinearLayout
@@ -258,23 +258,23 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/linearLayout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="12dp"
                             android:layout_marginTop="12dp"
-                            android:layout_marginEnd="12dp"
                             android:orientation="horizontal"
-                            app:layout_constraintTop_toBottomOf="@id/ll_shop">
+                            app:layout_constraintTop_toBottomOf="@id/ll_shop"
+                            tools:layout_editor_absoluteX="12dp">
 
                             <TextView
                                 android:id="@+id/tv_course_history"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="6dp"
-                                android:padding="8dp"
                                 android:layout_weight="1"
                                 android:background="?android:attr/selectableItemBackground"
                                 android:gravity="end"
+                                android:padding="8dp"
                                 android:text="观看历史"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="14sp"
@@ -285,10 +285,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="6dp"
-                                android:padding="8dp"
                                 android:layout_weight="1"
                                 android:background="?android:attr/selectableItemBackground"
                                 android:gravity="center"
+                                android:padding="8dp"
                                 android:text="订单"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="14sp"
@@ -299,10 +299,10 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="6dp"
-                                android:padding="8dp"
                                 android:layout_weight="1"
                                 android:background="?android:attr/selectableItemBackground"
                                 android:gravity="center"
+                                android:padding="8dp"
                                 android:text="已购买课程"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="14sp"
@@ -314,9 +314,9 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginStart="6dp"
                                 android:layout_weight="1"
-                                android:padding="8dp"
                                 android:background="?android:attr/selectableItemBackground"
                                 android:gravity="center"
+                                android:padding="8dp"
                                 android:text="收藏"
                                 android:textColor="@color/colorWhite"
                                 android:textSize="14sp"
@@ -337,6 +337,7 @@
             android:id="@+id/rv_my_moment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="-36dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:itemCount="2"

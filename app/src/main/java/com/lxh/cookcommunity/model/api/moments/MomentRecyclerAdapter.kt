@@ -6,7 +6,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.recyclerview.widget.GridLayoutManager
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.ItemMomentBinding
-import com.lxh.cookcommunity.model.api.SimpleProfileResp
+import com.lxh.cookcommunity.model.api.UserProfileModel
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListRecyclerAdapter
 import com.lxh.cookcommunity.util.showGallery
 
@@ -14,7 +14,7 @@ class MomentRecyclerAdapter(
     val activity:ComponentActivity,
     lifecycleOwner: LifecycleOwner,
     val onCellClick: (MomentContent) -> Unit,
-    val onHeaderClick: (SimpleProfileResp?) -> Unit,
+    val onHeaderClick: (UserProfileModel?) -> Unit,
     val onLikeClick: (MomentContent?, Int) -> Unit,
     val onCommitClick: (MomentContent) -> Unit
 ) : CommonListRecyclerAdapter<MomentContent, ItemMomentBinding>(
@@ -30,11 +30,11 @@ class MomentRecyclerAdapter(
 
         //宫格图
         binding.recImg.run {
-            layoutManager = getMomentsPictureLayoutManager(context, moment.pictures?.size ?: 1)
-            adapter = MomentsListGridImageAdapter(moment.pictures?: emptyList()) { imgRecPosition ->
+            layoutManager = getMomentsPictureLayoutManager(context, moment.images?.size ?: 1)
+            adapter = MomentsListGridImageAdapter(moment.images?: emptyList()) { imgRecPosition ->
                 showGallery(
                     activity,
-                    moment.pictures,
+                    moment.images,
                     imgRecPosition
                 )
             }
@@ -49,7 +49,7 @@ class MomentRecyclerAdapter(
             else -> ""
         }
         binding.root.setOnClickListener { onCellClick(moment) }
-        binding.cellAuthorPortrait.setOnClickListener { onHeaderClick(moment.publisher) }
+        binding.cellAuthorPortrait.setOnClickListener { onHeaderClick(moment.profile) }
         binding.btnLike.setOnClickListener { onLikeClick(moment, position) }
         binding.btnCommit.setOnClickListener { onCommitClick(moment) }
     }

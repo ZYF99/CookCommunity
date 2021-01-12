@@ -9,7 +9,7 @@ import com.lxh.cookcommunity.model.api.goods.Goods
 import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.login.RegisterRequestModel
-import com.lxh.cookcommunity.model.api.login.UserProfileModel
+import com.lxh.cookcommunity.model.api.UserProfileModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import io.reactivex.Single
 import okhttp3.MultipartBody
@@ -48,9 +48,8 @@ interface ApiService {
     /*刷新食物列表*/
     @GET("get")
     fun refreshFoodList(
-        @Query("name") name: String?,
-        @Query("id") id: Int?,
-        @Query("size") size: Int?
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<Food>>>
 
     /*搜索食物列表*/
@@ -64,19 +63,18 @@ interface ApiService {
     /***********************************************动态********************************************/
 
     /*刷新动态列表*/
-    @GET("get")
+    @GET("api/moments")
     fun refreshMomentList(
-        @Query("name") name: String?,
-        @Query("id") id: Int?,
-        @Query("size") size: Int?
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<MomentContent>>>
 
     /*搜索动态列表*/
     @GET("get")
     fun searchMomentList(
         @Query("name") name: String?,
-        @Query("id") id: Int?,
-        @Query("size") size: Int?
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<MomentContent>>>
 
     /*评论*/
@@ -92,17 +90,15 @@ interface ApiService {
     /*刷新商品列表*/
     @GET("get")
     fun refreshGoodsList(
-        @Query("name") name: String?,
-        @Query("id") id: Int?,
-        @Query("size") size: Int?
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<Goods>>>
 
     /*搜索商品列表*/
     @GET("get")
     fun searchGoodsList(
-        @Query("name") name: String?,
-        @Query("id") id: Int?,
-        @Query("size") size: Int?
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<Goods>>>
 
     /**********************************************工具********************************************/

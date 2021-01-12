@@ -5,15 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import com.lxh.cookcommunity.BuildConfig
 import com.lxh.cookcommunity.manager.api.ApiService
 import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
-import com.lxh.cookcommunity.model.api.login.UserProfileModel
-import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.base.BaseViewModel
 import com.zgxwxy.tuputech.util.switchThread
-import io.reactivex.Single
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
-import okhttp3.ResponseBody
 import org.kodein.di.generic.instance
 import java.io.File
 

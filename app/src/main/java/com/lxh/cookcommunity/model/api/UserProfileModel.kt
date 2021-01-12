@@ -1,4 +1,4 @@
-package com.lxh.cookcommunity.model.api.login
+package com.lxh.cookcommunity.model.api
 
 data class UserProfileModel(
     val uid: Long? = null,

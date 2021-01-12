@@ -55,7 +55,7 @@
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/iv_avatar"
-                        imageUrl="@{vm.momentMutableLiveData.publisher.avatar}"
+                        imageUrl="@{vm.momentMutableLiveData.profile.avatar}"
                         android:layout_width="26dp"
                         android:layout_height="26dp"
                         android:scaleType="centerCrop"
@@ -67,7 +67,7 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="10dp"
                         android:gravity="center"
-                        android:text="@{vm.momentMutableLiveData.publisher.name}"
+                        android:text="@{vm.momentMutableLiveData.profile.name}"
                         android:textColor="@color/colorBlack"
                         android:textSize="16sp"
                         tools:text="name" />

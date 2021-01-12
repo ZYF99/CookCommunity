@@ -68,10 +68,6 @@ abstract class CommonListFragment<Bean, VM : CommonListViewModel<Bean>, ItemBind
             binding.refreshLayout.isRefreshing = false
         }
 
-        viewModel.commonListLiveData.observeNonNull {
-            getRecyclerAdapter()?.replaceData(it)
-            binding.refreshLayout.isRefreshing = false
-        }
     }
 
     override fun initView() {
@@ -90,7 +86,7 @@ abstract class CommonListFragment<Bean, VM : CommonListViewModel<Bean>, ItemBind
         binding.rvList.adapter = getRecyclerAdapter()
 
         //下拉刷新监听
-        binding.refreshLayout.setOnRefreshListener { viewModel.refreshList(classify) }
+        binding.refreshLayout.setOnRefreshListener { viewModel.refreshList() }
 
         //上拉加载
         binding.rvList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -101,9 +97,11 @@ abstract class CommonListFragment<Bean, VM : CommonListViewModel<Bean>, ItemBind
             ) {
                 if (viewModel.commonListPageModelLiveData.value != null) {
                     if (!recyclerView.canScrollVertically(1)) {
-                        if (!viewModel.isLoadingMore.value!! && viewModel.commonListPageModelLiveData.value?.pages ?: 0 > 1
+                        if (!viewModel.isLoadingMore.value!!
+                            && viewModel.commonListPageModelLiveData.value?.pages ?: 0 > 1
+                            && viewModel.commonListPageModelLiveData.value?.pageNum ?: 1 < viewModel.commonListPageModelLiveData.value?.pages ?: 1
                         ) {
-                            viewModel.loadMoreShopList(classify)
+                            viewModel.loadMore()
                         }
                     }
                 }
@@ -113,7 +111,7 @@ abstract class CommonListFragment<Bean, VM : CommonListViewModel<Bean>, ItemBind
 
     override fun initData() {
         if (isFirstInit) {
-            viewModel.refreshList(classify)
+            viewModel.refreshList()
             isFirstInit = false
         }
     }
