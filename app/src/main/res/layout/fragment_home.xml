@@ -120,7 +120,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:orientation="horizontal"
-                            android:padding="16dp">
+                            android:padding="12dp">
 
                             <TextView
                                 android:id="@+id/tv_classify"
@@ -129,8 +129,8 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:text="分类"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="18dp" />
+                                android:textColor="@color/selector_color_black_white"
+                                android:textSize="16dp" />
 
                             <View
                                 android:layout_width="1dp"
@@ -144,8 +144,8 @@
                                 android:layout_weight="1"
                                 android:gravity="center"
                                 android:text="扫一扫"
-                                android:textColor="@color/colorBlack"
-                                android:textSize="18dp" />
+                                android:textColor="@color/selector_color_black_white"
+                                android:textSize="16dp" />
 
                         </LinearLayout>
 
