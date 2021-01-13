@@ -11,6 +11,7 @@ import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.login.RegisterRequestModel
 import com.lxh.cookcommunity.model.api.UserProfileModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
+import com.lxh.cookcommunity.model.api.moments.ReleaseMomentRequestModel
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -68,6 +69,12 @@ interface ApiService {
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<MomentContent>>>
+
+    /*发布动态*/
+    @POST("api/moments/publish")
+    fun releaseMoment(
+        @Body releaseMomentRequestModel: ReleaseMomentRequestModel
+    ): Single<ResponseBody>
 
     /*搜索动态列表*/
     @GET("get")

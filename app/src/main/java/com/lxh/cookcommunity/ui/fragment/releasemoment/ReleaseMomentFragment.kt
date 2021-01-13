@@ -17,6 +17,8 @@ import com.lxh.cookcommunity.ui.base.BaseFragment
 import com.lxh.cookcommunity.util.showAlbum
 import com.lxh.cookcommunity.util.showGallery
 
+var hasReleaseMoment = false
+
 class ReleaseMomentFragment : BaseFragment<FragmentReleaseMomentBinding, ReleaseMomentViewModel>(
     ReleaseMomentViewModel::class.java, layoutRes = R.layout.fragment_release_moment
 ) {
@@ -67,6 +69,16 @@ class ReleaseMomentFragment : BaseFragment<FragmentReleaseMomentBinding, Release
         //监听选中列表的变化
         viewModel.selectedList.observeNonNull {
             (binding.rvPhoto.adapter as ReleaseDynamicGridImageAdapter).replaceData(it)
+        }
+
+        //发布成功事件
+        viewModel.releaseSuccessEvent.observeNonNull {
+            it.handleIfNot {con->
+                if(con) {
+                    hasReleaseMoment = true
+                    activity?.finish()
+                }
+            }
         }
 
     }

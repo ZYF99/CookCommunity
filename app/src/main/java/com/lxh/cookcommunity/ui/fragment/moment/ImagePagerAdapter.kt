@@ -1,4 +1,4 @@
-package com.lxh.cookcommunity.model.api.moments
+package com.lxh.cookcommunity.ui.fragment.moment
 
 import android.content.Context
 import android.view.LayoutInflater

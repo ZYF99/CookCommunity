@@ -1,4 +1,4 @@
-package com.lxh.cookcommunity.model.api.moments
+package com.lxh.cookcommunity.ui.fragment.moment
 
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.ItemMomentGridImageBinding

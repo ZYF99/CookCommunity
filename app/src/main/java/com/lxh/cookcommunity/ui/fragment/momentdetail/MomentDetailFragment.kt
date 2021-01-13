@@ -9,10 +9,10 @@ import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentMomentDetailBinding
 import com.lxh.cookcommunity.manager.api.base.globalMoshi
 import com.lxh.cookcommunity.model.api.moments.MomentContent
-import com.lxh.cookcommunity.model.api.moments.MomentsListGridImageAdapter
-import com.lxh.cookcommunity.model.api.moments.getMomentsPictureLayoutManager
 import com.lxh.cookcommunity.ui.activity.ContentActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.ui.fragment.moment.MomentsListGridImageAdapter
+import com.lxh.cookcommunity.ui.fragment.moment.getMomentsPictureLayoutManager
 import com.lxh.cookcommunity.ui.fragment.personpersonal.jumpToPersonPersonal
 import com.lxh.cookcommunity.util.*
 

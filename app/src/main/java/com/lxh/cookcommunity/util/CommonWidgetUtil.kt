@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import androidx.databinding.DataBindingUtil
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.PopGalleryBinding
-import com.lxh.cookcommunity.model.api.moments.ImagePagerAdapter
+import com.lxh.cookcommunity.ui.fragment.moment.ImagePagerAdapter
 import com.lxh.cookcommunity.ui.widget.FullScreenDialog
 import kotlinx.android.synthetic.main.pop_gallery.*
 

@@ -1,4 +1,4 @@
-package com.lxh.cookcommunity.model.api.moments
+package com.lxh.cookcommunity.ui.fragment.moment
 
 import android.content.Context
 import androidx.activity.ComponentActivity
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.ItemMomentBinding
 import com.lxh.cookcommunity.model.api.UserProfileModel
+import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListRecyclerAdapter
 import com.lxh.cookcommunity.util.showGallery
 
