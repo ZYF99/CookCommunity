@@ -12,5 +12,4 @@ data class UserProfileModel(
     val updateTime:Long? = null,
     val lastLoginTime:Long? = null,
     val token:String? = null
-
 )

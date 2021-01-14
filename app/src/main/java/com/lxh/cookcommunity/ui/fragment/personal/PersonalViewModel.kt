@@ -5,6 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import com.lxh.cookcommunity.manager.api.ApiService
 import com.lxh.cookcommunity.model.api.UserProfileModel
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
+import com.lxh.cookcommunity.model.api.moments.COMMENT_FAVOR
+import com.lxh.cookcommunity.model.api.moments.CommentMomentRequestModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.base.BaseViewModel
 import com.zgxwxy.tuputech.util.switchThread
@@ -17,12 +19,28 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
     val userProfileMutableLiveData = MutableLiveData<UserProfileModel>()
     var isLoadingMore = MutableLiveData(false)
     var commonListPageModelLiveData = MutableLiveData<CommonListPageModel<MomentContent>>()
+    val changedMomentMutableLiveData = MutableLiveData<Pair<Int,MomentContent?>>()
+
+    //点赞
+    fun like(index:Int,id: Long?) {
+        apiService.pushCommentOrLike(
+            CommentMomentRequestModel(
+                mid = id,
+                type = COMMENT_FAVOR,
+                content = "",
+                image = ""
+            )
+        ).doOnApiSuccess {
+            changedMomentMutableLiveData.postValue(Pair(index,it.data))
+        }
+    }
 
     //拉取个人信息
     fun fetchUserProfile() {
         apiService.fetchUserProfile()
             .switchThread()
             .catchApiError()
+            .retry()
             .doOnSuccess {
                 userProfileMutableLiveData.postValue(it.data)
             }.bindLife()
@@ -33,6 +51,7 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
         apiService.refreshMomentList(1)
             .switchThread()
             .catchApiError()
+            .retry()
             .doOnSuccess {
                 commonListPageModelLiveData.postValue(it.data)
             }.bindLife()

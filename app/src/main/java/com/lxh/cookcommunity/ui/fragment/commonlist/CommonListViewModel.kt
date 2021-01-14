@@ -25,6 +25,7 @@ abstract class CommonListViewModel<T>(application: Application) : BaseViewModel(
         refreshFunction.invoke(1, 10)
             .switchThread()
             .catchApiError()
+            .retry()
             .doOnSubscribe {
                 isRefreshing.postValue(true)
             }.doOnSuccess { filmList ->
@@ -39,6 +40,7 @@ abstract class CommonListViewModel<T>(application: Application) : BaseViewModel(
         searchFunction.invoke(1, 10)
             .switchThread()
             .catchApiError()
+            .retry()
             .doOnSubscribe {
                 isRefreshing.postValue(true)
             }.doOnSuccess { filmList ->
@@ -53,6 +55,7 @@ abstract class CommonListViewModel<T>(application: Application) : BaseViewModel(
         refreshFunction.invoke((commonListPageModelLiveData.value?.pageNum ?: 1) + 1, 10)
             .switchThread()
             .catchApiError()
+            .retry()
             .doOnSubscribe {
                 isLoadingMore.postValue(true)
             }.doOnSuccess { commonListPageResultModel ->

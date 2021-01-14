@@ -16,8 +16,6 @@ abstract class BottomDialogView<B : ViewDataBinding>(
 	
 	lateinit var childBinding: B
 
-	
-	
 	override fun onCreate(savedInstanceState: Bundle?) {
 		childBinding = DataBindingUtil.inflate(layoutInflater,resId,null,false)
 		setContentView(childBinding.root)

@@ -33,7 +33,6 @@
 
         <activity
             android:name=".ui.activity.MainActivity"
-            android:launchMode="singleInstance"
             android:screenOrientation="portrait" />
 
         <activity

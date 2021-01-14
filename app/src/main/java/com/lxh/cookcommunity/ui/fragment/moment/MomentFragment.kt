@@ -26,10 +26,10 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
                 context?.jumpToMomentDetail(it)
             },
             onHeaderClick = {
-                context?.jumpToPersonPersonal()
+                context?.jumpToPersonPersonal(it)
             },
             onLikeClick = { momentContent, i ->
-
+                viewModel.like(i, momentContent?.mid)
             },
             onCommitClick = {
                 context?.jumpToMomentDetail(it)
@@ -37,9 +37,24 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
         )
     }
 
+    override fun initDataObServer() {
+        super.initDataObServer()
+        viewModel.changedMomentMutableLiveData.observeNonNull { changedMomentPair ->
+            val newList = viewModel.commonListPageModelLiveData.value?.dataList?.mapIndexedNotNull { index, momentContent ->
+                if(index == changedMomentPair.first) changedMomentPair.second
+                else momentContent
+            }
+            viewModel.commonListPageModelLiveData.postValue(
+                viewModel.commonListPageModelLiveData.value?.apply {
+                    dataList = newList?.toMutableList()
+                }
+            )
+        }
+    }
+
     override fun onResume() {
         super.onResume()
-        if(binding.rvList.adapter!=null && hasReleaseMoment){
+        if (binding.rvList.adapter != null && hasReleaseMoment) {
             viewModel.refreshList()
             hasReleaseMoment = false
         }

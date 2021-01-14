@@ -33,7 +33,33 @@ data class Food(
         avatar = "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fimg.mp.itc.cn%2Fq_mini%2Cc_zoom%2Cw_640%2Fupload%2F20170730%2F2dee9839d5574941bd04b81caa8dd49b_th.jpg&refer=http%3A%2F%2Fimg.mp.itc.cn&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1611299154&t=7531c95e59a372539901a921f461b084",
         courseList = listOf(Course(), Course(), Course(), Course(), Course())
     )
-)
+) {
+    override fun hashCode(): Int {
+        var result = id?.hashCode() ?: 0
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (brief?.hashCode() ?: 0)
+        result = 31 * result + (imgUrl?.hashCode() ?: 0)
+        result = 31 * result + (foodVideoList?.hashCode() ?: 0)
+        result = 31 * result + (cook?.hashCode() ?: 0)
+        return result
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as Food
+
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (brief != other.brief) return false
+        if (imgUrl != other.imgUrl) return false
+        if (foodVideoList != other.foodVideoList) return false
+        if (cook != other.cook) return false
+
+        return true
+    }
+}
 
 data class FoodVideo(
     val id: Long? = null,
@@ -41,4 +67,29 @@ data class FoodVideo(
     val warning: String? = null, //注意事项
     val videoUrl: String? = null, //视频URL
     val thumbnailUrl: String? = null //缩略图URL
-)
+){
+
+    override fun hashCode(): Int {
+        var result = id?.hashCode() ?: 0
+        result = 31 * result + (name?.hashCode() ?: 0)
+        result = 31 * result + (warning?.hashCode() ?: 0)
+        result = 31 * result + (videoUrl?.hashCode() ?: 0)
+        result = 31 * result + (thumbnailUrl?.hashCode() ?: 0)
+        return result
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+
+        other as FoodVideo
+
+        if (id != other.id) return false
+        if (name != other.name) return false
+        if (warning != other.warning) return false
+        if (videoUrl != other.videoUrl) return false
+        if (thumbnailUrl != other.thumbnailUrl) return false
+
+        return true
+    }
+}

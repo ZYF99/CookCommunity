@@ -54,11 +54,9 @@ class EditInfoViewModel(application: Application) : BaseViewModel(application) {
                 apiService.editUserProfile(
                     EditInfoRequestModel(avatar = BuildConfig.BASE_URL + "image/" + it.data?.imagePath)
                 )
-            }.switchThread()
-            .catchApiError()
-            .doOnSuccess {
+            }.doOnApiSuccess {
                 userInfoHasChanged = true
-            }.bindLife()
+            }
     }
 
     //修改昵称

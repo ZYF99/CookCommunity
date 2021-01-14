@@ -25,25 +25,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <ImageView
-                    android:id="@+id/iv_back"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_margin="16dp"
-                    android:src="@drawable/icon_back"
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:navigationIcon="@drawable/ic_arrow_back_black_24dp"
+                    app:elevation="10dp"
+                    app:layout_collapseMode="pin"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:tint="@color/colorBlack" />
+                    app:navigationIcon="@drawable/ic_arrow_back_black_24dp" />
+
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tl_vp"
                     android:layout_width="0dp"
                     android:layout_height="56dp"
+                    android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/iv_back"
-                    app:layout_constraintTop_toBottomOf="@id/iv_back"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintStart_toStartOf="@+id/toolbar"
+                    app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -28,6 +28,7 @@ class EditTextDialog(
 			dismiss()
 			onConfirmClick(childBinding.text ?: text)
 		}
+
 	}
 	
 }

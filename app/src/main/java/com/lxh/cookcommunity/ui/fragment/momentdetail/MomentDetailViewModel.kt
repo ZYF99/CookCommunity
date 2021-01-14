@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.lxh.cookcommunity.manager.api.ApiService
 import com.lxh.cookcommunity.model.api.moments.COMMENT_COMMENT
 import com.lxh.cookcommunity.model.api.moments.COMMENT_FAVOR
+import com.lxh.cookcommunity.model.api.moments.CommentMomentRequestModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.base.BaseViewModel
 import org.kodein.di.generic.instance
@@ -16,26 +17,40 @@ class MomentDetailViewModel(application: Application) : BaseViewModel(applicatio
     val inputCommentMutableLiveData = MutableLiveData<String>()
 
     //点赞
-    fun like() {
+    fun like(id: Long? = momentMutableLiveData.value?.mid) {
         apiService.pushCommentOrLike(
-            id = 2384632874,
-            type = COMMENT_FAVOR,
-            content = inputCommentMutableLiveData.value
+            CommentMomentRequestModel(
+                mid = id,
+                type = COMMENT_FAVOR,
+                content = "",
+                image = ""
+            )
         ).doOnApiSuccess {
-
+            momentMutableLiveData.postValue(it.data)
         }
     }
 
     //评论
-    fun pushComment() {
+    fun pushComment(id: Long? = momentMutableLiveData.value?.mid) {
         apiService.pushCommentOrLike(
-            id = 2384632874,
-            type = COMMENT_COMMENT,
-            content = inputCommentMutableLiveData.value
+            CommentMomentRequestModel(
+                mid = id,
+                type = COMMENT_COMMENT,
+                content = inputCommentMutableLiveData.value,
+                image = ""
+            )
         ).doOnApiSuccess {
-
+            momentMutableLiveData.postValue(it.data)
         }
     }
 
+    //拉取动态详情
+    fun fetchMomentDetail() {
+        apiService.fetchMomentDetail(
+            mid = momentMutableLiveData.value?.mid
+        ).doOnApiSuccess {
+            momentMutableLiveData.postValue(it.data)
+        }
+    }
 
 }

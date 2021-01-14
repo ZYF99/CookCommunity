@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.lxh.cookcommunity.ui.fragment.releasemoment.ReleaseDynamicGridImageAdapter
@@ -13,7 +14,7 @@ abstract class BaseRecyclerAdapter<Bean, Binding : ViewDataBinding>
 constructor(
     private val layoutRes: Int,
     private val onCellClick: ((Bean) -> Unit)? = null,
-    private val list:List<Bean> = emptyList()
+    private val list: List<Bean> = emptyList()
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     var baseList: List<Bean> = list
@@ -47,9 +48,27 @@ constructor(
 
     abstract fun bindData(binding: Binding, position: Int)
 
-    fun replaceData(newList: List<Bean>?) {
-        baseList = newList?: emptyList()
-        notifyDataSetChanged()
+    open fun replaceData(newList: List<Bean>?) {
+        if (baseList.isEmpty()) {
+            baseList = newList ?: emptyList()
+            notifyDataSetChanged()
+        } else {
+            if (newList?.isNotEmpty() == true) {
+                val diffResult =
+                    DiffUtil.calculateDiff(
+                        SingleBeanDiffCallBack(
+                            baseList,
+                            newList
+                        ),
+                        true
+                    )
+                baseList = newList
+                diffResult.dispatchUpdatesTo(this)
+            } else {
+                baseList = newList ?: emptyList()
+                notifyDataSetChanged()
+            }
+        }
     }
 
     fun addData(data: Bean?) {
@@ -62,6 +81,30 @@ constructor(
 
     }
 
+}
+
+class SingleBeanDiffCallBack<Bean>(
+    val oldDatas: List<Bean>,
+    val newDatas: List<Bean>
+) : DiffUtil.Callback() {
+    override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        return true
+    }
+
+    override fun getOldListSize(): Int {
+        return oldDatas.size
+    }
+
+    override fun getNewListSize(): Int {
+        return newDatas.size
+    }
+
+    override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+        val oldData = oldDatas[oldItemPosition]
+        val newData = newDatas[newItemPosition]
+        val a = oldData == newData
+        return oldData == newData
+    }
 }
 
 const val ITEM_SWIPE_VERTICAL = 0

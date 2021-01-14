@@ -26,9 +26,6 @@ class MarkFragment : BaseFragment<FragmentMarkBinding, MarkViewModel>(
 
         binding.tlVp.setupWithViewPager(binding.vpMark)
 
-        binding.ivBack.setOnClickListener {
-            activity?.finish()
-        }
     }
 
     override fun initData() {

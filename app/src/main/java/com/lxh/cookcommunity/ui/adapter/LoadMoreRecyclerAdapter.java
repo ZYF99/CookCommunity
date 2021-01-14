@@ -3,12 +3,14 @@ package com.lxh.cookcommunity.ui.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.lxh.cookcommunity.databinding.ItemFooterProgressbarBinding;
@@ -24,15 +26,15 @@ public abstract class LoadMoreRecyclerAdapter<Bean, Binding extends ViewDataBind
     private int layoutRes;
     private Boolean hasLoadMore;
     public List<Bean> baseList;
-    private OnCellClickListener<Binding,Bean> onCellClickListener;
+    private OnCellClickListener<Binding, Bean> onCellClickListener;
     private View headerView;
     public MutableLiveData<Boolean> onLoadMore = new MutableLiveData<>(false);
 
-    public interface OnCellClickListener<Binding,Bean> {
+    public interface OnCellClickListener<Binding, Bean> {
         void onCellClick(Binding binding, Bean bean);
     }
 
-    public void setOnCellClickListener(OnCellClickListener<Binding,Bean> onCellClickListener) {
+    public void setOnCellClickListener(OnCellClickListener<Binding, Bean> onCellClickListener) {
         this.onCellClickListener = onCellClickListener;
     }
 
@@ -46,12 +48,7 @@ public abstract class LoadMoreRecyclerAdapter<Bean, Binding extends ViewDataBind
         this.layoutRes = layoutRes;
         this.hasLoadMore = hasLoadMore;
         this.baseList = baseList;
-        onLoadMore.observe(lifecycleOwner, new Observer<Boolean>() {
-            @Override
-            public void onChanged(Boolean aBoolean) {
-                notifyItemChanged(baseList.size() - 1);
-            }
-        });
+        onLoadMore.observe(lifecycleOwner, aBoolean -> notifyItemChanged(baseList.size() - 1));
     }
 
     @NonNull
@@ -151,8 +148,8 @@ public abstract class LoadMoreRecyclerAdapter<Bean, Binding extends ViewDataBind
                 holder1.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (onCellClickListener != null){
-                            onCellClickListener.onCellClick(holder1.binding,baseList.get(pos));
+                        if (onCellClickListener != null) {
+                            onCellClickListener.onCellClick(holder1.binding, baseList.get(pos));
                             //notifyItemChanged(position);
                         }
                     }
@@ -169,10 +166,31 @@ public abstract class LoadMoreRecyclerAdapter<Bean, Binding extends ViewDataBind
 
     }
 
+    public void replaceData(List<Bean> newList) {
+         if (baseList.isEmpty()) {
+            baseList = newList;
+            notifyDataSetChanged();
+        } else {
+            if (newList.size() != 0) {
+                DiffUtil.DiffResult diffResult =
+                        DiffUtil.calculateDiff(
+                                new SingleBeanDiffCallBack<>(
+                                        baseList,
+                                        newList
+                                ),
+                                true
+                        );
+                baseList = newList;
+                diffResult.dispatchUpdatesTo(this);
+            } else {
+                baseList = newList;
+                notifyDataSetChanged();
+            }
+        }
+    }
+
     public abstract void bindData(Binding binding, int position);
 
-    public void replaceData(List<Bean> newList) {
-        baseList = newList;
-        notifyDataSetChanged();
-    }
+
+
 }

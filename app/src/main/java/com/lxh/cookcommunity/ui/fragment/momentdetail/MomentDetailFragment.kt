@@ -67,7 +67,7 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
             )
 
             binding.ivAvatar.setOnClickListener {
-                context?.jumpToPersonPersonal()
+                context?.jumpToPersonPersonal(viewModel.momentMutableLiveData.value?.profile)
             }
 
         }
@@ -86,7 +86,7 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
             adapter = CommentListAdapter(
                 { comment ->
                     showInputDialog()
-                    replyCommentId = comment.commentId
+                    replyCommentId = comment.cid
                 },
                 commentList
             )

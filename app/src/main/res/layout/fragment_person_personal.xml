@@ -30,6 +30,7 @@
 
                 <ImageView
                     android:id="@+id/iv"
+                    imageUrl="@{vm.personProfileLiveData.avatar}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:foreground="#52000000"
@@ -53,8 +54,8 @@
                         android:id="@+id/iv_back"
                         android:layout_width="16dp"
                         android:layout_height="16dp"
-                        android:src="@drawable/icon_back"
                         android:layout_margin="16dp"
+                        android:src="@drawable/icon_back"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -71,9 +72,9 @@
 
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/potrait"
+                            imageUrl="@{vm.personProfileLiveData.avatar}"
                             android:layout_width="72dp"
                             android:layout_height="72dp"
-                            android:src="@drawable/bg"
                             app:civ_border_color="@color/colorWhite"
                             app:civ_border_width="2dp"
                             app:layout_behavior=".ui.home.mine.TransferHeaderBehavior"
@@ -93,7 +94,7 @@
                             android:clickable="true"
                             android:focusable="true"
                             android:gravity="center"
-                            android:text="昵称"
+                            android:text="@{vm.personProfileLiveData.name}"
                             android:textColor="@color/colorWhite"
                             android:textSize="24sp"
                             android:textStyle="normal|bold"
@@ -104,7 +105,7 @@
 
                         <ImageView
                             android:id="@+id/im_gender"
-                            gender="女"
+                            gender="@{vm.personProfileLiveData.gender}"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_marginStart="8dp"
@@ -126,7 +127,7 @@
                             android:focusable="true"
                             android:gravity="center"
                             android:padding="4dp"
-                            android:text="更合适的了就看啥的房价肯定是咖啡"
+                            android:text="@{vm.personProfileLiveData.aboutMe}"
                             android:textColor="#FAFAFA"
                             android:textSize="16sp"
                             android:textStyle="normal"

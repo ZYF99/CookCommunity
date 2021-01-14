@@ -28,7 +28,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
             },
             onLikeClick = { momentContent, i ->
-
+                viewModel.like(i, momentContent?.mid)
             },
             onCommitClick = {
                 context?.jumpToMomentDetail(it)
@@ -73,6 +73,17 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
         viewModel.isLoadingMore.observeNonNull {
             (binding.rvMyMoment.adapter as CommonListRecyclerAdapter<*, *>).onLoadMore.postValue(it)
         }
+        viewModel.changedMomentMutableLiveData.observeNonNull { changedMomentPair ->
+            val newList = viewModel.commonListPageModelLiveData.value?.dataList?.mapIndexedNotNull { index, momentContent ->
+                if(index == changedMomentPair.first) changedMomentPair.second
+                else momentContent
+            }
+            viewModel.commonListPageModelLiveData.postValue(
+                viewModel.commonListPageModelLiveData.value?.apply {
+                    dataList = newList?.toMutableList()
+                }
+            )
+        }
     }
 
     override fun initData() {
@@ -82,7 +93,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
     override fun onResume() {
         super.onResume()
-        if(userInfoHasChanged){
+        if (userInfoHasChanged) {
             viewModel.fetchUserProfile()
         }
     }

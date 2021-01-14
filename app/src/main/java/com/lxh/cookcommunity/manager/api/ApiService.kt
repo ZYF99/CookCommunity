@@ -10,6 +10,7 @@ import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.login.RegisterRequestModel
 import com.lxh.cookcommunity.model.api.UserProfileModel
+import com.lxh.cookcommunity.model.api.moments.CommentMomentRequestModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.model.api.moments.ReleaseMomentRequestModel
 import io.reactivex.Single
@@ -76,7 +77,7 @@ interface ApiService {
         @Body releaseMomentRequestModel: ReleaseMomentRequestModel
     ): Single<ResponseBody>
 
-    /*搜索动态列表*/
+    /*NONE 搜索动态列表*/
     @GET("get")
     fun searchMomentList(
         @Query("name") name: String?,
@@ -84,13 +85,17 @@ interface ApiService {
         @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<MomentContent>>>
 
-    /*评论*/
-    @GET("commentReply")
+    /*评论/点赞*/
+    @POST("api/moments/comment")
     fun pushCommentOrLike(
-        @Query("id") id: Long?,
-        @Query("type") type: String?,
-        @Query("content") content: String?
-    ): Single<ResponseBody>
+        @Body commentMomentRequestModel: CommentMomentRequestModel
+    ): Single<ResultModel<MomentContent>>
+
+    /*拉取单个动态*/
+    @GET("api/moments/one")
+    fun fetchMomentDetail(
+        @Query("mid") mid: Long? = null
+    ): Single<ResultModel<MomentContent>>
 
     /**********************************************商品********************************************/
 

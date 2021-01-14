@@ -41,7 +41,7 @@ class MomentRecyclerAdapter(
             }
         }
 
-        val likeList = moment.likeList?.map { it.commentator } ?: emptyList()
+        val likeList = moment.likeList?.map { it.profile } ?: emptyList()
 
         val likeSize = likeList.size
         binding.likeString = when {
