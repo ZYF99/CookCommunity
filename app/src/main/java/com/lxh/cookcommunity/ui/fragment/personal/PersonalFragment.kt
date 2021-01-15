@@ -11,6 +11,8 @@ import com.lxh.cookcommunity.ui.fragment.editinfo.userInfoHasChanged
 import com.lxh.cookcommunity.ui.fragment.mark.jumpToMark
 import com.lxh.cookcommunity.ui.fragment.moment.MomentRecyclerAdapter
 import com.lxh.cookcommunity.ui.fragment.momentdetail.jumpToMomentDetail
+import com.lxh.cookcommunity.util.fullScreen
+import com.lxh.cookcommunity.util.setStatusTextColor
 
 class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel>(
     PersonalViewModel::class.java, layoutRes = R.layout.fragment_personal
@@ -93,6 +95,9 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
     override fun onResume() {
         super.onResume()
+        //状态栏字体白色
+        activity?.let { setStatusTextColor(false, it) }
+        activity?.let { fullScreen(it) }
         if (userInfoHasChanged) {
             viewModel.fetchUserProfile()
         }

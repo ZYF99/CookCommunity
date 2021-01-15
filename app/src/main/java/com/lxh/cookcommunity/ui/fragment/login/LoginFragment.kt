@@ -12,6 +12,7 @@ import com.lxh.cookcommunity.util.hideSoftKeyBoard
 import com.lxh.cookcommunity.ui.base.BaseFragment
 import com.lxh.cookcommunity.ui.base.Event
 import com.lxh.cookcommunity.ui.base.isNetworkAvailable
+import com.lxh.cookcommunity.util.fullScreen
 
 class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
     LoginViewModel::class.java,
@@ -19,7 +20,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
 ) {
 
     override fun initView() {
-
         //自动登陆
         if (SharedPrefModel.hasLogin) {
             activity?.hideSoftKeyBoard()
@@ -55,6 +55,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding, LoginViewModel>(
 
     override fun initData() {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.let { fullScreen(it) }
     }
 
 }

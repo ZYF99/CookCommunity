@@ -5,6 +5,7 @@ import androidx.databinding.DataBindingUtil
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.ActivityLoginBinding
 import com.lxh.cookcommunity.ui.base.BaseActivity
+import com.lxh.cookcommunity.util.fullScreen
 
 class LoginActivity : BaseActivity() {
 

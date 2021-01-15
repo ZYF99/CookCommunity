@@ -1,6 +1,7 @@
 package com.lxh.cookcommunity.ui.fragment.personpersonal
 
 import android.content.Context
+import android.view.View
 import androidx.activity.ComponentActivity
 import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListRecyclerAdapter
 import com.lxh.cookcommunity.ui.fragment.moment.MomentRecyclerAdapter
 import com.lxh.cookcommunity.ui.fragment.momentdetail.jumpToMomentDetail
 import com.lxh.cookcommunity.util.fromJson
+import com.lxh.cookcommunity.util.fullScreen
 import com.lxh.cookcommunity.util.toJson
 
 class PersonPersonalFragment : BaseFragment<FragmentPersonPersonalBinding, PersonPersonalViewModel>(
@@ -61,10 +63,6 @@ class PersonPersonalFragment : BaseFragment<FragmentPersonPersonalBinding, Perso
             }
         })
 
-        binding.ivBack.setOnClickListener {
-            activity?.finish()
-        }
-
     }
 
 
@@ -95,7 +93,17 @@ class PersonPersonalFragment : BaseFragment<FragmentPersonPersonalBinding, Perso
                 }
             )
         }
+    }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.let { fullScreen(it) }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        activity?.window?.statusBarColor = resources.getColor(R.color.colorPrimaryDark)
+        activity?.window?.decorView?.systemUiVisibility = View.VISIBLE
     }
 
 }

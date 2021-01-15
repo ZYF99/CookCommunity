@@ -6,12 +6,15 @@ import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentRegisterBinding
 import com.lxh.cookcommunity.ui.activity.MainActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.util.fullScreen
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel>(
     RegisterViewModel::class.java, R.layout.fragment_register
 ) {
 
     override fun initView() {
+
+        activity?.let { fullScreen(it) }
 
         //注册并登录按钮
         binding.btnNext.setOnClickListener {
@@ -40,5 +43,9 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding, RegisterViewModel
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        activity?.let { fullScreen(it) }
+    }
 
 }

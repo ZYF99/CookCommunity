@@ -1,8 +1,10 @@
 package com.lxh.cookcommunity.ui.base
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.net.ConnectivityManager
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +28,7 @@ import com.lxh.cookcommunity.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import com.lxh.cookcommunity.util.DialogUtil
+import com.lxh.cookcommunity.util.setStatusTextColor
 import io.reactivex.Completable
 import kotlinx.android.synthetic.main.fragment_release_moment.view.*
 import org.kodein.di.KodeinAware
@@ -70,6 +73,9 @@ constructor(
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //状态栏字体黑色
+        activity?.let { setStatusTextColor(true, it) }
+        activity?.window?.decorView?.systemUiVisibility = View.VISIBLE
         if (!isNavigationViewInit) {
             super.onViewCreated(view, savedInstanceState)
             initEventObserver()
@@ -97,6 +103,8 @@ constructor(
 
     override fun onResume() {
         super.onResume()
+        //状态栏字体白色
+        activity?.let { setStatusTextColor(true, it) }
         if (!lazyInitDataCompleted)
             AndroidSchedulers.mainThread().scheduleDirect(
                 {
@@ -166,6 +174,7 @@ constructor(
         super.onDestroy()
         destroyDisposable()
     }
+
 }
 
 //check network

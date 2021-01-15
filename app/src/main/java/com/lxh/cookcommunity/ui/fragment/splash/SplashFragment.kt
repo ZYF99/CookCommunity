@@ -5,6 +5,7 @@ import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentSplashBinding
 import com.lxh.cookcommunity.ui.activity.LoginActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
+import com.lxh.cookcommunity.util.fullScreen
 import io.reactivex.Completable
 import java.util.concurrent.TimeUnit
 
@@ -28,6 +29,11 @@ class SplashFragment : BaseFragment<FragmentSplashBinding, SplashViewModel>(
 
     override fun initData() {
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        activity?.let { fullScreen(it) }
     }
 
 
