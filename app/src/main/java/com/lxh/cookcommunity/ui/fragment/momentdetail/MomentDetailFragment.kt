@@ -119,13 +119,15 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
     }
 
     override fun initData() {
-        viewModel.momentMutableLiveData.postValue(
+        viewModel.momentMutableLiveData.value =
             globalMoshi.fromJson(
                 arguments?.getString(
                     KEY_MOMENT_DETAIL
                 )
             )
-        )
+
+        viewModel.fetchMomentDetail()
+
     }
 }
 
