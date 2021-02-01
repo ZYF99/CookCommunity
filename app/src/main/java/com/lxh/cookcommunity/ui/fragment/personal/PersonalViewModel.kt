@@ -15,14 +15,13 @@ import org.kodein.di.generic.instance
 class PersonalViewModel(application: Application) : BaseViewModel(application) {
 
     val apiService by instance<ApiService>()
-    val myRecentMomentMutableLiveDataList = MutableLiveData<List<MomentContent>>()
     val userProfileMutableLiveData = MutableLiveData<UserProfileModel>()
     var isLoadingMore = MutableLiveData(false)
     var commonListPageModelLiveData = MutableLiveData<CommonListPageModel<MomentContent>>()
-    val changedMomentMutableLiveData = MutableLiveData<Pair<Int,MomentContent?>>()
+    val changedMomentMutableLiveData = MutableLiveData<Pair<Int, MomentContent?>>()
 
     //点赞
-    fun like(index:Int,id: Long?) {
+    fun like(index: Int, id: Long?) {
         apiService.pushCommentOrLike(
             CommentMomentRequestModel(
                 mid = id,
@@ -31,30 +30,24 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
                 image = ""
             )
         ).doOnApiSuccess {
-            changedMomentMutableLiveData.postValue(Pair(index,it.data))
+            changedMomentMutableLiveData.postValue(Pair(index, it.data))
         }
     }
 
     //拉取个人信息
-    fun fetchUserProfile() {
+    fun fetchUserProfileAndRecentMoments() {
         apiService.fetchUserProfile()
-            .switchThread()
-            .catchApiError()
-            .retry()
-            .doOnSuccess {
+            .flatMap {
                 userProfileMutableLiveData.postValue(it.data)
-            }.bindLife()
-    }
-
-    //拉取最近的动态
-    fun fetchRecentMoments() {
-        apiService.refreshMomentList(1)
-            .switchThread()
+                //拉取最近的动态
+                apiService.refreshMomentList(pageNo = 1, uid = it.data?.uid)
+            }            .switchThread()
             .catchApiError()
             .retry()
             .doOnSuccess {
                 commonListPageModelLiveData.postValue(it.data)
-            }.bindLife()
+            }
+            .bindLife()
     }
 
     //加载更多

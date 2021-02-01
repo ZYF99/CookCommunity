@@ -24,9 +24,10 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
 
     //拉取菜单列表
     fun fetchFoodList() {
-        foodListMutableLiveData.postValue(
-            listOf(Food(), Food(), Food(), Food(), Food(), Food(), Food())
-        )
+        apiService.refreshRecommendDished()
+            .doOnApiSuccess {
+                foodListMutableLiveData.postValue(it.data?.dataList)
+            }
     }
 
 }

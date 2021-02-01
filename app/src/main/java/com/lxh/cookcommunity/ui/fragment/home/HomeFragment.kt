@@ -28,6 +28,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
             }
         }
 
+        //下拉刷新
+        binding.refreshLayout.setOnRefreshListener {
+            initData()
+        }
+
         //搜索
         binding.tvSearch.setOnClickListener {
             context?.jumpToSearchFood()

@@ -89,8 +89,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
     }
 
     override fun initData() {
-        viewModel.fetchUserProfile()
-        viewModel.fetchRecentMoments()
+        viewModel.fetchUserProfileAndRecentMoments()
     }
 
     override fun onResume() {
@@ -99,7 +98,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
         activity?.let { setStatusTextColor(false, it) }
         activity?.let { fullScreen(it) }
         if (userInfoHasChanged) {
-            viewModel.fetchUserProfile()
+            viewModel.fetchUserProfileAndRecentMoments()
         }
     }
 

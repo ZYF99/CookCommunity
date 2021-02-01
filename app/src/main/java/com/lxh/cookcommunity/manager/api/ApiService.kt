@@ -47,6 +47,13 @@ interface ApiService {
 
     /*************************************************食物******************************************/
 
+    /*刷新首页食物列表*/
+    @GET("api/dishes/recommend")
+    fun refreshRecommendDished(
+        @Query("pageNo") pageNo: Int? = 1,
+        @Query("pageSize") pageSize: Int? = 1000
+    ): Single<ResultModel<CommonListPageModel<Food>>>
+
     /*刷新食物列表*/
     @GET("get")
     fun refreshFoodList(
@@ -69,6 +76,14 @@ interface ApiService {
     fun refreshMomentList(
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int? = 10
+    ): Single<ResultModel<CommonListPageModel<MomentContent>>>
+
+    /*根据uid刷新动态列表*/
+    @GET("api/moments/poster")
+    fun refreshMomentList(
+        @Query("pageNo") pageNo: Int?,
+        @Query("pageSize") pageSize: Int? = 10,
+        @Query("uid") uid: Long? = null
     ): Single<ResultModel<CommonListPageModel<MomentContent>>>
 
     /*发布动态*/

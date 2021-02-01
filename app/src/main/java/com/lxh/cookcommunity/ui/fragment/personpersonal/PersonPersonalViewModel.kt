@@ -18,10 +18,10 @@ class PersonPersonalViewModel(application: Application) : BaseViewModel(applicat
     var isLoadingMore = MutableLiveData(false)
     var commonListPageModelLiveData = MutableLiveData<CommonListPageModel<MomentContent>>()
     var personProfileLiveData = MutableLiveData<UserProfileModel>()
-    val changedMomentMutableLiveData = MutableLiveData<Pair<Int,MomentContent?>>()
+    val changedMomentMutableLiveData = MutableLiveData<Pair<Int, MomentContent?>>()
 
     //点赞
-    fun like(index:Int,id: Long?) {
+    fun like(index: Int, id: Long?) {
         apiService.pushCommentOrLike(
             CommentMomentRequestModel(
                 mid = id,
@@ -30,13 +30,13 @@ class PersonPersonalViewModel(application: Application) : BaseViewModel(applicat
                 image = ""
             )
         ).doOnApiSuccess {
-            changedMomentMutableLiveData.postValue(Pair(index,it.data))
+            changedMomentMutableLiveData.postValue(Pair(index, it.data))
         }
     }
 
     //拉取最近的动态
     fun fetchRecentMoments() {
-        apiService.refreshMomentList(1)
+        apiService.refreshMomentList(pageNo = 1, uid = personProfileLiveData.value?.uid)
             .switchThread()
             .catchApiError()
             .retry()
