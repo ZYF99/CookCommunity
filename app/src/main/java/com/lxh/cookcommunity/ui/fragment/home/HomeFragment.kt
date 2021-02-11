@@ -58,6 +58,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
     override fun initDataObServer() {
 
+        viewModel.isRefreshingMutableLiveData.observeNonNull {
+            binding.refreshLayout.isRefreshing = it
+        }
+
         viewModel.foodListMutableLiveData.observeNonNull {
             (binding.rvFood.adapter as FoodRecyclerAdapter).replaceData(it)
         }

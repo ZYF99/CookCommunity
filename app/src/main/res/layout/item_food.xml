@@ -42,7 +42,7 @@
 
                 <ImageView
                     android:id="@+id/img"
-                    imageUrl="@{food.imgUrl}"
+                    imageUrl="@{food.image}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
@@ -83,7 +83,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title"
                 tools:ignore="RtlCompat"
-                android:text="@{food.brief}"
+                android:text="@{food.description}"
                 tools:text="营养啊啊啊啊啊" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

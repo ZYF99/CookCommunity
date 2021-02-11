@@ -62,7 +62,7 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="炒鸡蛋"
+                    android:text="@{vm.foodMutableLiveData.name}"
                     android:textColor="@color/colorBlack"
                     android:textSize="20dp"
                     android:textStyle="bold"
@@ -97,7 +97,8 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="24dp"
-            android:src="@drawable/logo"
+            imageUrl="@{vm.foodMutableLiveData.chefProfile.avatar}"
+            tools:src="@drawable/logo"
             app:layout_constraintStart_toStartOf="@+id/banner_food_pic"
             app:layout_constraintTop_toBottomOf="@+id/banner_food_pic" />
 
@@ -106,7 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:text="厨师：张三丰"
+            tools:text="厨师：张三丰"
             android:textColor="@color/colorBlack"
             android:textSize="18dp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_cook_avatar"
@@ -151,7 +152,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:lineSpacingExtra="6dp"
-                android:text="狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,"
+                android:text="@{vm.foodMutableLiveData.material}"
+                tools:text="狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,狗屎100g，猪屎200g，牛屎1t，铲子1把，狗尿200ml,"
                 android:textColor="@color/colorGrey_656565"
                 android:textSize="16dp" />
 

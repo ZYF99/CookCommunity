@@ -5,7 +5,7 @@ import androidx.core.os.bundleOf
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentCookPersonalBinding
 import com.lxh.cookcommunity.manager.api.base.globalMoshi
-import com.lxh.cookcommunity.model.api.cook.Cook
+import com.lxh.cookcommunity.model.api.cook.Chef
 import com.lxh.cookcommunity.ui.activity.ContentActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
 import com.lxh.cookcommunity.util.DialogUtil
@@ -42,11 +42,11 @@ class CookPersonalFragment : BaseFragment<FragmentCookPersonalBinding, CookPerso
 
 }
 
-fun Context.jumpToCookPersonal(cook: Cook?) {
+fun Context.jumpToCookPersonal(chef: Chef?) {
     val intent = ContentActivity.createIntent(
         context = this,
         des = ContentActivity.Destination.CookPersonal,
-        bundle = bundleOf(Pair(KEY_COOK_PERSONAL, cook.toJson()))
+        bundle = bundleOf(Pair(KEY_COOK_PERSONAL, chef.toJson()))
     )
     this.startActivity(intent)
 }

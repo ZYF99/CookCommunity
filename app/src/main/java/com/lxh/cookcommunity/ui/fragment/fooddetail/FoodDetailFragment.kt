@@ -28,7 +28,7 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
         }
 
         binding.tvPersonal.setOnClickListener {
-            context?.jumpToCookPersonal(viewModel.foodMutableLiveData.value?.cook)
+            context?.jumpToCookPersonal(viewModel.foodMutableLiveData.value?.chefProfile)
         }
 
     }
@@ -42,15 +42,19 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
             if (it.isNotEmpty())
                 binding.bannerFoodPic.setPages(it.toList()) { FoodImageBannerViewHolder() }
         }
+
+        viewModel.foodMutableLiveData.observeNonNull {
+            binding.tvCookName.text = "厨师：${it.chefProfile?.name}"
+        }
+
     }
-
 }
 
-fun Context.jumpToFoodDetail(food: Food) {
-    val intent = ContentActivity.createIntent(
-        context = this,
-        des = ContentActivity.Destination.FoodDetail,
-        bundle = bundleOf(Pair(KEY_FOOD_DETAIL, food.toJson()))
-    )
-    this.startActivity(intent)
-}
+    fun Context.jumpToFoodDetail(food: Food) {
+        val intent = ContentActivity.createIntent(
+            context = this,
+            des = ContentActivity.Destination.FoodDetail,
+            bundle = bundleOf(Pair(KEY_FOOD_DETAIL, food.toJson()))
+        )
+        this.startActivity(intent)
+    }
