@@ -2,6 +2,8 @@ package com.lxh.cookcommunity.manager.api
 
 import com.lxh.cookcommunity.manager.api.base.ResultModel
 import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
+import com.lxh.cookcommunity.model.api.ChefFansModel
+import com.lxh.cookcommunity.model.api.CollectFoodRequestModel
 import com.lxh.cookcommunity.model.api.UploadFileResultModel
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
 import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
@@ -13,6 +15,7 @@ import com.lxh.cookcommunity.model.api.UserProfileModel
 import com.lxh.cookcommunity.model.api.moments.CommentMomentRequestModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.model.api.moments.ReleaseMomentRequestModel
+import com.lxh.cookcommunity.model.api.studyvideo.StudyVideoModel
 import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.ResponseBody
@@ -54,20 +57,58 @@ interface ApiService {
         @Query("pageSize") pageSize: Int? = 1000
     ): Single<ResultModel<CommonListPageModel<Food>>>
 
-    /*刷新食物列表*/
+    /*刷新食物列表 无用！*/
     @GET("get")
     fun refreshFoodList(
         @Query("pageNo") pageNo: Int?,
         @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<Food>>>
 
-    /*搜索食物列表*/
-    @GET("get")
-    fun searchFoodList(
-        @Query("name") name: String?,
-        @Query("id") id: Int?,
-        @Query("size") size: Int?
+    /*分类筛选*/
+    @GET("api/dishes/filter")
+    fun filterFood(
+        @Query("pageNo") pageNo: Int?=1,
+        @Query("pageSize") pageSize: Int? = 1000,
+        @Query("group") group: String? = null,
+        @Query("type") type: String? = null,
+        @Query("time") time: String? = null
     ): Single<ResultModel<CommonListPageModel<Food>>>
+
+    /*搜索食物列表*/
+    @GET("api/dishes/search")
+    fun searchFoodList(
+        @Query("dishName") dishName: String?,
+        @Query("pageNo") pageNo: Int? = 1,
+        @Query("pageSize") pageSize: Int? = 10
+    ): Single<ResultModel<CommonListPageModel<Food>>>
+
+    /*拉取食物教程*/
+    @GET("api/dishes/course")
+    fun fetchFoodStudyVideo(
+        @Query("courseId") courseId: Long?
+    ): Single<ResultModel<StudyVideoModel>>
+
+    /*收藏食物*/
+    @POST("api/collect")
+    fun collectFood(
+        @Body collectFoodRequestModel: CollectFoodRequestModel? = null
+    ): Single<ResponseBody>
+
+    /*查询食物是否收藏*/
+    @POST("api/collect/check")
+    fun checkFoodCollect(
+        @Body collectFoodRequestModel: CollectFoodRequestModel? = null
+    ): Single<ResponseBody>
+
+    /*拉取厨子粉丝数*/
+    @GET("api/collect/chef")
+    fun fetchChefFans(
+        @Query("chefId")chefId:Long?=null
+    ): Single<ResultModel<ChefFansModel>>
+
+    /*拉取自己的粉丝数*/
+    @GET("api/collect/count?type=COLLECT")
+    fun fetchMineFansNum(): Single<ResultModel<ChefFansModel>>
 
     /***********************************************动态********************************************/
 

@@ -84,7 +84,7 @@
             android:layout_height="0dp"
             android:layout_marginBottom="8dp"
             android:lineSpacingExtra="8dp"
-            android:text="@{vm.foodVideoMutableLiveData.warning}"
+            android:text="@{vm.foodVideoMutableLiveData.description}"
             android:textColor="@color/colorGrey_666666"
             android:textSize="16dp"
             app:layout_constraintBottom_toTopOf="@+id/tv_next_step"

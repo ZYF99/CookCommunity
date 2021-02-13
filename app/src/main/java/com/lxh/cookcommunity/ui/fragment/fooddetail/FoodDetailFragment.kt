@@ -1,6 +1,7 @@
 package com.lxh.cookcommunity.ui.fragment.fooddetail
 
 import android.content.Context
+import android.view.View
 import androidx.core.os.bundleOf
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentFoodDetailBinding
@@ -11,6 +12,7 @@ import com.lxh.cookcommunity.ui.base.BaseFragment
 import com.lxh.cookcommunity.ui.fragment.cookpersonal.jumpToCookPersonal
 import com.lxh.cookcommunity.ui.fragment.studyvideo.jumpToStudyVideo
 import com.lxh.cookcommunity.util.fromJson
+import com.lxh.cookcommunity.util.showToast
 import com.lxh.cookcommunity.util.toJson
 
 const val KEY_FOOD_DETAIL = "key_food_detail"
@@ -20,8 +22,7 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
 ) {
 
     override fun initView() {
-        viewModel.foodMutableLiveData.value =
-            globalMoshi.fromJson(arguments?.getString(KEY_FOOD_DETAIL))
+        viewModel.foodMutableLiveData.value = globalMoshi.fromJson(arguments?.getString(KEY_FOOD_DETAIL))
 
         binding.tvStartCook.setOnClickListener {
             context?.jumpToStudyVideo(viewModel.foodMutableLiveData.value)
@@ -31,10 +32,20 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
             context?.jumpToCookPersonal(viewModel.foodMutableLiveData.value?.chefProfile)
         }
 
+        binding.tvCollection.setOnClickListener {
+            viewModel.collectFood{
+                binding.tvCollection.visibility = View.GONE
+                showToast("收藏成功")
+            }
+        }
+
     }
 
     override fun initData() {
-        viewModel.fetchBannerList()
+        viewModel.checkCollect {
+            binding.tvCollection.visibility = View.GONE
+        }
+        viewModel.bannerListMutableLiveData.postValue(listOf(viewModel.foodMutableLiveData.value?.image?:""))
     }
 
     override fun initDataObServer() {

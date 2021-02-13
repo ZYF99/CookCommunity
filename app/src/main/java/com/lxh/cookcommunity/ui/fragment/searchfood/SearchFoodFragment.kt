@@ -16,7 +16,7 @@ class SearchFoodFragment : CommonListFragment<Food, SearchFoodViewModel, ItemFoo
     classify = "moment",
     itemLayoutRes = R.layout.item_food,
     viewModelClazz = SearchFoodViewModel::class.java,
-    canRefresh = true,
+    canRefresh = false,
     canSearch = true
 ) {
 

@@ -21,15 +21,13 @@ class CookPersonalFragment : BaseFragment<FragmentCookPersonalBinding, CookPerso
     CookPersonalViewModel::class.java, layoutRes = R.layout.fragment_cook_personal
 ) {
 
-
     override fun initView() {
-        viewModel.cookMutableLiveData.value =
-            globalMoshi.fromJson(arguments?.getString(KEY_COOK_PERSONAL))
+        viewModel.cookMutableLiveData.value = globalMoshi.fromJson(arguments?.getString(KEY_COOK_PERSONAL))
     }
 
 
     override fun initData() {
-
+        viewModel.fetchChefFans()
     }
 
     override fun initDataObServer() {
@@ -37,6 +35,9 @@ class CookPersonalFragment : BaseFragment<FragmentCookPersonalBinding, CookPerso
             binding.rvCourse.adapter = CourseListAdapter(it.courseList) {course->
                 DialogUtil.showPurchaseDialog(requireContext(), course.price ?: 0f)
             }
+        }
+        viewModel.fansNumMutableLiveData.observeNonNull {
+            binding.tvFansNum.text = "粉丝数：$it"
         }
     }
 

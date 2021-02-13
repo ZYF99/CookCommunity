@@ -110,7 +110,7 @@ abstract class CommonListFragment<Bean, VM : CommonListViewModel<Bean>, ItemBind
     }
 
     override fun initData() {
-        if (isFirstInit) {
+        if (isFirstInit && !canSearch) {
             viewModel.refreshList()
             isFirstInit = false
         }

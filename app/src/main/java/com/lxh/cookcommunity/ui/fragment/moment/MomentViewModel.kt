@@ -26,8 +26,8 @@ class MomentViewModel(application: Application) : CommonListViewModel<MomentCont
         }
 
     //搜索动态列表
-    override val searchFunction: (Int, Int) -> Single<ResultModel<CommonListPageModel<MomentContent>>> =
-        { wes, we ->
+    override val searchFunction: (String,Int, Int) -> Single<ResultModel<CommonListPageModel<MomentContent>>> =
+        { s,wes, we ->
             apiService.searchMomentList("1", 1, 1)
                 .doOnSubscribe {
 

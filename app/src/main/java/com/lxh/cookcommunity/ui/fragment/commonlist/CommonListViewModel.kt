@@ -18,7 +18,7 @@ abstract class CommonListViewModel<T>(application: Application) : BaseViewModel(
 
     abstract val refreshFunction: (Int?, Int?) -> Single<ResultModel<CommonListPageModel<T>>>
 
-    abstract val searchFunction: ((Int, Int) -> Single<ResultModel<CommonListPageModel<T>>>)
+    abstract val searchFunction: ((String,Int, Int) -> Single<ResultModel<CommonListPageModel<T>>>)
 
     //刷新列表
     fun refreshList() {
@@ -37,7 +37,7 @@ abstract class CommonListViewModel<T>(application: Application) : BaseViewModel(
 
     //搜索列表
     fun search(key: String) {
-        searchFunction.invoke(1, 10)
+        searchFunction.invoke(key,1, 10)
             .switchThread()
             .catchApiError()
             .retry()

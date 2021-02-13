@@ -181,7 +181,7 @@
                             app:layout_constraintTop_toTopOf="parent">
 
                             <TextView
-                                android:id="@+id/tv_work"
+                                android:id="@+id/tv_fans"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
@@ -205,7 +205,7 @@
                                 android:background="@color/colorWhite" />
 
                             <TextView
-                                android:id="@+id/tv_content"
+                                android:id="@+id/tv_attention"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"

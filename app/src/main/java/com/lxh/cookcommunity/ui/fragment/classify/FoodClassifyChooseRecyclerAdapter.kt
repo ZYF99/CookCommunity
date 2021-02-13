@@ -5,7 +5,8 @@ import com.lxh.cookcommunity.databinding.ItemChooseClassifyBinding
 import com.lxh.cookcommunity.ui.adapter.BaseRecyclerAdapter
 
 class FoodClassifyChooseRecyclerAdapter(
-    list: List<ChooseClassify>?
+    list: List<ChooseClassify>?,
+    val onCellClick:(String?)->Unit
 ) : BaseRecyclerAdapter<ChooseClassify, ItemChooseClassifyBinding>(
     R.layout.item_choose_classify,
     null
@@ -29,6 +30,7 @@ class FoodClassifyChooseRecyclerAdapter(
                 selectedClassify = null
                 notifyDataSetChanged()
             }
+            onCellClick(selectedClassify)
         }
     }
 

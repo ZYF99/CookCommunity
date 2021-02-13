@@ -28,25 +28,28 @@ class StudyVideoFragment : BaseFragment<FragmentStudyVideoBinding, StudyVideoVie
         val foodJson = arguments?.getString(KEY_FOOD_DETAIL)
         if (foodJson?.isNotEmpty() == true) food = globalMoshi.fromJson(foodJson)
 
-        //当前页面序号置为0
-        viewModel.currentPageMutableLiveData.value = 0
-
     }
 
     override fun initData() {
-
+        //拉取所有视频信息
+        viewModel.fetchFoodStudyVideo(food?.id)
     }
 
 
     override fun initDataObServer() {
-        viewModel.currentPageMutableLiveData.observeNonNull { currentPage ->
 
+        viewModel.StudyModelMutableLiveData.observeNonNull {
+            //当前页面序号置为0
+            viewModel.currentPageMutableLiveData.value = 0
+        }
+
+        viewModel.currentPageMutableLiveData.observeNonNull { currentPage ->
             binding.tvStep.text = "第${currentPage + 1}步"
 
             //当前页面的视频信息
-            viewModel.foodVideoMutableLiveData.value = food?.foodVideoList?.get(currentPage)
+            viewModel.foodVideoMutableLiveData.value = viewModel.StudyModelMutableLiveData.value?.curriculumRspList?.get(currentPage+1)
 
-            if (((food?.foodVideoList?.size ?: 0) - 1) == currentPage) {
+            if (((viewModel.StudyModelMutableLiveData.value?.curriculumRspList?.size ?: 0) - 1) == (currentPage+1)) {
                 //是最后一页了
                 binding.tvNextStep.apply {
                     text = "学习完成"
@@ -64,13 +67,12 @@ class StudyVideoFragment : BaseFragment<FragmentStudyVideoBinding, StudyVideoVie
                     }
                 }
             }
-
         }
 
         viewModel.foodVideoMutableLiveData.observeNonNull {
             binding.videoPlayer.apply {
                 setUp(
-                    viewModel.foodVideoMutableLiveData.value?.videoUrl,
+                    viewModel.foodVideoMutableLiveData.value?.url,
                     JCVideoPlayerStandard.SCREEN_LAYOUT_NORMAL,
                     viewModel.foodVideoMutableLiveData.value?.name
                 )

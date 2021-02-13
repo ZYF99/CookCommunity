@@ -19,10 +19,9 @@ class SearchFoodViewModel(application: Application) : CommonListViewModel<Food>(
 
         }
 
-
-    override val searchFunction: (Int?, Int?) -> Single<ResultModel<CommonListPageModel<Food>>> =
-        { pageNo, pageSize ->
-            apiService.searchFoodList("1", 1, 1)
+    override val searchFunction: (String?,Int?, Int?) -> Single<ResultModel<CommonListPageModel<Food>>> =
+        { foodName,pageNo, pageSize ->
+            apiService.searchFoodList(foodName,1,1000)
         }
 
 

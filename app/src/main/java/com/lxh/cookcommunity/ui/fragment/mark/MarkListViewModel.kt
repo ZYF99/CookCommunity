@@ -20,8 +20,8 @@ class MarkListViewModel(application: Application) : CommonListViewModel<Goods>(a
         }
 
     //搜索动态列表
-    override val searchFunction: (Int, Int) -> Single<ResultModel<CommonListPageModel<Goods>>> =
-        {  wes, we ->
+    override val searchFunction: (String,Int, Int) -> Single<ResultModel<CommonListPageModel<Goods>>> =
+        {  s,wes, we ->
             apiService.searchGoodsList(1, 1)
                 .doOnSubscribe {
 

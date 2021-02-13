@@ -68,6 +68,11 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
     }
 
     override fun initDataObServer() {
+
+        viewModel.fansNumMutableLiveData.observeNonNull {
+            binding.tvAttention.text = "关注：$it"
+        }
+
         viewModel.commonListPageModelLiveData.observeNonNull {
             (binding.rvMyMoment.adapter as MomentRecyclerAdapter).replaceData(it.dataList)
         }
@@ -90,6 +95,7 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
     override fun initData() {
         viewModel.fetchUserProfileAndRecentMoments()
+        viewModel.fetchMineFansNum()
     }
 
     override fun onResume() {

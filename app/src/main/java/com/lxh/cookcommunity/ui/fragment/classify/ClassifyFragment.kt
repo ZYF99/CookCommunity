@@ -26,20 +26,21 @@ class ClassifyFragment : BaseFragment<FragmentClassifyBinding, ClassifyViewModel
 
     override fun initView() {
         binding.rvChooseTime.apply {
-            layoutManager =
-                LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
+            layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
             adapter = FoodClassifyChooseRecyclerAdapter(
                 listOf(
                     ChooseClassify(name = "早"),
                     ChooseClassify(name = "中"),
                     ChooseClassify(name = "晚")
                 )
-            )
+            ){
+                viewModel.timeMutableLiveData.value = it
+                viewModel.fetchFoodList()
+            }
         }
 
         binding.rvChooseCuisine.apply {
-            layoutManager =
-                LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
+            layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
             adapter = FoodClassifyChooseRecyclerAdapter(
                 listOf(
                     ChooseClassify(name = "川"),
@@ -51,19 +52,24 @@ class ClassifyFragment : BaseFragment<FragmentClassifyBinding, ClassifyViewModel
                     ChooseClassify(name = "湘"),
                     ChooseClassify(name = "徽")
                 )
-            )
+            ){
+                viewModel.groupMutableLiveData.value = it
+                viewModel.fetchFoodList()
+            }
         }
 
         binding.rvChooseType.apply {
-            layoutManager =
-                LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
+            layoutManager = LinearLayoutManager(context).apply { orientation = LinearLayoutManager.HORIZONTAL }
             adapter = FoodClassifyChooseRecyclerAdapter(
                 listOf(
                     ChooseClassify(name = "面"),
                     ChooseClassify(name = "汤"),
                     ChooseClassify(name = "炒菜")
                 )
-            )
+            ){
+                viewModel.typeMutableLiveData.value = it
+                viewModel.fetchFoodList()
+            }
         }
 
         binding.rvFood.apply {

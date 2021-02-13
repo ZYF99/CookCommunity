@@ -19,6 +19,8 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
     var isLoadingMore = MutableLiveData(false)
     var commonListPageModelLiveData = MutableLiveData<CommonListPageModel<MomentContent>>()
     val changedMomentMutableLiveData = MutableLiveData<Pair<Int, MomentContent?>>()
+    val fansNumMutableLiveData = MutableLiveData<Int>()
+
 
     //点赞
     fun like(index: Int, id: Long?) {
@@ -41,13 +43,23 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
                 userProfileMutableLiveData.postValue(it.data)
                 //拉取最近的动态
                 apiService.refreshMomentList(pageNo = 1, uid = it.data?.uid)
-            }            .switchThread()
+            }.switchThread()
             .catchApiError()
             .retry()
             .doOnSuccess {
                 commonListPageModelLiveData.postValue(it.data)
             }
             .bindLife()
+    }
+
+    //拉取个人粉丝数
+    fun fetchMineFansNum() {
+        apiService.fetchMineFansNum()
+            .switchThread()
+            .catchApiError()
+            .doOnSuccess {
+                fansNumMutableLiveData.postValue(it.data?.followNum)
+            }.bindLife()
     }
 
     //加载更多
