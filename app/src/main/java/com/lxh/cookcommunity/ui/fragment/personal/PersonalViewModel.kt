@@ -19,7 +19,9 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
     var isLoadingMore = MutableLiveData(false)
     var commonListPageModelLiveData = MutableLiveData<CommonListPageModel<MomentContent>>()
     val changedMomentMutableLiveData = MutableLiveData<Pair<Int, MomentContent?>>()
+
     val fansNumMutableLiveData = MutableLiveData<Int>()
+    val attentionNumMutableLiveData = MutableLiveData<Int>()
 
 
     //点赞
@@ -52,13 +54,23 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
             .bindLife()
     }
 
-    //拉取个人粉丝数
-    fun fetchMineFansNum() {
+    //拉取我关注的人数
+    fun fetchMyFollowNum() {
+        apiService.fetchMyAttentionNum()
+            .switchThread()
+            .catchApiError()
+            .doOnSuccess {
+                attentionNumMutableLiveData.postValue(it.data?.collectNum)
+            }.bindLife()
+    }
+
+    //拉取我的粉丝人数
+    fun fetchMyFansNum() {
         apiService.fetchMineFansNum()
             .switchThread()
             .catchApiError()
             .doOnSuccess {
-                fansNumMutableLiveData.postValue(it.data?.followNum)
+                fansNumMutableLiveData.postValue(it.data?.collectNum)
             }.bindLife()
     }
 

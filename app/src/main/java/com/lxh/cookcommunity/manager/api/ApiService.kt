@@ -2,16 +2,13 @@ package com.lxh.cookcommunity.manager.api
 
 import com.lxh.cookcommunity.manager.api.base.ResultModel
 import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
-import com.lxh.cookcommunity.model.api.ChefFansModel
-import com.lxh.cookcommunity.model.api.CollectFoodRequestModel
-import com.lxh.cookcommunity.model.api.UploadFileResultModel
+import com.lxh.cookcommunity.model.api.*
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
 import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
 import com.lxh.cookcommunity.model.api.goods.Goods
 import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.login.RegisterRequestModel
-import com.lxh.cookcommunity.model.api.UserProfileModel
 import com.lxh.cookcommunity.model.api.moments.CommentMomentRequestModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.model.api.moments.ReleaseMomentRequestModel
@@ -88,17 +85,17 @@ interface ApiService {
         @Query("courseId") courseId: Long?
     ): Single<ResultModel<StudyVideoModel>>
 
-    /*收藏食物*/
+    /*收藏 食物\人\厨师 */
     @POST("api/collect")
-    fun collectFood(
-        @Body collectFoodRequestModel: CollectFoodRequestModel? = null
+    fun collect(
+        @Body collectRequestModel: CollectRequestModel? = null
     ): Single<ResponseBody>
 
-    /*查询食物是否收藏*/
+    /*查询是否已收藏 食物\人\厨师*/
     @POST("api/collect/check")
-    fun checkFoodCollect(
-        @Body collectFoodRequestModel: CollectFoodRequestModel? = null
-    ): Single<ResponseBody>
+    fun checkCollect(
+        @Body collectFoodRequestModel: CollectRequestModel? = null
+    ): Single<ResultModel<CheckCollectResultModel>>
 
     /*拉取厨子粉丝数*/
     @GET("api/collect/chef")
@@ -107,8 +104,16 @@ interface ApiService {
     ): Single<ResultModel<ChefFansModel>>
 
     /*拉取自己的粉丝数*/
-    @GET("api/collect/count?type=COLLECT")
-    fun fetchMineFansNum(): Single<ResultModel<ChefFansModel>>
+    @GET("api/collect/count?type=FOLLOW")
+    fun fetchMineFansNum(): Single<ResultModel<UserFansModel>>
+
+    /*拉取我关注的人数*/
+    @GET("api/collect/count?type=ATTENTION")
+    fun fetchMyAttentionNum(): Single<ResultModel<UserFansModel>>
+
+    /*拉取某用户的粉丝数 TODO*/
+    @GET("todo")
+    fun fetchUserFansNum(): Single<ResultModel<UserFansModel>>
 
     /***********************************************动态********************************************/
 
@@ -156,9 +161,10 @@ interface ApiService {
     /**********************************************商品********************************************/
 
     /*刷新商品列表*/
-    @GET("get")
+    @GET("api/goods")
     fun refreshGoodsList(
-        @Query("pageNo") pageNo: Int?,
+        @Query("type") type:String?,
+        @Query("pageNo") pageNo: Int?=null,
         @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<Goods>>>
 

@@ -13,10 +13,12 @@ class MarkListViewModel(application: Application) : CommonListViewModel<Goods>(a
 
     val apiService by instance<ApiService>()
 
+    var type:String = ""
+
     //刷新动态列表
     override val refreshFunction: (Int?, Int?) -> Single<ResultModel<CommonListPageModel<Goods>>> =
         {  wes, we ->
-            apiService.refreshGoodsList(1)
+            apiService.refreshGoodsList(type)
         }
 
     //搜索动态列表

@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentMomentDetailBinding
 import com.lxh.cookcommunity.manager.api.base.globalMoshi
+import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.activity.ContentActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
@@ -67,7 +68,8 @@ class MomentDetailFragment : BaseFragment<FragmentMomentDetailBinding, MomentDet
             )
 
             binding.ivAvatar.setOnClickListener {
-                context?.jumpToPersonPersonal(viewModel.momentMutableLiveData.value?.profile)
+                if (SharedPrefModel.nowUserId != viewModel.momentMutableLiveData.value?.profile?.uid)
+                    context?.jumpToPersonPersonal(viewModel.momentMutableLiveData.value?.profile)
             }
 
         }

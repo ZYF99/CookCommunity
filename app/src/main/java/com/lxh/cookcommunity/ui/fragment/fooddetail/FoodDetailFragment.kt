@@ -43,7 +43,7 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
 
     override fun initData() {
         viewModel.checkCollect {
-            binding.tvCollection.visibility = View.GONE
+            binding.tvCollection.visibility = if(it)View.GONE else View.VISIBLE
         }
         viewModel.bannerListMutableLiveData.postValue(listOf(viewModel.foodMutableLiveData.value?.image?:""))
     }

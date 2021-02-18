@@ -69,8 +69,12 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
     override fun initDataObServer() {
 
-        viewModel.fansNumMutableLiveData.observeNonNull {
+        viewModel.attentionNumMutableLiveData.observeNonNull {
             binding.tvAttention.text = "关注：$it"
+        }
+
+        viewModel.fansNumMutableLiveData.observeNonNull {
+            binding.tvFans.text = "粉丝：$it"
         }
 
         viewModel.commonListPageModelLiveData.observeNonNull {
@@ -95,7 +99,8 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
 
     override fun initData() {
         viewModel.fetchUserProfileAndRecentMoments()
-        viewModel.fetchMineFansNum()
+        viewModel.fetchMyFollowNum()
+        viewModel.fetchMyFansNum()
     }
 
     override fun onResume() {
@@ -105,6 +110,9 @@ class PersonalFragment : BaseFragment<FragmentPersonalBinding, PersonalViewModel
         activity?.let { fullScreen(it) }
         if (userInfoHasChanged) {
             viewModel.fetchUserProfileAndRecentMoments()
+        }
+        if(binding.rvMyMoment.adapter!=null){
+            initData()
         }
     }
 

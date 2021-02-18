@@ -3,6 +3,7 @@ package com.lxh.cookcommunity.ui.fragment.moment
 import androidx.activity.ComponentActivity
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.ItemMomentBinding
+import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
 import com.lxh.cookcommunity.model.api.moments.MomentContent
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListFragment
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListRecyclerAdapter
@@ -26,7 +27,8 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
                 context?.jumpToMomentDetail(it)
             },
             onHeaderClick = {
-                context?.jumpToPersonPersonal(it)
+                if (it?.uid != SharedPrefModel.nowUserId)
+                   context?.jumpToPersonPersonal(it)
             },
             onLikeClick = { momentContent, i ->
                 viewModel.like(i, momentContent?.mid)
@@ -41,7 +43,7 @@ class MomentFragment : CommonListFragment<MomentContent, MomentViewModel, ItemMo
         super.initDataObServer()
         viewModel.changedMomentMutableLiveData.observeNonNull { changedMomentPair ->
             val newList = viewModel.commonListPageModelLiveData.value?.dataList?.mapIndexedNotNull { index, momentContent ->
-                if(index == changedMomentPair.first) changedMomentPair.second
+                if (index == changedMomentPair.first) changedMomentPair.second
                 else momentContent
             }
             viewModel.commonListPageModelLiveData.postValue(

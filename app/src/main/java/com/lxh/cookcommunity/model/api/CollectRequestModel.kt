@@ -1,6 +1,6 @@
 package com.lxh.cookcommunity.model.api
 
-data class CollectFoodRequestModel(
+data class CollectRequestModel(
     val type: String? = "COLLECT",
     val data: Long? = null
 )

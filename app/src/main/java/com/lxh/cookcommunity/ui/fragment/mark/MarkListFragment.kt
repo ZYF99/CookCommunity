@@ -9,7 +9,7 @@ import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListFragment
 import com.lxh.cookcommunity.ui.fragment.commonlist.CommonListRecyclerAdapter
 import com.lxh.cookcommunity.ui.fragment.goodsdetail.jumpToGoodsDetail
 
-class MarkListFragment(type: String) :
+class MarkListFragment(val type: String) :
     CommonListFragment<Goods, MarkListViewModel, ItemGoodsBinding>(
         classify = type,
         itemLayoutRes = R.layout.item_goods,
@@ -28,7 +28,7 @@ class MarkListFragment(type: String) :
 
     override fun initView() {
         super.initView()
-
+        viewModel.type = type
     }
 
     override fun initData() {

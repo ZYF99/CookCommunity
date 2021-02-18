@@ -3,6 +3,7 @@ package com.lxh.cookcommunity.ui.fragment.personpersonal
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lxh.cookcommunity.manager.api.ApiService
+import com.lxh.cookcommunity.model.api.CollectRequestModel
 import com.lxh.cookcommunity.model.api.UserProfileModel
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
 import com.lxh.cookcommunity.model.api.moments.COMMENT_FAVOR
@@ -20,6 +21,23 @@ class PersonPersonalViewModel(application: Application) : BaseViewModel(applicat
     var personProfileLiveData = MutableLiveData<UserProfileModel>()
     val changedMomentMutableLiveData = MutableLiveData<Pair<Int, MomentContent?>>()
 
+    //拉取粉丝
+    fun fetchFansNum(action:(Int)->Unit){
+        apiService.fetchUserFansNum()
+            .doOnApiSuccess {
+                action(it.data?.collectNum?:0)
+            }
+    }
+
+    //关注
+    fun follow(action:()->Unit) {
+        apiService.collect(
+            CollectRequestModel(type = "ATTENTION",data = personProfileLiveData.value?.uid)
+        ).doOnApiSuccess {
+            action()
+        }
+    }
+
     //点赞
     fun like(index: Int, id: Long?) {
         apiService.pushCommentOrLike(
@@ -32,6 +50,14 @@ class PersonPersonalViewModel(application: Application) : BaseViewModel(applicat
         ).doOnApiSuccess {
             changedMomentMutableLiveData.postValue(Pair(index, it.data))
         }
+    }
+
+    //查看是否已关注
+    fun checkIfFollow(action:(Boolean)->Unit){
+        apiService.checkCollect(CollectRequestModel(type = "ATTENTION",data = personProfileLiveData.value?.uid))
+            .doOnApiSuccess {
+                action(it.data?.hasCollect?:false)
+            }
     }
 
     //拉取最近的动态

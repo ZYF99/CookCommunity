@@ -23,8 +23,7 @@ class PersonPersonalFragment : BaseFragment<FragmentPersonPersonalBinding, Perso
 ) {
 
     override fun initView() {
-        viewModel.personProfileLiveData.value =
-            globalMoshi.fromJson(arguments?.getString("personProfile"))
+        viewModel.personProfileLiveData.value = globalMoshi.fromJson(arguments?.getString("personProfile"))
 
         binding.rvRecentMoment.adapter = MomentRecyclerAdapter(
             activity as ComponentActivity,
@@ -63,11 +62,24 @@ class PersonPersonalFragment : BaseFragment<FragmentPersonPersonalBinding, Perso
             }
         })
 
+        //关注
+        binding.tvFollow.setOnClickListener {
+            viewModel.follow {
+                binding.tvFollow.visibility = View.GONE
+            }
+        }
+
     }
 
 
     override fun initData() {
         viewModel.fetchRecentMoments()
+        viewModel.fetchFansNum{
+            binding.tvFollowNum.text = "粉丝：$it"
+        }
+        viewModel.checkIfFollow{followed ->
+            binding.tvFollow.visibility = if(followed)View.GONE else View.VISIBLE
+        }
     }
 
     override fun initDataObServer() {
