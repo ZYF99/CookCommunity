@@ -28,6 +28,7 @@ class CookPersonalFragment : BaseFragment<FragmentCookPersonalBinding, CookPerso
 
     override fun initData() {
         viewModel.fetchChefFans()
+        viewModel.fetchChefCourse()
     }
 
     override fun initDataObServer() {

@@ -47,7 +47,7 @@
                     android:layout_width="72dp"
                     android:layout_height="72dp"
                     android:layout_margin="16dp"
-                    android:src="@drawable/logo"
+                    imageUrl="@{course.image}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -60,7 +60,7 @@
                     android:layout_marginEnd="8dp"
                     android:gravity="center_vertical"
                     android:lineSpacingExtra="8dp"
-                    android:text="@{course.brief}"
+                    android:text="@{course.description}"
                     tools:text="课程1主要是针对傻逼开设的课程，傻逼学了此课程后智商可以提高250"
                     android:textColor="@color/colorGrey_656565"
                     android:textSize="10dp"

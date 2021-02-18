@@ -16,7 +16,18 @@ class CookPersonalViewModel(application: Application) : BaseViewModel(applicatio
 
     val apiService by instance<ApiService>()
 
-    fun fetchChefFans(){
+    fun fetchChefCourse() {
+        apiService.fetchChefCourse(cookMutableLiveData.value?.uid)
+            .doOnApiSuccess {
+                cookMutableLiveData.postValue(
+                    cookMutableLiveData.value?.copy(
+                        courseList = it.data?.courseList
+                    )
+                )
+            }
+    }
+
+    fun fetchChefFans() {
         apiService.fetchChefFans(cookMutableLiveData.value?.uid)
             .doOnApiSuccess {
                 fansNumMutableLiveData.postValue(it.data?.followNum)

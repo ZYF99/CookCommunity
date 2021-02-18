@@ -4,6 +4,7 @@ import com.lxh.cookcommunity.manager.api.base.ResultModel
 import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
 import com.lxh.cookcommunity.model.api.*
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
+import com.lxh.cookcommunity.model.api.cook.Course
 import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
 import com.lxh.cookcommunity.model.api.goods.Goods
 import com.lxh.cookcommunity.model.api.home.BannerModel
@@ -107,6 +108,12 @@ interface ApiService {
     fun fetchChefFans(
         @Query("chefId")chefId:Long?=null
     ): Single<ResultModel<ChefFansModel>>
+
+    /*拉取厨子课程*/
+    @GET("api/goods/course")
+    fun fetchChefCourse(
+        @Query("chefId")chefId:Long?=null
+    ): Single<ResultModel<CourseResultModel>>
 
     /*拉取自己的粉丝数*/
     @GET("api/collect/count?type=FOLLOW")
