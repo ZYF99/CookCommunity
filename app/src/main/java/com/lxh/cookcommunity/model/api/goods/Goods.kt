@@ -3,11 +3,12 @@ package com.lxh.cookcommunity.model.api.goods
 data class Goods(
     val id: Long? = null,
     val name: String? = null,
+    val type: String? = null, //"tableware","eat"
     val brief: String? = null,
     val poster: String? = null,
     val images: List<String>? = null,
     val price: Float? = null
-){
+) {
 
     override fun hashCode(): Int {
         var result = id?.hashCode() ?: 0
@@ -15,8 +16,11 @@ data class Goods(
         result = 31 * result + (brief?.hashCode() ?: 0)
         result = 31 * result + (poster?.hashCode() ?: 0)
         result = 31 * result + (images?.hashCode() ?: 0)
+        result = 31 * result + (type?.hashCode() ?: 0)
         result = 31 * result + (price?.hashCode() ?: 0)
         return result
+
+
     }
 
     override fun equals(other: Any?): Boolean {
@@ -30,6 +34,7 @@ data class Goods(
         if (brief != other.brief) return false
         if (poster != other.poster) return false
         if (images != other.images) return false
+        if (type != other.type) return false
         if (price != other.price) return false
 
         return true

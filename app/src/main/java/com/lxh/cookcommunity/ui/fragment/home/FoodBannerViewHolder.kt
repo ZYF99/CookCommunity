@@ -6,11 +6,10 @@ import android.view.View
 import androidx.databinding.DataBindingUtil
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.ItemFoodBannerBinding
-import com.lxh.cookcommunity.model.api.home.FoodBannerModel
-import com.lxh.cookcommunity.model.api.home.Food
+import com.lxh.cookcommunity.model.api.home.BannerModel
 import com.zhouwei.mzbanner.holder.MZViewHolder
 
-class FoodBannerViewHolder : MZViewHolder<FoodBannerModel> {
+class FoodBannerViewHolder : MZViewHolder<BannerModel> {
 
     private lateinit var photographyBinding: ItemFoodBannerBinding
 
@@ -25,7 +24,7 @@ class FoodBannerViewHolder : MZViewHolder<FoodBannerModel> {
         return photographyBinding.root
     }
 
-    override fun onBind(p0: Context?, p1: Int, data: FoodBannerModel?) {
+    override fun onBind(p0: Context?, p1: Int, data: BannerModel?) {
         // 数据绑定
         photographyBinding.foodBannerModel = data
     }

@@ -6,6 +6,7 @@ import com.lxh.cookcommunity.model.api.*
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
 import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
 import com.lxh.cookcommunity.model.api.goods.Goods
+import com.lxh.cookcommunity.model.api.home.BannerModel
 import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.login.RegisterRequestModel
@@ -46,6 +47,10 @@ interface ApiService {
     ): Single<ResponseBody>
 
     /*************************************************食物******************************************/
+
+    /*刷新首页banner列表*/
+    @GET("api/goods/banner")
+    fun refreshBanner(): Single<ResultModel<BannerResultModel>>
 
     /*刷新首页食物列表*/
     @GET("api/dishes/recommend")
