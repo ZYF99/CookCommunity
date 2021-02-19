@@ -54,7 +54,7 @@ class CookPersonalFragment : BaseFragment<FragmentCookPersonalBinding, CookPerso
 
 }
 
-fun Context.jumpToCookPersonal(chef: Chef?) {
+fun Context.jumpToChefPersonal(chef: Chef?) {
     val intent = ContentActivity.createIntent(
         context = this,
         des = ContentActivity.Destination.CookPersonal,

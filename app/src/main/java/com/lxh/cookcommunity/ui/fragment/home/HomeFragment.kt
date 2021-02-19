@@ -5,7 +5,9 @@ import com.lxh.cookcommunity.databinding.FragmentHomeBinding
 import com.lxh.cookcommunity.ui.base.BaseFragment
 import com.lxh.cookcommunity.ui.fragment.camerasearch.jumpToCameraSearch
 import com.lxh.cookcommunity.ui.fragment.classify.jumpToClassify
+import com.lxh.cookcommunity.ui.fragment.cookpersonal.jumpToChefPersonal
 import com.lxh.cookcommunity.ui.fragment.fooddetail.jumpToFoodDetail
+import com.lxh.cookcommunity.ui.fragment.goodsdetail.jumpToGoodsDetail
 import com.lxh.cookcommunity.ui.fragment.searchfood.jumpToSearchFood
 
 class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
@@ -23,8 +25,27 @@ class HomeFragment : BaseFragment<FragmentHomeBinding, HomeViewModel>(
 
         //轮播图
         binding.banner.setBannerPageClickListener { _, position ->
-            if (viewModel.bannerListMutableLiveData.value?.isNotEmpty() == true) {
-
+            val clickBannerItem = viewModel.bannerListMutableLiveData.value?.get(position)
+            when (clickBannerItem?.type) {
+                "shop" -> {
+                    viewModel.fetchGoodDetail(clickBannerItem.jump?.toLongOrNull()){
+                        //跳转到商品详情界面
+                        context?.jumpToGoodsDetail(it)
+                    }
+                }
+                "food" -> {
+                    //跳转到菜品详情界面
+                    viewModel.fetchFoodDetail(clickBannerItem.jump?.toLongOrNull()){
+                        //跳转到商品详情界面
+                        context?.jumpToFoodDetail(it)
+                    }
+                }
+                "chef" -> {
+                    viewModel.fetchChefDetail(clickBannerItem.jump?.toLongOrNull()){
+                        //跳转到厨师个人界面
+                        context?.jumpToChefPersonal(it)
+                    }
+                }
             }
         }
 

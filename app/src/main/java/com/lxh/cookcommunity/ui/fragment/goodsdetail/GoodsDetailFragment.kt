@@ -43,7 +43,7 @@ class GoodsDetailFragment : BaseFragment<FragmentGoodsDetailBinding, GoodsDetail
 
 }
 
-fun Context.jumpToGoodsDetail(goods: Goods) {
+fun Context.jumpToGoodsDetail(goods: Goods?) {
     val intent = ContentActivity.createIntent(
         context = this,
         des = ContentActivity.Destination.GoodsDetail,

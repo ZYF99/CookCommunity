@@ -9,7 +9,7 @@ import com.lxh.cookcommunity.manager.api.base.globalMoshi
 import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.ui.activity.ContentActivity
 import com.lxh.cookcommunity.ui.base.BaseFragment
-import com.lxh.cookcommunity.ui.fragment.cookpersonal.jumpToCookPersonal
+import com.lxh.cookcommunity.ui.fragment.cookpersonal.jumpToChefPersonal
 import com.lxh.cookcommunity.ui.fragment.studyvideo.jumpToStudyVideo
 import com.lxh.cookcommunity.util.fromJson
 import com.lxh.cookcommunity.util.showToast
@@ -29,7 +29,7 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
         }
 
         binding.tvPersonal.setOnClickListener {
-            context?.jumpToCookPersonal(viewModel.foodMutableLiveData.value?.chefProfile)
+            context?.jumpToChefPersonal(viewModel.foodMutableLiveData.value?.chefProfile)
         }
 
         binding.tvCollection.setOnClickListener {
@@ -61,7 +61,7 @@ class FoodDetailFragment : BaseFragment<FragmentFoodDetailBinding, FoodDetailVie
     }
 }
 
-    fun Context.jumpToFoodDetail(food: Food) {
+    fun Context.jumpToFoodDetail(food: Food?) {
         val intent = ContentActivity.createIntent(
             context = this,
             des = ContentActivity.Destination.FoodDetail,

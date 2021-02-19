@@ -4,11 +4,14 @@ import com.lxh.cookcommunity.manager.api.base.ResultModel
 import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
 import com.lxh.cookcommunity.model.api.*
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
+import com.lxh.cookcommunity.model.api.cook.ChefResultModel
 import com.lxh.cookcommunity.model.api.cook.Course
 import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
 import com.lxh.cookcommunity.model.api.goods.Goods
+import com.lxh.cookcommunity.model.api.goods.GoodsResultModel
 import com.lxh.cookcommunity.model.api.home.BannerModel
 import com.lxh.cookcommunity.model.api.home.Food
+import com.lxh.cookcommunity.model.api.home.FoodResultModel
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.login.RegisterRequestModel
 import com.lxh.cookcommunity.model.api.moments.CommentMomentRequestModel
@@ -67,6 +70,12 @@ interface ApiService {
         @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<Food>>>
 
+    /*拉取单个菜品*/
+    @GET("api/dishes/one")
+    fun fetchFoodDetail(
+        @Query("id") id: Long?
+    ): Single<ResultModel<FoodResultModel>>
+
     /*分类筛选*/
     @GET("api/dishes/filter")
     fun filterFood(
@@ -102,6 +111,13 @@ interface ApiService {
     fun checkCollect(
         @Body collectFoodRequestModel: CollectRequestModel? = null
     ): Single<ResultModel<CheckCollectResultModel>>
+
+    /*拉取单个厨子*/
+    @GET("api/chef/one")
+    fun fetchChefDetail(
+        @Query("id") id: Long?
+    ): Single<ResultModel<ChefResultModel>>
+
 
     /*拉取厨子的粉丝数*/
     @GET("api/collect/count?type=ATTENTION&reverse=true")
@@ -173,6 +189,12 @@ interface ApiService {
     ): Single<ResultModel<MomentContent>>
 
     /**********************************************商品********************************************/
+
+    /*拉取单个商品*/
+    @GET("api/goods/one")
+    fun fetchGoodsDetail(
+        @Query("id") id: Long?
+    ): Single<ResultModel<GoodsResultModel>>
 
     /*刷新商品列表*/
     @GET("api/goods")

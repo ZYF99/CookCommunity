@@ -3,6 +3,8 @@ package com.lxh.cookcommunity.ui.fragment.home
 import android.app.Application
 import androidx.lifecycle.MutableLiveData
 import com.lxh.cookcommunity.manager.api.ApiService
+import com.lxh.cookcommunity.model.api.cook.Chef
+import com.lxh.cookcommunity.model.api.goods.Goods
 import com.lxh.cookcommunity.model.api.home.BannerModel
 import com.lxh.cookcommunity.model.api.home.Food
 import com.lxh.cookcommunity.ui.base.BaseViewModel
@@ -38,6 +40,30 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
             .doOnSuccess {
                 foodListMutableLiveData.postValue(it.data?.dataList)
             }.bindLife()
+    }
+
+    //拉取商品详情
+    fun fetchGoodDetail(goodsId: Long?, action: (Goods?) -> Unit) {
+        apiService.fetchGoodsDetail(goodsId)
+            .doOnApiSuccess {
+                action(it.data?.data)
+            }
+    }
+
+    //拉取厨子详情
+    fun fetchChefDetail(chefId: Long?, action: (Chef?) -> Unit) {
+        apiService.fetchChefDetail(chefId)
+            .doOnApiSuccess {
+                action(it.data?.data)
+            }
+    }
+
+    //拉取菜品详情
+    fun fetchFoodDetail(foodId: Long?, action: (Food?) -> Unit) {
+        apiService.fetchFoodDetail(foodId)
+            .doOnApiSuccess {
+                action(it.data?.data)
+            }
     }
 
 }
