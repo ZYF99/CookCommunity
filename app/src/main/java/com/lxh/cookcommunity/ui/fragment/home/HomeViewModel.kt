@@ -19,9 +19,12 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     //拉取轮播图列表
     fun fetchBannerList() {
         apiService.refreshBanner()
-            .doOnApiSuccess {
+            .switchThread()
+            .catchApiError()
+            .doOnSuccess {
                 bannerListMutableLiveData.postValue(it.data?.bannerList)
             }
+            .bindLife()
     }
 
     //拉取菜单列表

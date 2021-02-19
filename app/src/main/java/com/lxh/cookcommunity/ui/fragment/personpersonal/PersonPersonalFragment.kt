@@ -66,6 +66,7 @@ class PersonPersonalFragment : BaseFragment<FragmentPersonPersonalBinding, Perso
         binding.tvFollow.setOnClickListener {
             viewModel.follow {
                 binding.tvFollow.visibility = View.GONE
+                initData()
             }
         }
 

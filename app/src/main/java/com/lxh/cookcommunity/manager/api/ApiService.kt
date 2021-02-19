@@ -70,7 +70,7 @@ interface ApiService {
     /*分类筛选*/
     @GET("api/dishes/filter")
     fun filterFood(
-        @Query("pageNo") pageNo: Int?=1,
+        @Query("pageNo") pageNo: Int? = 1,
         @Query("pageSize") pageSize: Int? = 1000,
         @Query("group") group: String? = null,
         @Query("type") type: String? = null,
@@ -103,29 +103,31 @@ interface ApiService {
         @Body collectFoodRequestModel: CollectRequestModel? = null
     ): Single<ResultModel<CheckCollectResultModel>>
 
-    /*拉取厨子粉丝数*/
-    @GET("api/collect/chef")
+    /*拉取厨子的粉丝数*/
+    @GET("api/collect/count?type=ATTENTION&reverse=true")
     fun fetchChefFans(
-        @Query("chefId")chefId:Long?=null
-    ): Single<ResultModel<ChefFansModel>>
+        @Query("uid") chefId: Long? = null
+    ): Single<ResultModel<UserFansModel>>
 
     /*拉取厨子课程*/
     @GET("api/goods/course")
     fun fetchChefCourse(
-        @Query("chefId")chefId:Long?=null
+        @Query("chefId") chefId: Long? = null
     ): Single<ResultModel<CourseResultModel>>
 
-    /*拉取自己的粉丝数*/
-    @GET("api/collect/count?type=FOLLOW")
-    fun fetchMineFansNum(): Single<ResultModel<UserFansModel>>
-
     /*拉取我关注的人数*/
-    @GET("api/collect/count?type=ATTENTION")
-    fun fetchMyAttentionNum(): Single<ResultModel<UserFansModel>>
+    @GET("api/collect/count?type=FOLLOW&reverse=false")
+    fun fetchMyFollowNum(): Single<ResultModel<UserFansModel>>
 
-    /*拉取某用户的粉丝数 TODO*/
-    @GET("todo")
-    fun fetchUserFansNum(): Single<ResultModel<UserFansModel>>
+    /*拉取自己的粉丝数*/
+    @GET("api/collect/count?type=FOLLOW&reverse=true")
+    fun fetchMyFansNum(): Single<ResultModel<UserFansModel>>
+
+    /*拉取某用户的粉丝数*/
+    @GET("api/collect/count?type=FOLLOW&reverse=true")
+    fun fetchUserFansNum(
+        @Query("uid") uid: Long? = null
+    ): Single<ResultModel<UserFansModel>>
 
     /***********************************************动态********************************************/
 
@@ -175,8 +177,8 @@ interface ApiService {
     /*刷新商品列表*/
     @GET("api/goods")
     fun refreshGoodsList(
-        @Query("type") type:String?,
-        @Query("pageNo") pageNo: Int?=null,
+        @Query("type") type: String?,
+        @Query("pageNo") pageNo: Int? = null,
         @Query("pageSize") pageSize: Int? = 10
     ): Single<ResultModel<CommonListPageModel<Goods>>>
 

@@ -1,6 +1,7 @@
 package com.lxh.cookcommunity.ui.fragment.cookpersonal
 
 import android.content.Context
+import android.view.View
 import androidx.core.os.bundleOf
 import com.lxh.cookcommunity.R
 import com.lxh.cookcommunity.databinding.FragmentCookPersonalBinding
@@ -23,17 +24,26 @@ class CookPersonalFragment : BaseFragment<FragmentCookPersonalBinding, CookPerso
 
     override fun initView() {
         viewModel.cookMutableLiveData.value = globalMoshi.fromJson(arguments?.getString(KEY_COOK_PERSONAL))
+        binding.tvFollow.setOnClickListener {
+            viewModel.follow {
+                binding.tvFollow.visibility = View.GONE
+                initData()
+            }
+        }
     }
 
 
     override fun initData() {
         viewModel.fetchChefFans()
         viewModel.fetchChefCourse()
+        viewModel.checkIfFollow {
+            binding.tvFollow.visibility = if (it) View.GONE else View.VISIBLE
+        }
     }
 
     override fun initDataObServer() {
         viewModel.cookMutableLiveData.observeNonNull {
-            binding.rvCourse.adapter = CourseListAdapter(it.courseList) {course->
+            binding.rvCourse.adapter = CourseListAdapter(it.courseList) { course ->
                 DialogUtil.showPurchaseDialog(requireContext(), course.price ?: 0f)
             }
         }

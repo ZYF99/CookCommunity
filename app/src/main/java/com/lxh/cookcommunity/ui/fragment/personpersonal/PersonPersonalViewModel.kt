@@ -23,7 +23,7 @@ class PersonPersonalViewModel(application: Application) : BaseViewModel(applicat
 
     //拉取粉丝
     fun fetchFansNum(action:(Int)->Unit){
-        apiService.fetchUserFansNum()
+        apiService.fetchUserFansNum(personProfileLiveData.value?.uid)
             .doOnApiSuccess {
                 action(it.data?.collectNum?:0)
             }
@@ -32,7 +32,7 @@ class PersonPersonalViewModel(application: Application) : BaseViewModel(applicat
     //关注
     fun follow(action:()->Unit) {
         apiService.collect(
-            CollectRequestModel(type = "ATTENTION",data = personProfileLiveData.value?.uid)
+            CollectRequestModel(type = "FOLLOW",data = personProfileLiveData.value?.uid)
         ).doOnApiSuccess {
             action()
         }
@@ -54,7 +54,7 @@ class PersonPersonalViewModel(application: Application) : BaseViewModel(applicat
 
     //查看是否已关注
     fun checkIfFollow(action:(Boolean)->Unit){
-        apiService.checkCollect(CollectRequestModel(type = "ATTENTION",data = personProfileLiveData.value?.uid))
+        apiService.checkCollect(CollectRequestModel(type = "FOLLOW",data = personProfileLiveData.value?.uid))
             .doOnApiSuccess {
                 action(it.data?.hasCollect?:false)
             }

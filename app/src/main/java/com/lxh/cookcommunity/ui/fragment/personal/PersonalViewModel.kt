@@ -56,7 +56,7 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
 
     //拉取我关注的人数
     fun fetchMyFollowNum() {
-        apiService.fetchMyAttentionNum()
+        apiService.fetchMyFollowNum()
             .switchThread()
             .catchApiError()
             .doOnSuccess {
@@ -66,7 +66,7 @@ class PersonalViewModel(application: Application) : BaseViewModel(application) {
 
     //拉取我的粉丝人数
     fun fetchMyFansNum() {
-        apiService.fetchMineFansNum()
+        apiService.fetchMyFansNum()
             .switchThread()
             .catchApiError()
             .doOnSuccess {
