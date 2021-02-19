@@ -10,6 +10,7 @@ data class Food(
     val description: String? = null,
     val material: String? = null,
     val image: String? = null,
+    val courseId: Long? = null,
     val foodVideoList: List<FoodVideo>? = null,
     val chefProfile: Chef? = null
 ) {

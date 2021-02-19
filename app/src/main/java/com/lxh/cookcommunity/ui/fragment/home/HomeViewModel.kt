@@ -46,7 +46,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     fun fetchGoodDetail(goodsId: Long?, action: (Goods?) -> Unit) {
         apiService.fetchGoodsDetail(goodsId)
             .doOnApiSuccess {
-                action(it.data?.data)
+                action(it.data)
             }
     }
 
@@ -54,7 +54,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     fun fetchChefDetail(chefId: Long?, action: (Chef?) -> Unit) {
         apiService.fetchChefDetail(chefId)
             .doOnApiSuccess {
-                action(it.data?.data)
+                action(it.data)
             }
     }
 
@@ -62,7 +62,7 @@ class HomeViewModel(application: Application) : BaseViewModel(application) {
     fun fetchFoodDetail(foodId: Long?, action: (Food?) -> Unit) {
         apiService.fetchFoodDetail(foodId)
             .doOnApiSuccess {
-                action(it.data?.data)
+                action(it.data)
             }
     }
 

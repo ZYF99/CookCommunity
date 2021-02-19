@@ -32,7 +32,7 @@ class StudyVideoFragment : BaseFragment<FragmentStudyVideoBinding, StudyVideoVie
 
     override fun initData() {
         //拉取所有视频信息
-        viewModel.fetchFoodStudyVideo(food?.id)
+        viewModel.fetchFoodStudyVideo(food?.courseId)
     }
 
 

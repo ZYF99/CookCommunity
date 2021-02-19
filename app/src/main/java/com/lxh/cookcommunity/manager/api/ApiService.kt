@@ -4,6 +4,7 @@ import com.lxh.cookcommunity.manager.api.base.ResultModel
 import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
 import com.lxh.cookcommunity.model.api.*
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
+import com.lxh.cookcommunity.model.api.cook.Chef
 import com.lxh.cookcommunity.model.api.cook.ChefResultModel
 import com.lxh.cookcommunity.model.api.cook.Course
 import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
@@ -74,7 +75,7 @@ interface ApiService {
     @GET("api/dishes/one")
     fun fetchFoodDetail(
         @Query("id") id: Long?
-    ): Single<ResultModel<FoodResultModel>>
+    ): Single<ResultModel<Food>>
 
     /*分类筛选*/
     @GET("api/dishes/filter")
@@ -113,10 +114,10 @@ interface ApiService {
     ): Single<ResultModel<CheckCollectResultModel>>
 
     /*拉取单个厨子*/
-    @GET("api/chef/one")
+    @GET("api/account/chef")
     fun fetchChefDetail(
-        @Query("id") id: Long?
-    ): Single<ResultModel<ChefResultModel>>
+        @Query("chefId") id: Long?
+    ): Single<ResultModel<Chef>>
 
 
     /*拉取厨子的粉丝数*/
@@ -194,7 +195,7 @@ interface ApiService {
     @GET("api/goods/one")
     fun fetchGoodsDetail(
         @Query("id") id: Long?
-    ): Single<ResultModel<GoodsResultModel>>
+    ): Single<ResultModel<Goods>>
 
     /*刷新商品列表*/
     @GET("api/goods")

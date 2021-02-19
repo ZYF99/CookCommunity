@@ -22,8 +22,8 @@ class StudyVideoViewModel(application: Application) : BaseViewModel(application)
     val foodVideoMutableLiveData = MutableLiveData<FoodVideo>()
 
     //拉取视频教程
-    fun fetchFoodStudyVideo(foodId:Long?){
-        apiService.fetchFoodStudyVideo(foodId)
+    fun fetchFoodStudyVideo(courseId:Long?){
+        apiService.fetchFoodStudyVideo(courseId)
             .doOnApiSuccess {
                 StudyModelMutableLiveData.postValue(it.data)
             }
