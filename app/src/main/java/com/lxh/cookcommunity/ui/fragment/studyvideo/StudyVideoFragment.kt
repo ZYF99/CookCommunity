@@ -45,11 +45,12 @@ class StudyVideoFragment : BaseFragment<FragmentStudyVideoBinding, StudyVideoVie
 
         viewModel.currentPageMutableLiveData.observeNonNull { currentPage ->
             binding.tvStep.text = "第${currentPage + 1}步"
-
-            //当前页面的视频信息
-            viewModel.foodVideoMutableLiveData.value = viewModel.StudyModelMutableLiveData.value?.curriculumRspList?.get(currentPage+1)
-
-            if (((viewModel.StudyModelMutableLiveData.value?.curriculumRspList?.size ?: 0) - 1) == (currentPage+1)) {
+            val l = viewModel.StudyModelMutableLiveData.value?.curriculumRspList
+            if (l?.isNotEmpty() == true) {
+                //当前页面的视频信息
+                viewModel.foodVideoMutableLiveData.value = l.get(currentPage + 1)
+            }
+            if (((viewModel.StudyModelMutableLiveData.value?.curriculumRspList?.size ?: 0) - 1) == (currentPage + 1)) {
                 //是最后一页了
                 binding.tvNextStep.apply {
                     text = "学习完成"
