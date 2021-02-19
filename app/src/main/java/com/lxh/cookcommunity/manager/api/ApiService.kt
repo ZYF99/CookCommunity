@@ -5,14 +5,9 @@ import com.lxh.cookcommunity.manager.sharedpref.SharedPrefModel
 import com.lxh.cookcommunity.model.api.*
 import com.lxh.cookcommunity.model.api.commonlist.CommonListPageModel
 import com.lxh.cookcommunity.model.api.cook.Chef
-import com.lxh.cookcommunity.model.api.cook.ChefResultModel
-import com.lxh.cookcommunity.model.api.cook.Course
 import com.lxh.cookcommunity.model.api.editinfo.EditInfoRequestModel
 import com.lxh.cookcommunity.model.api.goods.Goods
-import com.lxh.cookcommunity.model.api.goods.GoodsResultModel
-import com.lxh.cookcommunity.model.api.home.BannerModel
 import com.lxh.cookcommunity.model.api.home.Food
-import com.lxh.cookcommunity.model.api.home.FoodResultModel
 import com.lxh.cookcommunity.model.api.login.LoginRequestModel
 import com.lxh.cookcommunity.model.api.login.RegisterRequestModel
 import com.lxh.cookcommunity.model.api.moments.CommentMomentRequestModel
