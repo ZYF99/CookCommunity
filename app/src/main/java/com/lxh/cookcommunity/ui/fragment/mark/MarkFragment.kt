@@ -21,7 +21,7 @@ class MarkFragment : BaseFragment<FragmentMarkBinding, MarkViewModel>(
         binding.vpMark.adapter = CommonPagerAdapter(
             childFragmentManager,
             list,
-            listOf("食品", "餐具")
+            listOf("食品", "其他")
         )
 
         binding.tlVp.setupWithViewPager(binding.vpMark)
